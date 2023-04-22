@@ -172,9 +172,9 @@ def hapusJin():
                     tempdata.jumlah_candi_yang_dihancurkan += 1
                     tempdata.id_candi_yang_dihancurkan = util_function.sort(temphancur,tempdata.jumlah_candi_yang_dihancurkan, "<")
             tempdata.data_candi = tempdatas
-            if data_user[index][2] == "Pembangun":
+            if data_user[index][3] == "Pembangun":
                 Visual.printascii("hapus_jin_bangun",access)
-            elif data_user[index][2] == "Pengumpul":
+            elif data_user[index][3] == "Pengumpul":
                 Visual.printascii("hapus_jin_kumpul",access)
             Visual.printascii(access,access)
         else:
