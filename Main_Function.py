@@ -112,9 +112,9 @@ def summonJin():
 
         time.sleep(1)
         if role == "Pengumpul":
-            Visual.printascii("summon_pengumpul")
+            Visual.printascii("summon_pengumpul",access)
         elif role == "Pembangun":
-            Visual.printascii("summon_pembangun")
+            Visual.printascii("summon_pembangun",access)
 
         Visual.printascii(access,access)
     else:
