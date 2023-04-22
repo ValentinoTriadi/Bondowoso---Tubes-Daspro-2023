@@ -198,10 +198,10 @@ def ubahJin():
         tempdata.data_user[index][2] = function_jin.ubah_role(tempdata.data_user[index][2])
 
         if tempdata.data_user[index][2] == "Pembangun":
-            Visual.printascii("ubah_kumpul_bangun")
+            Visual.printascii("ubah_kumpul_bangun",access)
             Visual.printascii(access,access)
         elif tempdata.data_user[index][2] == "Pengumpul":
-            Visual.printascii("ubah_bangun_kumpul")
+            Visual.printascii("ubah_bangun_kumpul",access)
             Visual.printascii(access,access)
     
 
