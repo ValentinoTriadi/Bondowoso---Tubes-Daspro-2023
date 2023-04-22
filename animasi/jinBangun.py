@@ -207,6 +207,6 @@ summon6 =[
 "",
 "Membacakan mantra...   "]
 
-summon = [summon1, summon2, summon3, summon4, summon5, summon6]
-animasi = 6
+summon = [summon1, summon2, summon3, summon4, summon5, summon6, summon6]
+animasi = 7
 length = 33
