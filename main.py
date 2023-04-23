@@ -4,6 +4,7 @@ if __name__ == "__main__":
     load_only.load()
     while load_only.start:
         menu = input(">>> ")
+        import Visual
         if menu == "login" and not Main_Function.logins:
             Main_Function.login()
 
@@ -76,7 +77,6 @@ if __name__ == "__main__":
             Visual.printascii(Main_Function.access,Main_Function.access)
 
         elif Main_Function.logins:
-            import Visual
             Visual.render_screen(["Access Denied"],1)
             time.sleep(1.5)
             Visual.printascii(Main_Function.access,Main_Function.access)
