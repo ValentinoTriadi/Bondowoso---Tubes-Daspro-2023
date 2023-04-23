@@ -1,4 +1,4 @@
-import util_function, function_jin, time, function_candi, os.path
+import util_function, function_jin, time, function_candi, os.path, typing
 logins = False
 access = ""
 user = "asdf"
@@ -203,7 +203,7 @@ def ubahJin():
     
 
 ''' -------------------------------F06------------------------------ '''
-def bangun(username):
+def bangun(username: str):
     import tempdata, Visual
     # candi = commanddata.read_csv("candi.csv")
     candi = tempdata.data_candi
@@ -265,7 +265,7 @@ def bangun(username):
         time.sleep(2.5)
     
 ''' -------------------------------F07------------------------------ '''
-def kumpul(batch):
+def kumpul(batch: bool):
     import tempdata, Visual
     pasir = util_function.randint(0,5) ; batu = util_function.randint(0,5) ; air = util_function.randint(0,5)
     bahan = tempdata.data_bahan_bangunan
@@ -453,7 +453,7 @@ def laporancandi():
     input()
 
 ''' -------------------------------F11------------------------------ '''
-def cekid(id):
+def cekid(id: int) -> bool:
     import tempdata
     data_candi = tempdata.data_candi
     for i in range (tempdata.len_candi):
@@ -467,7 +467,7 @@ def cekid(id):
     return False
 
 # TODO: Remove Specific line of data from array
-def remove_dataid(id):
+def remove_dataid(id: int):
     import tempdata
     for i in range(tempdata.len_candi):
         cek = True
