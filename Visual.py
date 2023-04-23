@@ -274,7 +274,6 @@ def printascii(typegambar,access):
         time.sleep(1)
 
 
-printascii("summon_pembangun","roro_jonggrang")
 
 # INFO
 # BONDO COLOR 9
