@@ -53,73 +53,73 @@ def logout():
 
 ''' ------------------------------F03------------------------------ '''
 def summonJin():
-    global username_jin_summon
+    global username_jin_summon # Username dari jin yang akan disummon
     import tempdata, Visual
-    Visual.render_screen(["Summon Jin"],1)
+    Visual.render_screen(["Summon Jin"],1) # Menampilkan animasi summon jin
     time.sleep(0.5)
-    if tempdata.len_user < 102:
-        Visual.render_screen(["Jenis jin yang dapat dipanggil: ",
+    if tempdata.len_user < 102: # Jika total jin masih di bawah 100
+        Visual.render_screen(["Jenis jin yang dapat dipanggil: ", # Animasi opsi jenis jin
         "(1) Pengumpul - Bertugas mengumpulkan bahan bangunan",
         "(2) Pembangun - Bertugas membangun candi"], 3)
 
-        jin = int(input("Masukkan nomor jenis jin yang ingin dipanggil: "))
+        jin = int(input("Masukkan nomor jenis jin yang ingin dipanggil: ")) # Menerima input jenis jin yang akan dipanggil
         while jin != 2 and jin != 1:
-            Visual.render_screen([f'Tidak ada jenis jin bernomor "{jin}"!'], 1)
+            Visual.render_screen([f'Tidak ada jenis jin bernomor "{jin}"!'], 1) # Jika input di luar dari opsi
             time.sleep(2.5)
             Visual.render_screen(["Jenis jin yang dapat dipanggil: ",
             "(1) Pengumpul - Bertugas mengumpulkan bahan bangunan",
             "(2) Pembangun - Bertugas membangun candi"], 3)
-            jin = int(input("Masukkan nomor jenis jin yang ingin dipanggil: "))
+            jin = int(input("Masukkan nomor jenis jin yang ingin dipanggil: ")) # Looping meminta input jenis jin
 
-        if jin == 1:
+        if jin == 1: # Ketika user menginput opsi 1
             role = "Pengumpul"
             Visual.render_screen(['Memilih jin "Pengumpul".'], 1)
-            username = input("Masukkan username jin: ")
-            while function_jin.Cek_User(username):
-                Visual.render_screen([f'Username "{username}" sudah diambil!'],1)
+            username = input("Masukkan username jin: ") # Memasukkan username jin yang akan dipanggil
+            while function_jin.Cek_User(username): # Jika username sudah terdaftar akan looping meminta input
+                Visual.render_screen([f'Username "{username}" sudah diambil!'],1) 
                 time.sleep(2)
                 Visual.render_screen(['Memilih jin "Pengumpul".'], 1)
                 username = input("Masukkan username jin: ")
-        else:
+        else: # Ketika user menginput opsi 2
             role = "Pembangun"
             Visual.render_screen(['Memilih jin "Pembangun".'], 1)
-            username = input("Masukkan username jin: ")
-            while function_jin.Cek_User(username):
-                Visual.render_screen([f'Username "{username}" sudah diambil!'],1)
+            username = input("Masukkan username jin: ") # Memasukkan username jin yang akan dipanggil
+            while function_jin.Cek_User(username): # Jika username sudah terdaftar akan looping meminta input
+                Visual.render_screen([f'Username "{username}" sudah diambil!'],1)  
                 time.sleep(2)
                 Visual.render_screen(['Memilih jin "Pembangun".'], 1)
                 username = input("Masukkan username jin: ")
-        username_jin_summon = username
+        username_jin_summon = username # Username akan disave sesuai dengan variabel username
 
-        password = input("Masukkan password jin: ")
-        while not 5 <= util_function.length(password + '.', '.') <= 25:
+        password = input("Masukkan password jin: ") # Meminta data password untuk username jin yang akan disummon
+        while not 5 <= util_function.length(password + '.', '.') <= 25: # Jika password panjangnya tidak dari 5 sampai 25 huruf
             Visual.render_screen(["Password panjangnya harus 5-25 karakter!"],1)
             time.sleep(2.5)
-            if role == "Pengumpul":
-                Visual.render_screen(['Memilih jin "Pengumpul".'], 1)
-            elif role == "Pembangun":
+            if role == "Pengumpul": # Sesuai opsi jenis jin yang dipilih di atas
+                Visual.render_screen(['Memilih jin "Pengumpul".'], 1) 
+            elif role == "Pembangun": # Sesuai opsi jenis jin yang dipilih di atas
                 Visual.render_screen(['Memilih jin "Pembangun".'], 1)
             password = input("Masukkan password jin: ")
 
-        datas = [username,password,role]
+        datas = [username,password,role] # Mengubah inputan data menjadi bentuk list bernama datas
         # commanddata.save_csv("user.csv", datas)
 
-        tempdatas = [[] for i in range(tempdata.len_user + 1)]
+        tempdatas = [[] for i in range(tempdata.len_user + 1)] # Menambahkan list datas ke ke datas temporary untuk disave sementara
         for i in range(tempdata.len_user):
             tempdatas[i] = tempdata.data_user[i]
         tempdatas[tempdata.len_user] = datas        
         tempdata.len_user += 1
 
-        tempdata.data_user = tempdatas
+        tempdata.data_user = tempdatas # Memasukkan tempdatas ke data user
 
         time.sleep(1)
         if role == "Pengumpul":
-            Visual.printascii("summon_pengumpul",access)
+            Visual.printascii("summon_pengumpul",access) # Menampilkan animasi summon jin pengumpul
         elif role == "Pembangun":
-            Visual.printascii("summon_pembangun",access)
+            Visual.printascii("summon_pembangun",access) # Menampilkan animasi summon jin pembangun
 
         
-    else:
+    else: # Jika jin yang terdaftar sudah 100
         Visual.render_screen(["Jumlah Jin telah maksimal! (100 jin).",f"{user} tidak dapat men-summon lebih dari itu."],2)
         time.sleep(2)
     
@@ -127,56 +127,56 @@ def summonJin():
 ''' ------------------------------F04------------------------------ '''
 def hapusJin():
     import tempdata, Visual
-    Visual.render_screen(["Hapus Jin"],1)
+    Visual.render_screen(["Hapus Jin"],1) # Menampilkan animasi tampilan opsi penghapusan jin
     time.sleep(0.5)
-    username = input("Masukkan username jin : ")
+    username = input("Masukkan username jin : ") # Meminta input username jin yang akan dihapus
 
-    if not function_jin.Cek_User(username):
+    if not function_jin.Cek_User(username): # Jika username yang diinput tidak memiliki kesamaan dengan data yang ada
         Visual.render_screen(["Tidak ada jin dengan username tersebut."],1)
         time.sleep(2)
         Visual.printascii(access, access)
-    elif function_jin.Cek_User(username):
-        option = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ")
+    elif function_jin.Cek_User(username): # Jika username terdaftar di dalam data
+        option = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ") # Input user terkait konfirmasi penghapusan jin
 
-        if option == "Y":
-            data_user = tempdata.data_user
-            datacandi = tempdata.data_candi
+        if option == "Y": # Jika input user adalah Ya
+            data_user = tempdata.data_user # Mengambil data user
+            datacandi = tempdata.data_candi # Mengambil data candi
             for i in range(tempdata.len_user):
-                if data_user[i][0] == username:
+                if data_user[i][0] == username: # Mencari indeks data yang usernamenya sesuai dengan input user
                     index = i
-            for i in range(index,tempdata.len_user-1):
-                tempdata.data_user[i] = tempdata.data_user[i+1]
-            tempdata.len_user -= 1
-            tempdatas = [[] for i in range(tempdata.len_user)]
+            for i in range(index,tempdata.len_user-1): 
+                tempdata.data_user[i] = tempdata.data_user[i+1] # Menghapus data jin lalu menaikkan semua data di bawahnya 1 indeks ke atas
+            tempdata.len_user -= 1 # panjang tempdata berkurang 1
+            tempdatas = [[] for i in range(tempdata.len_user)] # Membuat ulang tempdata yang baru
             for i in range(tempdata.len_user):
                 tempdatas[i] = tempdata.data_user[i]
-            tempdata.data_user = tempdatas
+            tempdata.data_user = tempdatas # Meng-assign kembali tempdatas untuk data user
 
-            count = 0
-            for i in range(tempdata.len_candi):
+            count = 0 
+            for i in range(tempdata.len_candi): # Menghitung banyak candi yang dibangun oleh jin yang akan dihapus
                 if datacandi[i][1] == username:
                     count+=1
 
-            tempdatas = [[] for i in range(tempdata.len_candi - count)]
+            tempdatas = [[] for i in range(tempdata.len_candi - count)] # Membuat list tempdatas baru
             j = 0
             for i in range(tempdata.len_candi):
-                if datacandi[i][1] != username:
-                    tempdatas[j] = datacandi[i]
+                if datacandi[i][1] != username: # Jika candi tidak dibangun oleh jin yang akan dihapus
+                    tempdatas[j] = datacandi[i] # Candi tersebut akan di-assign ke tempdatas
                     j+=1
-                else:
-                    tempdata.len_candi-=1
-                    id = datacandi[i][0]
-                    temphancur = [0 for i in range(tempdata.jumlah_candi_yang_dihancurkan + 1)]
+                else: # Jika candi dibuat oleh jin yang akan dihapus
+                    tempdata.len_candi-=1 # Panjang data candi berkurang 1
+                    id = datacandi[i][0] # ID Candi akan masuk ke variabel id
+                    temphancur = [0 for i in range(tempdata.jumlah_candi_yang_dihancurkan + 1)] # List sementara candi yang dihancurkan
                     for i in range(tempdata.jumlah_candi_yang_dihancurkan):
                         temphancur[i] = tempdata.id_candi_yang_dihancurkan[i]
-                    temphancur[tempdata.jumlah_candi_yang_dihancurkan] = id
-                    tempdata.jumlah_candi_yang_dihancurkan += 1
+                    temphancur[tempdata.jumlah_candi_yang_dihancurkan] = id # Meng-assign id candi yang dohancurkan
+                    tempdata.jumlah_candi_yang_dihancurkan += 1 # Jumlah candi yang dihancurkan bertambah 1
                     tempdata.id_candi_yang_dihancurkan = util_function.sort(temphancur,tempdata.jumlah_candi_yang_dihancurkan, "<")
-            tempdata.data_candi = tempdatas
-            if data_user[index][2] == "Pembangun":
-                Visual.printascii("hapus_jin_bangun",access)
-            elif data_user[index][2] == "Pengumpul":
-                Visual.printascii("hapus_jin_kumpul",access)
+            tempdata.data_candi = tempdatas # Data candi terbaru dari tempdatas
+            if data_user[index][2] == "Pembangun": # Jika role jin yang dihapus adalah pembangun
+                Visual.printascii("hapus_jin_bangun",access) # Menampilkan animasi jin dihapus
+            elif data_user[index][2] == "Pengumpul": # Jika role jin yang dihapus adalah pembangun
+                Visual.printascii("hapus_jin_kumpul",access) # Menampilkan animasi jin dihapus
 
 
 
