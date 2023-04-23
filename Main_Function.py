@@ -3,6 +3,7 @@ logins = False
 access = ""
 user = "asdf"
 path_folder = ""
+username_jin_summon = ""
 
 '''-------------------------------F01------------------------------'''
 def login():
@@ -52,6 +53,7 @@ def logout():
 
 ''' ------------------------------F03------------------------------ '''
 def summonJin():
+    global username_jin_summon
     import tempdata, Visual
     Visual.render_screen(["Summon Jin"],1)
     time.sleep(0.5)
@@ -87,6 +89,7 @@ def summonJin():
                 time.sleep(2)
                 Visual.render_screen(['Memilih jin "Pembangun".'], 1)
                 username = input("Masukkan username jin: ")
+        username_jin_summon = username
 
         password = input("Masukkan password jin: ")
         while not 5 <= util_function.length(password + '.', '.') <= 25:

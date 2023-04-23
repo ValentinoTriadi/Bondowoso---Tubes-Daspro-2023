@@ -175,15 +175,15 @@ def printascii(typegambar,access):
             time.sleep(0.5)
         time.sleep(2)
     elif typegambar == "summon_pembangun":
-        from Main_Function import user
-        animasi.jinBangun.summon[6][32] = f"Jin {user} berhasil dipanggil!"
+        from Main_Function import username_jin_summon
+        animasi.jinBangun.summon[6][32] = f"Jin {username_jin_summon} berhasil dipanggil!"
         for i in range(animasi.jinBangun.animasi):
             render_screen(animasi.jinBangun.summon[i], animasi.jinBangun.length)
             time.sleep(0.5)            
         time.sleep(2)
     elif typegambar == "summon_pengumpul":
-        from Main_Function import user
-        animasi.jinKumpul.summon[6][32] = f"Jin {user} berhasil dipanggil!"
+        from Main_Function import username_jin_summon
+        animasi.jinKumpul.summon[6][32] = f"Jin {username_jin_summon} berhasil dipanggil!"
         for i in range(animasi.jinKumpul.animasi):
             render_screen(animasi.jinKumpul.summon[i], animasi.jinKumpul.length )
             time.sleep(0.5)            
