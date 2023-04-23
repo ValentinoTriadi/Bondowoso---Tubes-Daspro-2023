@@ -52,7 +52,7 @@ def window_size():
     return [window_width, window_height]
 
 
-def render_screen(ascii, height_of_ascii):
+def render_screen(ascii: list, height_of_ascii: int):
     # clear terminal before render the screen
     os.system("cls||clear")
     
@@ -94,7 +94,7 @@ def render_screen(ascii, height_of_ascii):
                 print(" "*(horizontal_padding - 1), end="|\n")
 
 
-def printascii(typegambar,access):
+def printascii(typegambar: str,access: str):
     import ayamKokok, animasi.bangunCandi, animasi.batchBangun, animasi.door, animasi.hancurCandi, animasi.hapusJin, animasi.jinBangun, animasi.jinKumpul, animasi.karakterGame, animasi.kumpul, laporan, animasi.saving, animasi.ubahJin
 
     os.system("cls||clear")

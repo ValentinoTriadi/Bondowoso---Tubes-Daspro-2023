@@ -1,7 +1,7 @@
 import util_function
 
 ''' ------------------------------ Cek User ------------------------------ '''
-def Cek_User(username):
+def Cek_User(username: str) -> bool:
     import tempdata
     fo = tempdata.data_user
     sama = False
@@ -14,7 +14,7 @@ def Cek_User(username):
 
 
 ''' ------------------------------ Ubah Role ------------------------------ '''
-def ubah_role(role):
+def ubah_role(role: str) -> str:
     if role == "Pengumpul":
             option = input(f'Jin ini bertipe "Pengumpul". Yakin ingin mengubah ke tipe "Pembangun" (Y/N)? ')
             while option != "Y" and option != "N":
@@ -38,7 +38,7 @@ def ubah_role(role):
 
 
 ''' ------------------------------ Hitung Jin ------------------------------ '''
-def count_jin(jenis):
+def count_jin(jenis: str) -> int:
     import tempdata
     data = tempdata.data_user
     count = 0
@@ -50,7 +50,7 @@ def count_jin(jenis):
 
 
 ''' ------------------------------ Cari Jin Terajin/Termalas ------------------------------ '''
-def jinter(rajin):
+def jinter(rajin: bool) -> str:
     import tempdata
     datacandi = tempdata.data_candi
     listpembangun = tempdata.data_jin_yang_pernah_membangun
@@ -82,7 +82,7 @@ def jinter(rajin):
         if jumlah_jin_terajin == 1:
             return listterajin[0]
         else:
-            return util_function.leksikal(listterajin,jumlah_jin_terajin, False) 
+            return util_function.leksikal(listterajin,jumlah_jin_terajin, False)[0]
     else:
         mins = util_function.minimum(jumlah_yg_dibangun_jin, tempdata.len_pembangun)
         jumlah_jin_termalas = 0
@@ -103,4 +103,4 @@ def jinter(rajin):
         if jumlah_jin_termalas == 1:
             return listtermalas[0]
         else:
-            return util_function.leksikal(listtermalas,jumlah_jin_termalas,True) # Belum dikerjain
+            return util_function.leksikal(listtermalas,jumlah_jin_termalas,True)[0]

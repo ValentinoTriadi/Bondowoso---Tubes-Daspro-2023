@@ -5,7 +5,7 @@ ter_mahal, harga_mahal = function_candi.canditer(True)
 ter_murah, harga_murah = function_candi.canditer(False)
 
 
-laporanjin = [
+laporancandi = [
 "       ..,,,*                                                     ,.,.           ",
 "         ,*,,,                                                       .,,         ",
 "         &%%((##*/((###############(######(#(((((((###((((#(###(#(((%##(#        ",
@@ -29,7 +29,7 @@ laporanjin = [
 "",
 "Tekan \"Enter\" setelah selesai membaca laporan"]
 
-laporancandi = [
+laporanjin = [
 "       ..,,,*                                                     ,.,.           ",
 "         ,*,,,                                                       .,,         ",
 "         &%%((##*/((###############(######(#(((((((###((((#(###(#(((%##(#        ",

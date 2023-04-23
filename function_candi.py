@@ -1,7 +1,7 @@
 import util_function
 
 '''----------------------------- Process List -----------------------------'''
-def saveCandi(material, username):
+def saveCandi(material: list, username: str) -> list:
     import tempdata
     if tempdata.jumlah_candi_yang_dihancurkan == 0:
         tempdata.len_candi +=1
@@ -21,7 +21,7 @@ def saveCandi(material, username):
     return datas
 
 '''----------------------------- Hitung Jumlah Bahan Yang Terpakai -----------------------------'''
-def countbahan(bahan):
+def countbahan(bahan: str) -> int:
     import tempdata
     data = tempdata.data_candi
 
@@ -40,7 +40,7 @@ def countbahan(bahan):
     return count
 
 '''----------------------------- Cari Candi Termahal/Termurah -----------------------------'''
-def canditer(mahal):
+def canditer(mahal: bool) -> tuple:
     import tempdata
     data = tempdata.data_candi
     lendata = tempdata.len_candi - tempdata.jumlah_candi_yang_dihancurkan
