@@ -1,7 +1,7 @@
 import util_function, function_jin, time, function_candi, os.path
 logins = False
 access = ""
-user = ""
+user = "asdf"
 path_folder = ""
 
 '''-------------------------------F01------------------------------'''
@@ -24,7 +24,7 @@ def login():
             cekpass = datapass[i][1]
     if not cekuser:
         Visual.render_screen(["Username tidak terdaftar!"],1)
-        time.sleep(1)
+        time.sleep(2.5)
         login()
     else:
         if password == cekpass:
@@ -35,7 +35,7 @@ def login():
             
         else:
             Visual.render_screen(["Password salah!"],1)
-            time.sleep(1)
+            time.sleep(2.5)
             login()
 
 '''-------------------------------F02------------------------------'''
@@ -47,7 +47,6 @@ def logout():
     user = ""
     
     Visual.printascii("logout",None)
-    Visual.printascii(access,None)
     login()
 
 
@@ -64,7 +63,7 @@ def summonJin():
         jin = int(input("Masukkan nomor jenis jin yang ingin dipanggil: "))
         while jin != 2 and jin != 1:
             Visual.render_screen([f'Tidak ada jenis jin bernomor "{jin}"!'], 1)
-            time.sleep(1)
+            time.sleep(2.5)
             Visual.render_screen(["Jenis jin yang dapat dipanggil: ",
             "(1) Pengumpul - Bertugas mengumpulkan bahan bangunan",
             "(2) Pembangun - Bertugas membangun candi"], 3)
@@ -76,7 +75,7 @@ def summonJin():
             username = input("Masukkan username jin: ")
             while function_jin.Cek_User(username):
                 Visual.render_screen([f'Username "{username}" sudah diambil!'],1)
-                time.sleep(1.5)
+                time.sleep(2)
                 Visual.render_screen(['Memilih jin "Pengumpul".'], 1)
                 username = input("Masukkan username jin: ")
         else:
@@ -85,14 +84,14 @@ def summonJin():
             username = input("Masukkan username jin: ")
             while function_jin.Cek_User(username):
                 Visual.render_screen([f'Username "{username}" sudah diambil!'],1)
-                time.sleep(1.5)
+                time.sleep(2)
                 Visual.render_screen(['Memilih jin "Pembangun".'], 1)
                 username = input("Masukkan username jin: ")
 
         password = input("Masukkan password jin: ")
         while not 5 <= util_function.length(password + '.', '.') <= 25:
             Visual.render_screen(["Password panjangnya harus 5-25 karakter!"],1)
-            time.sleep(1.5)
+            time.sleep(2.5)
             if role == "Pengumpul":
                 Visual.render_screen(['Memilih jin "Pengumpul".'], 1)
             elif role == "Pembangun":
@@ -116,11 +115,10 @@ def summonJin():
         elif role == "Pembangun":
             Visual.printascii("summon_pembangun",access)
 
-        Visual.printascii(access,access)
+        
     else:
         Visual.render_screen(["Jumlah Jin telah maksimal! (100 jin).",f"{user} tidak dapat men-summon lebih dari itu."],2)
-        time.sleep(1)
-        Visual.printascii(access,access)
+        time.sleep(2)
     
 
 ''' ------------------------------F04------------------------------ '''
@@ -132,7 +130,7 @@ def hapusJin():
 
     if not function_jin.Cek_User(username):
         Visual.render_screen(["Tidak ada jin dengan username tersebut."],1)
-        time.sleep(1)
+        time.sleep(2)
         Visual.printascii(access, access)
     elif function_jin.Cek_User(username):
         option = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ")
@@ -176,9 +174,7 @@ def hapusJin():
                 Visual.printascii("hapus_jin_bangun",access)
             elif data_user[index][2] == "Pengumpul":
                 Visual.printascii("hapus_jin_kumpul",access)
-            Visual.printascii(access,access)
-        else:
-            Visual.printascii(access,access)
+
 
 
 ''' ------------------------------F05------------------------------ '''
@@ -188,7 +184,7 @@ def ubahJin():
 
     if not function_jin.Cek_User(username):
         Visual.render_screen(["Tidak ada jin dengan username tersebut."],1)
-        time.sleep(1)
+        time.sleep(2)
         Visual.printascii(access,access)
     else:
         data_user = tempdata.data_user
@@ -199,10 +195,8 @@ def ubahJin():
 
         if tempdata.data_user[index][2] == "Pembangun":
             Visual.printascii("ubah_kumpul_bangun",access)
-            Visual.printascii(access,access)
         elif tempdata.data_user[index][2] == "Pengumpul":
             Visual.printascii("ubah_bangun_kumpul",access)
-            Visual.printascii(access,access)
     
 
 ''' -------------------------------F06------------------------------ '''
@@ -258,17 +252,14 @@ def bangun(username):
             Visual.printascii("bangun_candi",access)
             Visual.render_screen([f"Sisa candi yang perlu dibangun: {100-tempdata.len_candi}."],1)
             time.sleep(2.5)
-            Visual.printascii(access,access)
 
         else:
             Visual.printascii("bangun_candi",access)
             Visual.render_screen(["Sisa candi yang perlu dibangun: 0."],1)
             time.sleep(2.5)
-            Visual.printascii(access,access)
     else:
         Visual.render_screen(["Bahan bangunan tidak mencukupi","Candi tidak bisa dibangun!"],2)
         time.sleep(2.5)
-        Visual.printascii(access,access)
     
 ''' -------------------------------F07------------------------------ '''
 def kumpul(batch):
@@ -282,7 +273,6 @@ def kumpul(batch):
         Visual.printascii("kumpul", access)
         Visual.render_screen([f"Jin menemukan {pasir} pasir, {batu} batu, {air} air."],1)
         time.sleep(2.5)
-        Visual.printascii(access,access)
 
     
 ''' -------------------------------F08------------------------------ '''
@@ -292,7 +282,7 @@ def batchkumpul():
 
     if jinPengumpul == 0:
         Visual.render_screen(["Kumpul gagal","Anda tidak punya jin pengumpul","Silahkan summon terlebih dahulu."],3)
-        time.sleep(1)
+        time.sleep(2)
         Visual.printascii(access,access)
     else:
         pasir = 0 ; batu = 0 ; air = 0
@@ -301,11 +291,10 @@ def batchkumpul():
             pasir += PBA[0] ; batu += PBA[1] ; air += PBA[2]
 
         Visual.render_screen([f"Mengerahkan {jinPengumpul} jin untuk mengumpulkan bahan."],1)
-        time.sleep(1)
+        time.sleep(2.5)
         Visual.printascii("kumpul",access)
         Visual.render_screen([f"Jin menemukan total {pasir} pasir, {batu} batu, dan {air} air."],1)
-        time.sleep(1)
-        Visual.printascii(access,access)
+        time.sleep(2.5)
 
     
 def batchbangun():  
@@ -314,7 +303,7 @@ def batchbangun():
 
     if Jumlah_jin_Pembangun == 0:
         Visual.render_screen(["Bangun gagal","Anda tidak punya jin pembangun","Silahkan summon terlebih dahulu."],3)
-        time.sleep(1)
+        time.sleep(2)
         Visual.printascii(access,access)
     else:
         data_user = tempdata.data_user 
@@ -351,8 +340,8 @@ def batchbangun():
                     index = temp_id_candi_yang_dihancurkan[0]   # mengambil id dari candi yang telah dihancurkan
 
                     tempdatas = [ 0 for i in range(temp_jumlah_candi_yang_dihancurkan - 1)] # Inisialisasi awal list baru untuk menyimpan list temp_id_candi_yang_dihancurkan ketika diambil 1 id tekecil
-                    for i in range(1,temp_jumlah_candi_yang_dihancurkan): # mengisi list baru dengan list temp_id_candi_yang_dihancurkan setelah diambil 1 id terkecil
-                        tempdatas[i-1] = temp_id_candi_yang_dihancurkan[i]
+                    for k in range(1,temp_jumlah_candi_yang_dihancurkan): # mengisi list baru dengan list temp_id_candi_yang_dihancurkan setelah diambil 1 id terkecil
+                        tempdatas[k-1] = temp_id_candi_yang_dihancurkan[k]
                     
                     temp_id_candi_yang_dihancurkan = tempdatas # merubah list temp_id_candi_yang_dihancurkan menjadi list temp_id_candi_yang_dihancurkan yang telah diambil 1 id terkecil
                     temp_jumlah_candi_yang_dihancurkan -= 1 # mengurangi jumlah candi yang dihancurkan (karena akan dibangun kembali)
@@ -404,7 +393,6 @@ def batchbangun():
             Visual.printascii("batch_bangun",access)
             Visual.render_screen([f"Jin berhasil membangun total {Jumlah_jin_Pembangun} candi."],1)
             time.sleep(2.5)
-            Visual.printascii(access,access)
 
         else:
             sisa_pasir = total_Material[0] - int(bahan[0][0])
@@ -418,7 +406,6 @@ def batchbangun():
                 sisa_air = 0
             Visual.render_screen([f"Bangun gagal. Kurang {sisa_pasir} pasir, {sisa_batu} batu, dan {sisa_air} air."],1)
             time.sleep(2.5)
-            Visual.printascii(access,access)
 
 
 ''' -------------------------------F09------------------------------ '''
@@ -441,7 +428,6 @@ def laporanjin ():
     # dalam kelompok kami, kami mengeluarkan output laporan jin yang dapat dilihat pada module laporan pada folder animasi
     Visual.printascii("laporan_jin", access)
     input()
-    Visual.printascii(access,access)
 
 ''' -------------------------------F10------------------------------ '''
 def laporancandi():
@@ -462,7 +448,6 @@ def laporancandi():
     # dalam kelompok kami, kami mengeluarkan output laporan jin yang dapat dilihat pada module laporan pada folder animasi
     Visual.printascii("laporan_candi", access)
     input()
-    Visual.printascii(access,access)
 
 ''' -------------------------------F11------------------------------ '''
 def cekid(id):
@@ -511,15 +496,12 @@ def hancurkancandi():
 
     else:
         Visual.render_screen(["Tidak ada candi dengan ID tersebut."],1)
-        time.sleep(1)
-        Visual.printascii(access,access)
+        time.sleep(2)
 
 ''' -------------------------------F12------------------------------ '''
 def ayamberkokok():
-    global start
     import tempdata, Visual
 
-    start = False 
     if tempdata.len_candi<100:
         Visual.printascii("roro_menang",access)
         time.sleep(10)
@@ -567,8 +549,7 @@ def save():
         util_function.write_csv("bahan_bangunan.csv", path_folder)
 
         Visual.printascii("save3",access)
-    time.sleep(2)
-    Visual.printascii("home",access)
+    
 
 ''' ------------------------------F15------------------------------ '''
 def help():
