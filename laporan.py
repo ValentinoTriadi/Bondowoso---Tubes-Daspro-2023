@@ -104,7 +104,6 @@ laporan3 = [
 "",
 ""]
 
-
 laporan_jin = [laporan3, laporan2,laporanjin]
 laporan_candi = [laporan3, laporan2,laporancandi]
 animasi = 3

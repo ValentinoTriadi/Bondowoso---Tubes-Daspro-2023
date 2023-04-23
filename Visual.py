@@ -60,10 +60,8 @@ def render_screen(ascii, height_of_ascii):
     ws = window_size()
     number_of_lines = height_of_ascii
     vertical_padding_before_divided = ws[1] - number_of_lines
-    if vertical_padding_before_divided % 2 == 0: 
-        vertical_padding_before_divided = vertical_padding_before_divided 
-    else:
-        vertical_padding_before_divided - 1
+    if vertical_padding_before_divided % 2 != 0: 
+        vertical_padding_before_divided -= 1
     vertical_padding = vertical_padding_before_divided // 2
     line_of_sentence_start = vertical_padding
 
@@ -78,17 +76,15 @@ def render_screen(ascii, height_of_ascii):
         else:
             sentence = ascii[i-line_of_sentence_start]
 
-            horizontal_padding_before_divided = ws[0] - len(sentence)
+            horizontal_padding_before_divided = ws[0] - len(sentence) 
 
             if horizontal_padding_before_divided % 2 == 0: 
+                horizontal_padding =  int(horizontal_padding_before_divided // 2)
                 is_odd = False 
             else:
+                horizontal_padding = int(horizontal_padding_before_divided - 1)//2 
                 is_odd = True
 
-            if is_odd:
-                horizontal_padding = int(horizontal_padding_before_divided - 1)//2 
-            else:
-                horizontal_padding =  int(horizontal_padding_before_divided // 2)
             print("|", end="")
             print(" "*(horizontal_padding - 1), end="")
             print(sentence, end="")
@@ -182,14 +178,14 @@ def printascii(typegambar,access):
         from Main_Function import user
         animasi.jinBangun.summon[6][32] = f"Jin {user} berhasil dipanggil!"
         for i in range(animasi.jinBangun.animasi):
-            render_screen(animasi.jinBangun.summon, animasi.jinBangun.length + 2)
+            render_screen(animasi.jinBangun.summon[i], animasi.jinBangun.length)
             time.sleep(0.5)            
         time.sleep(2)
     elif typegambar == "summon_pengumpul":
         from Main_Function import user
         animasi.jinKumpul.summon[6][32] = f"Jin {user} berhasil dipanggil!"
         for i in range(animasi.jinKumpul.animasi):
-            render_screen(animasi.jinKumpul.summon, animasi.jinKumpul.length + 2)
+            render_screen(animasi.jinKumpul.summon[i], animasi.jinKumpul.length )
             time.sleep(0.5)            
         time.sleep(2)
     elif typegambar == "hapus_jin_bangun":
@@ -278,10 +274,11 @@ def printascii(typegambar,access):
         time.sleep(1)
 
 
-# printascii("roro_jonggrang","roro_jonggrang")
+printascii("summon_pembangun","roro_jonggrang")
 
 # INFO
 # BONDO COLOR 9
 # RORO COLOR 5
 # BANGUN COLOR 3
 # KUMPUL COLOR 6
+

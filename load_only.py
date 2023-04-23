@@ -1,4 +1,4 @@
-nama_folder = ""
+nama_folder = "cek1"
 start = False
 def load():
     global start, nama_folder
