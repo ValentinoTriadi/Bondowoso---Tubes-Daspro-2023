@@ -492,59 +492,107 @@ def batchkumpul():
 
     '''-------------------- 3 --------------------'''
     if jinPengumpul == 0:
+        
+        '''-------------------- 4 --------------------'''
         Visual.render_screen(["Kumpul gagal","Anda tidak punya jin pengumpul","Silahkan summon terlebih dahulu."],3)
         time.sleep(2)
         Visual.printascii(access,access)
+        '''-------------------- 4 --------------------'''
+
     else:
+
+        '''-------------------- 5 --------------------'''
         pasir = 0 ; batu = 0 ; air = 0
         for i in range(jinPengumpul):
             PBA = kumpul(True)
             pasir += PBA[0] ; batu += PBA[1] ; air += PBA[2]
+        '''-------------------- 5 --------------------'''
 
+
+        '''-------------------- 6 --------------------'''
         Visual.render_screen([f"Mengerahkan {jinPengumpul} jin untuk mengumpulkan bahan."],1)
         time.sleep(2.5)
         Visual.printascii("kumpul",access)
         Visual.render_screen([f"Jin menemukan total {pasir} pasir, {batu} batu, dan {air} air."],1)
         time.sleep(2.5)
+        '''-------------------- 6 --------------------'''
+
     '''-------------------- 3 --------------------'''
 
     
+'''-------------------- 1 --------------------'''
 def batchbangun():  
     import tempdata, Visual
+
+    '''-------------------- 2 --------------------'''
     Jumlah_jin_Pembangun = function_jin.count_jin("Pembangun")
+    '''-------------------- 2 --------------------'''
+
 
     if Jumlah_jin_Pembangun == 0:
+        
+        '''-------------------- 3 --------------------'''
         Visual.render_screen(["Bangun gagal","Anda tidak punya jin pembangun","Silahkan summon terlebih dahulu."],3)
         time.sleep(2)
         Visual.printascii(access,access)
+        '''-------------------- 3 --------------------'''
+        
     else:
+
+        '''-------------------- 4 --------------------'''
         data_user = tempdata.data_user 
+        '''-------------------- 4 --------------------'''
+
+
+        '''-------------------- 5 --------------------'''
         if Jumlah_jin_Pembangun - tempdata.jumlah_candi_yang_dihancurkan > 0:
             lendata = tempdata.len_candi + Jumlah_jin_Pembangun - tempdata.jumlah_candi_yang_dihancurkan
         else:
             lendata = tempdata.len_candi
+        '''-------------------- 5 --------------------'''
+
+
+        '''-------------------- 6 --------------------'''
         temp_candi = [[] for i in range(lendata)]
-        for i in range(tempdata.len_candi):
-            temp_candi[i] = tempdata.data_candi[i]
         total_Material = [0,0,0]
         bahan = tempdata.data_bahan_bangunan
         jin = ["" for i in range(Jumlah_jin_Pembangun)]
-
         j = 0
+        '''-------------------- 6 --------------------'''
+
+
+        '''-------------------- 7 --------------------'''
+        for i in range(tempdata.len_candi):
+            temp_candi[i] = tempdata.data_candi[i]
+        '''-------------------- 7 --------------------'''
+
+
+        '''-------------------- 8 --------------------'''
         for i in range(tempdata.len_user):
             if data_user[i][2] == "Pembangun":
                 jin[j] = data_user[i][0]
                 j += 1
+        '''-------------------- 8 --------------------'''
 
+
+        '''-------------------- 9 --------------------'''
         temp_id_candi_yang_dihancurkan = tempdata.id_candi_yang_dihancurkan
         temp_jumlah_candi_yang_dihancurkan = tempdata.jumlah_candi_yang_dihancurkan
+        '''-------------------- 9 --------------------'''
 
+
+        '''-------------------- 10 --------------------'''
         j = 0
         for i in range(lendata):
             if temp_candi[i] == []:
+
+                '''-------------------- 11 --------------------'''
                 pasir = util_function.randint(1,5) ; batu = util_function.randint(1,5) ; air = util_function.randint(1,5)
                 material = [str(pasir),str(batu),str(air)]
+                '''-------------------- 11 --------------------'''
                 
+
+                '''-------------------- 12 --------------------'''
                 if temp_jumlah_candi_yang_dihancurkan == 0: # Kondisi ketika tidak ada candi yg hancur
                     index = tempdata.len_candi+1
                     tempdata.len_candi+=1
@@ -557,20 +605,29 @@ def batchbangun():
                     
                     temp_id_candi_yang_dihancurkan = tempdatas # merubah list temp_id_candi_yang_dihancurkan menjadi list temp_id_candi_yang_dihancurkan yang telah diambil 1 id terkecil
                     temp_jumlah_candi_yang_dihancurkan -= 1 # mengurangi jumlah candi yang dihancurkan (karena akan dibangun kembali)
+                '''-------------------- 12 --------------------'''
 
+
+                '''-------------------- 13 --------------------'''
                 harga = int(material[0]) * 10000 + int(material[1]) * 15000 + int(material[2]) * 7500
                 temp_candi[i] = [index,jin[j],material[0],material[1],material[2],harga]
                 j += 1
                 total_Material[0] += pasir ; total_Material[1] += batu ; total_Material[2] += air
+                '''-------------------- 13 --------------------'''
 
+        '''-------------------- 10 --------------------'''
+
+
+        '''-------------------- 14 --------------------'''
         Visual.render_screen([f"Mengerahkan {Jumlah_jin_Pembangun} jin untuk membangun candi dengan total bahan",
                               f"{total_Material[0]} pasir, {total_Material[1]} batu, dan {total_Material[2]} air."],2)
         time.sleep(2.5)
+        '''-------------------- 14 --------------------'''
 
 
+        '''-------------------- 15 --------------------'''
         if total_Material[0] <= int(bahan[0][0]) and total_Material[1] <= int(bahan[0][1]) and total_Material[2] <= int(bahan[0][2]):
             bahan[0][0] = str(int(bahan[0][0]) - total_Material[0]) ; bahan[0][1] = str(int(bahan[0][1]) - total_Material[1]) ; bahan[0][2] = str(int(bahan[0][2]) - total_Material[2] )
-
 
             '''-------------------- Cek apakah username ada di list jin_yang_pernah_membangun atau tidak --------------------'''
             # Kalau ada, maka list jin_yang_pernah_membangun tidak ditambahkan username
@@ -589,8 +646,12 @@ def batchbangun():
                                 temp_jin_pembangun[j] = tempdata.data_jin_yang_pernah_membangun
                             else:
                                 temp_jin_pembangun[j] = data_user[i][2]
+            '''-------------------- Cek apakah username ada di list jin_yang_pernah_membangun atau tidak --------------------'''
 
+
+            '''-------------------- 16 --------------------'''
             tempdata.data_bahan_bangunan = bahan
+
             if lendata > 100:
                 temp_candi2 = [[] for i in range(100)]
                 for i in range(100):
@@ -600,13 +661,21 @@ def batchbangun():
             else:
                 tempdata.data_candi = temp_candi
                 tempdata.len_candi = lendata
+
             tempdata.id_candi_yang_dihancurkan = temp_id_candi_yang_dihancurkan
             tempdata.jumlah_candi_yang_dihancurkan = temp_jumlah_candi_yang_dihancurkan
+            '''-------------------- 16 --------------------'''
+
+
+            '''-------------------- 17 --------------------'''
             Visual.printascii("batch_bangun",access)
             Visual.render_screen([f"Jin berhasil membangun total {Jumlah_jin_Pembangun} candi."],1)
             time.sleep(2.5)
+            '''-------------------- 17 --------------------'''
 
         else:
+
+            '''-------------------- 18 --------------------'''
             sisa_pasir = total_Material[0] - int(bahan[0][0])
             sisa_batu = total_Material[1] - int(bahan[0][1])
             sisa_air = total_Material[2] - int(bahan[0][2])
@@ -616,8 +685,18 @@ def batchbangun():
                 sisa_batu = 0
             if sisa_air < 0:
                 sisa_air = 0
+            '''-------------------- 18 --------------------'''
+
+
+            '''-------------------- 19 --------------------'''
             Visual.render_screen([f"Bangun gagal. Kurang {sisa_pasir} pasir, {sisa_batu} batu, dan {sisa_air} air."],1)
             time.sleep(2.5)
+            '''-------------------- 19 --------------------'''
+
+        '''-------------------- 15 --------------------'''
+
+'''-------------------- 1 --------------------'''
+
 '''-------------------------------------------------------------F08------------------------------------------------------------'''
 
 
@@ -670,22 +749,39 @@ def laporancandi():
 
 
 '''-------------------------------------------------------------F11------------------------------------------------------------'''
+
+'''-------------------- 1 --------------------'''
 def cekid(id: int) -> bool:
     import tempdata
+    '''-------------------- 2 --------------------'''
     data_candi = tempdata.data_candi
+    '''-------------------- 2 --------------------'''
+
+
+    '''-------------------- 3 --------------------'''
     for i in range (tempdata.len_candi):
-        cek = True
+        cek = True # True berarti id tidak ada pada list id_candi_yang_dihancurkan
+
         for j in range(tempdata.jumlah_candi_yang_dihancurkan): # Loop untuk cek apakah id yang akan dihancurkan ada pada list id_candi_yang_dihancurkan
-            if i + 1 == tempdata.id_candi_yang_dihancurkan[j]:
-                cek = False
+            if i + 1 == tempdata.id_candi_yang_dihancurkan[j]: # Kondisi saat id yang akan dihancurkan ada pada list id_candi_yang_dihancurkan
+                cek = False # False berarti id ada pada list id_candi_yang_dihancurkan
+
         if cek: # Saat id yang akan dihancurkan tidak ada pada list id_candi_yang_dihancurkan 
             if data_candi[i] != [] and id == int(data_candi[i][0]):
                 return True
+    '''-------------------- 3 --------------------'''
+
     return False
 
+'''-------------------- 1 --------------------'''
+
+
+'''-------------------- 1 --------------------'''
 # TODO: Remove Specific line of data from array
 def remove_dataid(id: int):
     import tempdata
+
+    '''-------------------- 2 --------------------'''
     for i in range(tempdata.len_candi):
         cek = True
         for j in range(tempdata.jumlah_candi_yang_dihancurkan):
@@ -694,29 +790,66 @@ def remove_dataid(id: int):
         if cek: 
             if int(tempdata.data_candi[i][0]) == id: # Asumsi id candi tidak ada yang sama
                 tempdata.data_candi[i] =  []
+    '''-------------------- 2 --------------------'''
 
 
+    '''-------------------- 3 --------------------'''
     temphancur = [0 for i in range(tempdata.jumlah_candi_yang_dihancurkan+1)]
     for i in range(tempdata.jumlah_candi_yang_dihancurkan):
         temphancur[i] = tempdata.id_candi_yang_dihancurkan[i]
+
     temphancur[tempdata.jumlah_candi_yang_dihancurkan] = id
+    '''-------------------- 3 --------------------'''
+
+
+    '''-------------------- 4 --------------------'''
     tempdata.jumlah_candi_yang_dihancurkan += 1
     tempdata.id_candi_yang_dihancurkan = util_function.sort(temphancur,tempdata.jumlah_candi_yang_dihancurkan, "<")
+    '''-------------------- 4 --------------------'''
+
+'''-------------------- 1 --------------------'''
 
 
+'''-------------------- 1 --------------------'''
 def hancurkancandi():
     import Visual
+
+    '''-------------------- 2 --------------------'''
     id = int(input("Masukkan ID candi: "))
+    '''-------------------- 2 --------------------'''
+
+
+    '''-------------------- 3 --------------------'''
     if cekid(id):
+
+        '''-------------------- 4 --------------------'''
         confirm = input(f"Apakah anda yakin ingin menghancurkan candi ID: {id} (Y/N)? ")
+        '''-------------------- 4 --------------------'''
+
+
+        '''-------------------- 5 --------------------'''
+        while confirm != 'Y' and confirm != 'N': # Saat input user tidak sesuai dengan ketentuan
+            Visual.render_screen(["EXIT", "", "", "Silakan masukan input sesuai dengan ketentuan"],4) # Pesan Kesalahan 
+        '''-------------------- 5 --------------------'''
+
+        '''-------------------- 6 --------------------'''
         if confirm == "Y":
             remove_dataid(id)
             Visual.printascii("hancur_candi",access)
             Visual.printascii(access,access)
+        '''-------------------- 6 --------------------'''
 
     else:
+
+        '''-------------------- 7 --------------------'''
         Visual.render_screen(["Tidak ada candi dengan ID tersebut."],1)
         time.sleep(2)
+        '''-------------------- 7 --------------------'''
+
+    '''-------------------- 3 --------------------'''
+
+'''-------------------- 1 --------------------'''
+
 '''-------------------------------------------------------------F11------------------------------------------------------------'''
 
 
@@ -725,20 +858,21 @@ def hancurkancandi():
 def ayamberkokok():
     import tempdata, Visual
 
-    if tempdata.len_candi<100:
+    '''-------------------- Tampilan Animasi --------------------'''
+    if tempdata.len_candi<100: # Saat jumlah candi kurang dari 100
         Visual.printascii("roro_menang",access)
         time.sleep(10)
-    else:
+    else: # Saat jumlah candi adalah 100
         Visual.printascii("bondo_menang",access)
         time.sleep(10)
+    '''-------------------- Tampilan Animasi --------------------'''
+
 '''-------------------------------------------------------------F12------------------------------------------------------------'''
 
 
 
 '''------------------------------------------------------------F13------------------------------------------------------------'''
-
 # Ada pada module load_only
-
 '''------------------------------------------------------------F13------------------------------------------------------------'''
 
 
