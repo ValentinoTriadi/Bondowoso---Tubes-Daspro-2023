@@ -1,80 +1,118 @@
-import util_function, function_jin, time, function_candi, os.path, typing
+import util_function, function_jin, time, function_candi, os.path
 logins = False
 access = ""
 user = "asdf"
 path_folder = ""
 username_jin_summon = ""
 
-'''-------------------------------F01------------------------------'''
+'''-------------------------------------------------------------F01------------------------------------------------------------'''
 def login():
     import tempdata, Visual
     global logins, access, user
-    Visual.render_screen(["Login"],1)
+    Visual.render_screen(["Login"],1) # Menampilkan screen 'login'
     time.sleep(0.5)
-    datapass = tempdata.data_user
-    username = input("Username: ")
+
+    '''-------------------- Input User --------------------'''
+    # asumsi input username unik dan hanya mengandung huruf alphabet
+    username = input("Username: ") # Input dari user
     password = input("Password: ")
+    '''-------------------- Input User --------------------'''
 
-    index = 0
-    cekuser = False
-    cekpass = ""
-    for i in range(tempdata.len_user):
-        if datapass[i][0] == username: # datapass[i](akun pada baris ke brp pada data)[0](username)
-            cekuser = True
-            index = i
-            cekpass = datapass[i][1]
-    if not cekuser:
-        Visual.render_screen(["Username tidak terdaftar!"],1)
+
+    '''-------------------- Inisialisasi Awal --------------------'''
+    datauser = tempdata.data_user # meng-assign data global ke variabel data user lokal
+    index = 0   # sebagai tempat menyimpan index tempat username ditemukan
+    cekuser = False     # sebagai tempat menyimpan cek apakah user ada pada data atau tidak
+    cekpass = ""    # sebagai tempat untuk menyimpan password yang diambil dari data 
+    '''-------------------- Inisialisasi Awal --------------------'''
+
+
+    '''-------------------- Memeriksa User --------------------'''
+    for i in range(tempdata.len_user):  # loop untuk memeriksa apakah username yang diinput ada pada data atau tidak
+        # Kondisional untuk mengecek apakah username terdapat pada data atau tidak
+        if datauser[i][0] == username: # datauser[i](akun pada baris ke brp pada data)[0](username)
+            # {Username terdapat pada data}
+            cekuser = True # cek benar, berarti username ada pada data
+            index = i # menyimpan index tempat username ditemukan
+            cekpass = datauser[i][1] # menyimpan password pada data dengan index yang sama dengan index ditemukannya username
+    '''-------------------- Memeriksa User --------------------'''
+
+    
+    '''-------------------- Validasi Login --------------------'''
+    # Kondisional untuk memvalidasi login
+    if not cekuser: # Saat user tidak ditemukan pada data
+        Visual.render_screen(["Username tidak terdaftar!"],1) # Menampilkan pesan
         time.sleep(2.5)
-        login()
-    else:
-        if password == cekpass:
-            access = datapass[index][2]
-            user = datapass[index][0]
-            logins = True
-            Visual.printascii(access,access)
+        login() # Mengulangi fungsi login
+    else: # Saat user ditemukan pada data
+        if password == cekpass: # ketika password yang diinput benar
+            logins = True # Merubah variabel logins global menjadi benar (sudah login)
+            access = datauser[index][2] # Merubah variabel access global menjadi role dari user
+            user = datauser[index][0] # Merubah variabel user global menjadi username
+            Visual.printascii(access,access) # Menampilkan animasi karakter
             
-        else:
-            Visual.render_screen(["Password salah!"],1)
+        else: # ketika password yang diinput salah
+            Visual.render_screen(["Password salah!"],1) # Menampilkan pesan
             time.sleep(2.5)
-            login()
+            login() # Mengulang fungsi login
+    '''-------------------- Validasi Login --------------------'''
 
-'''-------------------------------F02------------------------------'''
+'''-------------------------------------------------------------F01------------------------------------------------------------'''
+
+
+
+'''-------------------------------------------------------------F02------------------------------------------------------------'''
 def logout():
     import Visual
     global logins, access, user
-    logins = False
-    access = ""
-    user = ""
+
+    '''-------------------- Inisialisasi Variabel Global --------------------'''
+    logins = False # Merubah variabel logins global menjadi salah (belum login)
+    access = "" # Merubah variabel access global menjadi tidak ada
+    user = "" # Merubah variabel user global menjadi tidak ada
+    '''-------------------- Inisialisasi Variabel Global --------------------'''
+
     
-    Visual.printascii("logout",None)
-    login()
+    Visual.printascii("logout",None) # Menampilkan animasi logout
+'''-------------------------------------------------------------F02------------------------------------------------------------'''
 
 
-''' ------------------------------F03------------------------------ '''
+
+'''------------------------------------------------------------F03------------------------------------------------------------'''
 def summonJin():
     global username_jin_summon # Username dari jin yang akan disummon
     import tempdata, Visual
     Visual.render_screen(["Summon Jin"],1) # Menampilkan animasi summon jin
     time.sleep(0.5)
-    if tempdata.len_user < 102: # Jika total jin masih di bawah 100
+
+    '''-------------------- Mengecek Jumlah Jin --------------------'''
+    if tempdata.len_user < 102: # Jika total jin masih di bawah 100 (< 102 dikarenakan ada user Bondowoso dan Roro yang bukan merupakan jin tetapi terdapat pada data user)
+
+        '''-------------------- Input Jenis Jin --------------------'''
         Visual.render_screen(["Jenis jin yang dapat dipanggil: ", # Animasi opsi jenis jin
         "(1) Pengumpul - Bertugas mengumpulkan bahan bangunan",
         "(2) Pembangun - Bertugas membangun candi"], 3)
 
         jin = int(input("Masukkan nomor jenis jin yang ingin dipanggil: ")) # Menerima input jenis jin yang akan dipanggil
-        while jin != 2 and jin != 1:
+
+        # TODO: Validasi input
+        while jin != 2 and jin != 1: # Loop untuk validasi input
             Visual.render_screen([f'Tidak ada jenis jin bernomor "{jin}"!'], 1) # Jika input di luar dari opsi
             time.sleep(2.5)
             Visual.render_screen(["Jenis jin yang dapat dipanggil: ",
             "(1) Pengumpul - Bertugas mengumpulkan bahan bangunan",
             "(2) Pembangun - Bertugas membangun candi"], 3)
             jin = int(input("Masukkan nomor jenis jin yang ingin dipanggil: ")) # Looping meminta input jenis jin
+        '''-------------------- Input Jenis Jin --------------------'''
 
+
+        '''-------------------- Input Username Jin --------------------'''
         if jin == 1: # Ketika user menginput opsi 1
             role = "Pengumpul"
             Visual.render_screen(['Memilih jin "Pengumpul".'], 1)
             username = input("Masukkan username jin: ") # Memasukkan username jin yang akan dipanggil
+
+            # TODO: Validasi username
             while function_jin.Cek_User(username): # Jika username sudah terdaftar akan looping meminta input
                 Visual.render_screen([f'Username "{username}" sudah diambil!'],1) 
                 time.sleep(2)
@@ -84,125 +122,237 @@ def summonJin():
             role = "Pembangun"
             Visual.render_screen(['Memilih jin "Pembangun".'], 1)
             username = input("Masukkan username jin: ") # Memasukkan username jin yang akan dipanggil
+
+            # TODO: Validasi username
             while function_jin.Cek_User(username): # Jika username sudah terdaftar akan looping meminta input
                 Visual.render_screen([f'Username "{username}" sudah diambil!'],1)  
                 time.sleep(2)
                 Visual.render_screen(['Memilih jin "Pembangun".'], 1)
                 username = input("Masukkan username jin: ")
-        username_jin_summon = username # Username akan disave sesuai dengan variabel username
 
+        username_jin_summon = username # Username jin yang di summon akan disave pada variabel global yang diperuntukkan animasi
+        '''-------------------- Input Username Jin --------------------'''
+
+
+        '''-------------------- Input Password Jin --------------------'''
         password = input("Masukkan password jin: ") # Meminta data password untuk username jin yang akan disummon
+
+        # TODO: Validasi panjang password
         while not 5 <= util_function.length(password + '.', '.') <= 25: # Jika password panjangnya tidak dari 5 sampai 25 huruf
-            Visual.render_screen(["Password panjangnya harus 5-25 karakter!"],1)
+            Visual.render_screen(["Password panjangnya harus 5-25 karakter!"],1) # Menampilkan pesan kesalahan
             time.sleep(2.5)
             if role == "Pengumpul": # Sesuai opsi jenis jin yang dipilih di atas
-                Visual.render_screen(['Memilih jin "Pengumpul".'], 1) 
+                Visual.render_screen(['Memilih jin "Pengumpul".'], 1) # Menampilkan animasi
             elif role == "Pembangun": # Sesuai opsi jenis jin yang dipilih di atas
-                Visual.render_screen(['Memilih jin "Pembangun".'], 1)
-            password = input("Masukkan password jin: ")
+                Visual.render_screen(['Memilih jin "Pembangun".'], 1) # Menampilkan animasi
+            password = input("Masukkan password jin: ") 
+        '''-------------------- Input Password Jin --------------------'''
 
+
+        '''-------------------- Update Data User --------------------'''
         datas = [username,password,role] # Mengubah inputan data menjadi bentuk list bernama datas
-        # commanddata.save_csv("user.csv", datas)
 
+        # TODO: Mengupdate data user
         tempdatas = [[] for i in range(tempdata.len_user + 1)] # Menambahkan list datas ke ke datas temporary untuk disave sementara
-        for i in range(tempdata.len_user):
+        for i in range(tempdata.len_user): # Loop untuk mengisi tempdatas (datas temporary) dengan data sebelumnya
             tempdatas[i] = tempdata.data_user[i]
-        tempdatas[tempdata.len_user] = datas        
-        tempdata.len_user += 1
+        tempdatas[tempdata.len_user] = datas # Menambahkan list bernama datas ke tempdatas (datas temporary)
 
-        tempdata.data_user = tempdatas # Memasukkan tempdatas ke data user
+        tempdata.len_user += 1 # Mengupdate jumlah user setelah melakukan summon jin
+        tempdata.data_user = tempdatas # Memasukkan tempdatas (datas temporary) ke data user
+        '''-------------------- Update Data User --------------------'''
 
+
+        '''-------------------- Tampilan Animasi --------------------'''
         time.sleep(1)
         if role == "Pengumpul":
             Visual.printascii("summon_pengumpul",access) # Menampilkan animasi summon jin pengumpul
         elif role == "Pembangun":
             Visual.printascii("summon_pembangun",access) # Menampilkan animasi summon jin pembangun
+        '''-------------------- Tampilan Animasi --------------------'''
 
         
     else: # Jika jin yang terdaftar sudah 100
+
+        '''-------------------- Tampilan Animasi --------------------'''
         Visual.render_screen(["Jumlah Jin telah maksimal! (100 jin).",f"{user} tidak dapat men-summon lebih dari itu."],2)
         time.sleep(2)
+        '''-------------------- Tampilan Animasi --------------------'''
+
+    '''-------------------- Mengecek Jumlah Jin --------------------'''
+
+'''------------------------------------------------------------F03------------------------------------------------------------'''
     
 
-''' ------------------------------F04------------------------------ '''
+
+'''------------------------------------------------------------F04------------------------------------------------------------'''
 def hapusJin():
     import tempdata, Visual
+
+    '''-------------------- Tampilan Awal --------------------'''
     Visual.render_screen(["Hapus Jin"],1) # Menampilkan animasi tampilan opsi penghapusan jin
     time.sleep(0.5)
+    '''-------------------- Tampilan Awal --------------------'''
+    
+
+    '''-------------------- Input Username --------------------'''
     username = input("Masukkan username jin : ") # Meminta input username jin yang akan dihapus
+    '''-------------------- Input Username --------------------'''
 
+
+    '''-------------------- Cek Username --------------------'''
     if not function_jin.Cek_User(username): # Jika username yang diinput tidak memiliki kesamaan dengan data yang ada
-        Visual.render_screen(["Tidak ada jin dengan username tersebut."],1)
-        time.sleep(2)
-        Visual.printascii(access, access)
-    elif function_jin.Cek_User(username): # Jika username terdaftar di dalam data
-        option = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ") # Input user terkait konfirmasi penghapusan jin
 
+        '''-------------------- Validasi Kesalahan --------------------'''
+        Visual.render_screen(["Tidak ada jin dengan username tersebut."],1) # Menampilkan pesan kesalahan
+        time.sleep(2)
+        '''-------------------- Validasi Kesalahan --------------------'''
+
+
+    elif function_jin.Cek_User(username): # Jika username terdaftar di dalam data
+
+        '''-------------------- Konfirmasi --------------------'''
+        option = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ") # Input user terkait konfirmasi penghapusan jin
+        '''-------------------- Konfirmasi --------------------'''
+
+
+        '''-------------------- Validasi Konfirmasi --------------------'''
+        while option != "Y" and option != "N":
+            Visual.render_screen(["Input tidak sesuai!","Silakan masukan (Y/N)!"],2) # Pesan kesalahan
+            option = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ") # Input user terkait konfirmasi penghapusan jin
+        '''-------------------- Validasi Konfirmasi --------------------'''
+
+
+        '''-------------------- Penghapusan Jin --------------------'''
         if option == "Y": # Jika input user adalah Ya
+
+            '''-------------------- Inisialisasi Awal Data --------------------'''
             data_user = tempdata.data_user # Mengambil data user
             datacandi = tempdata.data_candi # Mengambil data candi
-            for i in range(tempdata.len_user):
-                if data_user[i][0] == username: # Mencari indeks data yang usernamenya sesuai dengan input user
-                    index = i
-            for i in range(index,tempdata.len_user-1): 
-                tempdata.data_user[i] = tempdata.data_user[i+1] # Menghapus data jin lalu menaikkan semua data di bawahnya 1 indeks ke atas
-            tempdata.len_user -= 1 # panjang tempdata berkurang 1
-            tempdatas = [[] for i in range(tempdata.len_user)] # Membuat ulang tempdata yang baru
-            for i in range(tempdata.len_user):
-                tempdatas[i] = tempdata.data_user[i]
-            tempdata.data_user = tempdatas # Meng-assign kembali tempdatas untuk data user
+            '''-------------------- Inisialisasi Awal Data --------------------'''
 
-            count = 0 
+
+            '''-------------------- Mencari Indeks Username --------------------'''
+            for i in range(tempdata.len_user): # Loop untuk mencari indeks data yang usernamenya sesuai dengan input user
+                if data_user[i][0] == username: 
+                    index = i
+            '''-------------------- Mencari Indeks Username --------------------'''
+
+
+            '''-------------------- Menghapus Username Dari Data --------------------'''
+            for i in range(index,tempdata.len_user-1): # Loop untuk menghapus data jin lalu menaikkan semua data di bawahnya 1 indeks ke atas
+                tempdata.data_user[i] = tempdata.data_user[i+1] 
+            '''-------------------- Menghapus Username Dari Data --------------------'''
+
+
+            '''-------------------- Mengupdate Data User --------------------'''
+            tempdata.len_user -= 1 # mengupdate panjang data user menjadi berkurang 1
+
+            # TODO: Mengupdate data user
+            tempdatas = [[] for i in range(tempdata.len_user)] # Membuat ulang tempdata yang baru dengan jumlah elemen yang sesuai dengan panjang data (sehingga list tidak ada elemen kosong)
+            for i in range(tempdata.len_user): # Loop untuk memasukan data lama ke list baru
+                tempdatas[i] = tempdata.data_user[i]
+
+            tempdata.data_user = tempdatas # Meng-assign kembali tempdatas untuk data user
+            '''-------------------- Mengupdate Data User --------------------'''
+
+
+            '''-------------------- Mengupdate Data Candi yang Dihancurkan--------------------'''
+
+            ''' TODO: Menghitung banyak candi yang telah dibangun jin yang akan dihapus '''
+            count = 0 # Banyak candi yang telah dibangun oleh jin yang akan dihapus
             for i in range(tempdata.len_candi): # Menghitung banyak candi yang dibangun oleh jin yang akan dihapus
                 if datacandi[i][1] == username:
                     count+=1
 
-            tempdatas = [[] for i in range(tempdata.len_candi - count)] # Membuat list tempdatas baru
+            ''' TODO: Inisialisasi Awal '''
             j = 0
-            for i in range(tempdata.len_candi):
+            tempdatas = [[] for i in range(tempdata.len_candi - count)] # Membuat list tempdatas baru untuk data candi
+            
+            ''' TODO: Mengupdate data candi yang dihancurkan '''
+            for i in range(tempdata.len_candi): # Loop untuk mengisi tempdatas 
                 if datacandi[i][1] != username: # Jika candi tidak dibangun oleh jin yang akan dihapus
                     tempdatas[j] = datacandi[i] # Candi tersebut akan di-assign ke tempdatas
                     j+=1
                 else: # Jika candi dibuat oleh jin yang akan dihapus
                     tempdata.len_candi-=1 # Panjang data candi berkurang 1
                     id = datacandi[i][0] # ID Candi akan masuk ke variabel id
+
                     temphancur = [0 for i in range(tempdata.jumlah_candi_yang_dihancurkan + 1)] # List sementara candi yang dihancurkan
-                    for i in range(tempdata.jumlah_candi_yang_dihancurkan):
+                    for i in range(tempdata.jumlah_candi_yang_dihancurkan): # Loop untuk mengisi list sementara dengan data yang sudah ada sebelum ditambahkan id baru
                         temphancur[i] = tempdata.id_candi_yang_dihancurkan[i]
                     temphancur[tempdata.jumlah_candi_yang_dihancurkan] = id # Meng-assign id candi yang dohancurkan
                     tempdata.jumlah_candi_yang_dihancurkan += 1 # Jumlah candi yang dihancurkan bertambah 1
-                    tempdata.id_candi_yang_dihancurkan = util_function.sort(temphancur,tempdata.jumlah_candi_yang_dihancurkan, "<")
+                    tempdata.id_candi_yang_dihancurkan = util_function.sort(temphancur,tempdata.jumlah_candi_yang_dihancurkan, "<") # Mengurutkan data id candi yang dihancurkan dari yang terkecil
+
             tempdata.data_candi = tempdatas # Data candi terbaru dari tempdatas
+            '''-------------------- Mengupdate Data Candi yang Dihancurkan--------------------'''
+
+
+            '''-------------------- Tampilan Animasi --------------------'''
             if data_user[index][2] == "Pembangun": # Jika role jin yang dihapus adalah pembangun
                 Visual.printascii("hapus_jin_bangun",access) # Menampilkan animasi jin dihapus
             elif data_user[index][2] == "Pengumpul": # Jika role jin yang dihapus adalah pembangun
                 Visual.printascii("hapus_jin_kumpul",access) # Menampilkan animasi jin dihapus
+            '''-------------------- Tampilan Animasi --------------------'''
+
+        '''-------------------- Penghapusan Jin --------------------'''
+
+    '''-------------------- Cek Username --------------------'''
+
+'''------------------------------------------------------------F04------------------------------------------------------------'''
 
 
 
-''' ------------------------------F05------------------------------ '''
+'''------------------------------------------------------------F05------------------------------------------------------------'''
 def ubahJin():
     import tempdata, Visual
-    username = input("Masukkan username jin : ")
 
-    if not function_jin.Cek_User(username):
+    '''-------------------- Input Username --------------------'''
+    username = input("Masukkan username jin : ") # Meminta input username yang akan dirubah tipenya
+    '''-------------------- Input Username --------------------'''
+
+
+    '''-------------------- Cek Username --------------------'''
+    # Kondisional untuk mengecek username yang di input terdaftar pada data atau tidak
+    if not function_jin.Cek_User(username): # Saat username tidak ditemukan pada data
         Visual.render_screen(["Tidak ada jin dengan username tersebut."],1)
         time.sleep(2)
         Visual.printascii(access,access)
-    else:
-        data_user = tempdata.data_user
-        for i in range(tempdata.len_user):
-            if data_user[i][0] == username:
+    else: # Saat username ditemukan pada data
+
+        '''-------------------- Inisialisasi Awal Data --------------------'''
+        data_user = tempdata.data_user # Mengambil data user dan di assign ke variabel lokal
+        index = 0 # Tempat menyimpan index username
+        '''-------------------- Inisialisasi Awal Data --------------------'''
+
+
+        '''-------------------- Mencari Index Username --------------------'''
+        for i in range(tempdata.len_user): # Loop untuk mencari index username
+            if data_user[i][0] == username: # Saat username ditemukan
                 index = i
-        tempdata.data_user[index][2] = function_jin.ubah_role(tempdata.data_user[index][2])
+        '''-------------------- Mencari Index Username --------------------'''
 
-        if tempdata.data_user[index][2] == "Pembangun":
+
+        '''-------------------- Mengubah Tipe Username --------------------'''
+        tempdata.data_user[index][2] = function_jin.ubah_role(tempdata.data_user[index][2]) # Memanggil fungsi ubah_role
+        '''-------------------- Mengubah Tipe Username --------------------'''
+
+
+        '''-------------------- Tampilan Animasi --------------------'''
+        if tempdata.data_user[index][2] == "Pembangun": # Jika jin diubah menjadi tipe pembangun
             Visual.printascii("ubah_kumpul_bangun",access)
-        elif tempdata.data_user[index][2] == "Pengumpul":
+        elif tempdata.data_user[index][2] == "Pengumpul": # Jika jin diubah menjadi tipe pengumpul
             Visual.printascii("ubah_bangun_kumpul",access)
-    
+        '''-------------------- Tampilan Animasi --------------------'''
 
-''' -------------------------------F06------------------------------ '''
+    '''-------------------- Cek Username --------------------'''
+    
+'''------------------------------------------------------------F05------------------------------------------------------------'''
+
+
+
+'''-------------------------------------------------------------F06------------------------------------------------------------'''
 def bangun(username: str):
     import tempdata, Visual
     # candi = commanddata.read_csv("candi.csv")
@@ -235,7 +385,7 @@ def bangun(username: str):
                         tempdatacandi[i] = candi[i]
                 tempdata.data_candi = tempdatacandi
             
-            '''---------- Cek apakah username ada di list jin_yang_pernah_membangun atau tidak ----------'''
+            '''-------------------- Cek apakah username ada di list jin_yang_pernah_membangun atau tidak --------------------'''
             # Kalau ada, maka list jin_yang_pernah_membangun tidak ditambahkan username
             # Kalau tidak ada, maka list jin_yang_pernah_membangun ditambahkan username
             cek = True  # Kondisi awal apabila user tidak ditemukan dalam list jin_yang_pernah_membangun
@@ -263,8 +413,11 @@ def bangun(username: str):
     else:
         Visual.render_screen(["Bahan bangunan tidak mencukupi","Candi tidak bisa dibangun!"],2)
         time.sleep(2.5)
+'''-------------------------------------------------------------F06------------------------------------------------------------'''
+
+
     
-''' -------------------------------F07------------------------------ '''
+'''-------------------------------------------------------------F07------------------------------------------------------------'''
 def kumpul(batch: bool):
     import tempdata, Visual
     pasir = util_function.randint(0,5) ; batu = util_function.randint(0,5) ; air = util_function.randint(0,5)
@@ -276,9 +429,11 @@ def kumpul(batch: bool):
         Visual.printascii("kumpul", access)
         Visual.render_screen([f"Jin menemukan {pasir} pasir, {batu} batu, {air} air."],1)
         time.sleep(2.5)
+'''-------------------------------------------------------------F07------------------------------------------------------------'''
+
 
     
-''' -------------------------------F08------------------------------ '''
+'''-------------------------------------------------------------F08------------------------------------------------------------'''
 def batchkumpul():
     import Visual
     jinPengumpul = function_jin.count_jin("Pengumpul")
@@ -363,7 +518,7 @@ def batchbangun():
             bahan[0][0] = str(int(bahan[0][0]) - total_Material[0]) ; bahan[0][1] = str(int(bahan[0][1]) - total_Material[1]) ; bahan[0][2] = str(int(bahan[0][2]) - total_Material[2] )
 
 
-            '''---------- Cek apakah username ada di list jin_yang_pernah_membangun atau tidak ----------'''
+            '''-------------------- Cek apakah username ada di list jin_yang_pernah_membangun atau tidak --------------------'''
             # Kalau ada, maka list jin_yang_pernah_membangun tidak ditambahkan username
             # Kalau tidak ada, maka list jin_yang_pernah_membangun ditambahkan username
             for i in range(tempdata.len_user): # Cek semua user yang memiliki role "Pembangun"
@@ -409,9 +564,11 @@ def batchbangun():
                 sisa_air = 0
             Visual.render_screen([f"Bangun gagal. Kurang {sisa_pasir} pasir, {sisa_batu} batu, dan {sisa_air} air."],1)
             time.sleep(2.5)
+'''-------------------------------------------------------------F08------------------------------------------------------------'''
 
 
-''' -------------------------------F09------------------------------ '''
+
+'''-------------------------------------------------------------F09------------------------------------------------------------'''
 def laporanjin ():
     import Visual
     # Komentar berikut merupakan algoritma dasar dalam output laporan jin
@@ -431,8 +588,11 @@ def laporanjin ():
     # dalam kelompok kami, kami mengeluarkan output laporan jin yang dapat dilihat pada module laporan pada folder animasi
     Visual.printascii("laporan_jin", access)
     input()
+'''-------------------------------------------------------------F09------------------------------------------------------------'''
 
-''' -------------------------------F10------------------------------ '''
+
+
+'''-------------------------------------------------------------F10------------------------------------------------------------'''
 def laporancandi():
     import Visual
     # Komentar berikut merupakan algoritma dasar dalam output laporan jin
@@ -451,8 +611,11 @@ def laporancandi():
     # dalam kelompok kami, kami mengeluarkan output laporan jin yang dapat dilihat pada module laporan pada folder animasi
     Visual.printascii("laporan_candi", access)
     input()
+'''-------------------------------------------------------------F10------------------------------------------------------------'''
 
-''' -------------------------------F11------------------------------ '''
+
+
+'''-------------------------------------------------------------F11------------------------------------------------------------'''
 def cekid(id: int) -> bool:
     import tempdata
     data_candi = tempdata.data_candi
@@ -500,8 +663,11 @@ def hancurkancandi():
     else:
         Visual.render_screen(["Tidak ada candi dengan ID tersebut."],1)
         time.sleep(2)
+'''-------------------------------------------------------------F11------------------------------------------------------------'''
 
-''' -------------------------------F12------------------------------ '''
+
+
+'''-------------------------------------------------------------F12------------------------------------------------------------'''
 def ayamberkokok():
     import tempdata, Visual
 
@@ -511,56 +677,97 @@ def ayamberkokok():
     else:
         Visual.printascii("bondo_menang",access)
         time.sleep(10)
+'''-------------------------------------------------------------F12------------------------------------------------------------'''
 
 
-''' ------------------------------F13------------------------------ '''
+
+'''------------------------------------------------------------F13------------------------------------------------------------'''
 
 # Ada pada module load_only
 
+'''------------------------------------------------------------F13------------------------------------------------------------'''
 
-''' ------------------------------F14------------------------------ '''
+
+
+'''------------------------------------------------------------F14------------------------------------------------------------'''
 def save():
     global path_folder
     import Visual
+
+    '''-------------------- Tampilan Awal --------------------'''
     Visual.render_screen(["Save"],1)
     time.sleep(0.5)
-    name_folder = input("Masukkan nama folder: ")
-    path_folder = f"save/{name_folder}"
+    '''-------------------- Tampilan Awal --------------------'''
+
+
+    '''-------------------- Input Nama Folder --------------------'''
+    name_folder = input("Masukkan nama folder: ") # Meminta input nama folder tempat file akan disave
+    path_folder = f"save/{name_folder}" # Membuat path directory untuk folder yang telah diinput
+    '''-------------------- Input Nama Folder --------------------'''
     
     
+    '''-------------------- Save File --------------------'''
+    if not os.path.isdir(f"./{path_folder}"): # Saat folder belum ada namun folder parent 'save' sudah ada
 
-    if not os.path.isdir(f"./{path_folder}"):
-        os.mkdir(f"./{path_folder}")
+        '''-------------------- Membuat Folder --------------------'''
+        os.mkdir(f"./{path_folder}") # Membuat folder sesuai nama folder yang diinput
+        '''-------------------- Membuat Folder --------------------'''
 
+        '''-------------------- Menyimpan file CSV dalam folder --------------------'''
         util_function.write_csv("candi.csv", path_folder)
         util_function.write_csv("user.csv", path_folder)
         util_function.write_csv("bahan_bangunan.csv", path_folder)
+        '''-------------------- Menyimpan file CSV dalam folder --------------------'''
 
+        '''-------------------- Tampilan Animasi --------------------'''
         Visual.printascii("save1", access)
-    elif not os.path.isdir("./save"):
-        os.mkdir(f"./save")
-        os.mkdir(f"./{path_folder}")
+        '''-------------------- Tampilan Animasi --------------------'''
 
+    elif not os.path.isdir("./save"): # Saat parent folder 'save' belum ada
+
+        '''-------------------- Membuat Folder --------------------'''
+        os.mkdir(f"./save") # Membuat folder parent 'save'
+        os.mkdir(f"./{path_folder}") # Membuat folder sesuai nama folder yang diinput
+        '''-------------------- Membuat Folder --------------------'''
+
+        '''-------------------- Menyimpan file CSV dalam folder --------------------'''
         util_function.write_csv("candi.csv", path_folder)
         util_function.write_csv("user.csv", path_folder)
         util_function.write_csv("bahan_bangunan.csv", path_folder)
+        '''-------------------- Menyimpan file CSV dalam folder --------------------'''
 
+        '''-------------------- Tampilan Animasi --------------------'''
         Visual.printascii("save2",access)        
-    elif os.path.isdir(f"./{path_folder}"):
+        '''-------------------- Tampilan Animasi --------------------'''
+
+    elif os.path.isdir(f"./{path_folder}"): # Saat folder sudah ada dan folder parent 'save' sudah ada
+
+        '''-------------------- Menyimpan file CSV dalam folder --------------------'''
         util_function.write_csv("candi.csv", path_folder)
         util_function.write_csv("user.csv", path_folder)
         util_function.write_csv("bahan_bangunan.csv", path_folder)
+        '''-------------------- Menyimpan file CSV dalam folder --------------------'''
 
+        '''-------------------- Tampilan Animasi --------------------'''
         Visual.printascii("save3",access)
+        '''-------------------- Tampilan Animasi --------------------'''
+
+    '''-------------------- Save File --------------------'''
+
+'''------------------------------------------------------------F14------------------------------------------------------------'''
+
     
 
-''' ------------------------------F15------------------------------ '''
+'''------------------------------------------------------------F15------------------------------------------------------------'''
 def help():
     import Visual
-    print(" HELP ".center(28,"="))
-    if logins:
-        if access == "bandung_bondowoso":
-            Visual.render_screen(["1. logout".ljust(80," "),"   Untuk keluar dari akun yang digunakan sekarang".ljust(80," "),
+    '''-------------------- Tampilan Help --------------------'''
+    if logins: # Saat sudah login
+
+        if access == "bandung_bondowoso": # Saat role user adalah bandung_bondowoso
+            
+            '''-------------------- Tampilan Help Bondowoso --------------------'''
+            Visual.render_screen([" HELP ".center(28,"="), "", "1. logout".ljust(80," "),"   Untuk keluar dari akun yang digunakan sekarang".ljust(80," "),
             "2. summonjin".ljust(80," "),"   Untuk memanggil jin dari dunia lain".ljust(80," "),
             "3. hapusjin".ljust(80," "),"   Untuk menghapus jin".ljust(80," "),
             "4. ubahjin".ljust(80," "),"   Untuk mengubah tipe jin".ljust(80," "),
@@ -569,42 +776,72 @@ def help():
             "7. laporanjin".ljust(80," "),"   Untuk mengambil laporan jin yang berisi kinerja para jin".ljust(80," "),
             "8. laporancandi".ljust(80," "),"   Untuk mengambil laporan candi yang berisi progress pembangunan candi".ljust(80," "),
             "9. save".ljust(80," "),"   Untuk menyimpan data yang berada di program".ljust(80," "),
-            "10. exit".ljust(80," "),"   Untuk keluar dari permainan".ljust(80," ")], 20)
+            "10. exit".ljust(80," "),"   Untuk keluar dari permainan".ljust(80," ")], 22)
+            '''-------------------- Tampilan Help Bondowoso --------------------'''
 
-        elif access == "roro_jonggrang":
-            Visual.render_screen(["1. logout".ljust(80," "),"   Untuk keluar dari akun yang digunakan sekarang".ljust(80," "),
+        elif access == "roro_jonggrang": # Saat role user adalah roro_jonggrang
+
+            '''-------------------- Tampilan Help Roro --------------------'''
+            Visual.render_screen([" HELP ".center(28,"="),"","1. logout".ljust(80," "),"   Untuk keluar dari akun yang digunakan sekarang".ljust(80," "),
             "2. hancurkancandi".ljust(80," "),"   Untuk menghancurkan candi yang tersedia".ljust(80," "),
             "3. ayamberkokok".ljust(80," "),"   Untuk menyelesaikan permainan".ljust(80," "),
             "4. save".ljust(80," "),"   Untuk menyimpan data yang berada di program".ljust(80," "),
-            "5. exit".ljust(80," "),"   Untuk keluar dari permainan".ljust(80," ")],10)
+            "5. exit".ljust(80," "),"   Untuk keluar dari permainan".ljust(80," ")],12)
+            '''-------------------- Tampilan Help Roro --------------------'''
 
-        elif access == "Pembangun":
-            Visual.render_screen(["1. logout".ljust(80," "),"   Untuk keluar dari akun yang digunakan sekarang".ljust(80," "),
+        elif access == "Pembangun": # Saat role user adalah Pembangun
+
+            '''-------------------- Tampilan Help Jin Pembangun --------------------'''
+            Visual.render_screen([" HELP ".center(28,"="),"","1. logout".ljust(80," "),"   Untuk keluar dari akun yang digunakan sekarang".ljust(80," "),
             "2. bangun".ljust(80," "),"   Untuk membangun candi".ljust(80," "),
             "3. save".ljust(80," "),"   Untuk menyimpan data yang berada di program".ljust(80," "),
-            "4. exit".ljust(80," "),"   Untuk keluar dari permainan".ljust(80," ")],8)
+            "4. exit".ljust(80," "),"   Untuk keluar dari permainan".ljust(80," ")],10)
+            '''-------------------- Tampilan Help Jin Pembangun --------------------'''
 
-        elif access == "Pengumpul":
-            Visual.render_screen(["1. logout".ljust(80," "),"   Untuk keluar dari akun yang digunakan sekarang".ljust(80," "),
+        elif access == "Pengumpul": # Saat role user adalah Pengumpul
+
+            '''-------------------- Tampilan Help Jin Pengumpul --------------------'''
+            Visual.render_screen([" HELP ".center(28,"="),"","1. logout".ljust(80," "),"   Untuk keluar dari akun yang digunakan sekarang".ljust(80," "),
             "2. kumpul".ljust(80," "),"   Untuk mengumpulkan resource candi".ljust(80," "),
             "3. save".ljust(80," "),"   Untuk menyimpan data yang berada di program".ljust(80," "),
-            "4. exit".ljust(80," "),"   Untuk keluar dari permainan".ljust(80," ")],8)
-    else:
-        Visual.render_screen(["1. login".ljust(80," "),"   Untuk masuk menggunakan akun".ljust(80," "),
+            "4. exit".ljust(80," "),"   Untuk keluar dari permainan".ljust(80," ")],10)
+            '''-------------------- Tampilan Help Jin Pengumpul --------------------'''
+
+    else: # Saat belum login
+
+        '''-------------------- Tampilan Help Saat Belum Login --------------------'''
+        Visual.render_screen([" HELP ".center(28,"="),"","1. login".ljust(80," "),"   Untuk masuk menggunakan akun".ljust(80," "),
         "2. save".ljust(80," "),"   Untuk menyimpan data yang berada di program".ljust(80," "),
-        "3. exit".ljust(80," "),"   Untuk keluar dari permainan".ljust(80," ")],6)
+        "3. exit".ljust(80," "),"   Untuk keluar dari permainan".ljust(80," ")],8)
+        '''-------------------- Tampilan Help Saat Belum Login --------------------'''
+
+    '''-------------------- Tampilan Help --------------------'''
+
+'''------------------------------------------------------------F15------------------------------------------------------------'''
+
 
     
-''' ------------------------------F16------------------------------ '''
+'''------------------------------------------------------------F16------------------------------------------------------------'''
 def keluar():
     import Visual
+
+    '''-------------------- Tampilan Awal --------------------'''
     Visual.render_screen(["EXIT"],1)
+    '''-------------------- Tampilan Awal --------------------'''
+
+
+    '''-------------------- Konfirmasi Save File --------------------'''
     confirm = input("Apakah Anda mau melakukan penyimpanan file yang sudah diubah? (y/n) ")
-    while confirm != 'y' and confirm != 'n':
-        Visual.render_screen(["EXIT"],1)
+
+    # TODO: Validasi Konfirmasi
+    while confirm != 'y' and confirm != 'n': # Saat input user tidak sesuai dengan ketentuan
+        Visual.render_screen(["EXIT", "", "", "Silakan masukan input sesuai dengan ketentuan"],4) # Pesan Kesalahan 
         confirm = input("Apakah Anda mau melakukan penyimpanan file yang sudah diubah? (y/n) ")
+    '''-------------------- Konfirmasi Save File --------------------'''
+
     if confirm == 'y':
         save()
     Visual.printascii("exit",access)
+'''------------------------------------------------------------F16------------------------------------------------------------'''
     
     
