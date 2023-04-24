@@ -474,16 +474,23 @@ def kumpul(batch: bool):
         Visual.render_screen([f"Jin menemukan {pasir} pasir, {batu} batu, {air} air."],1)
         time.sleep(2.5)
     '''-------------------- 2 --------------------'''
-    
+
 '''-------------------------------------------------------------F07------------------------------------------------------------'''
 
 
     
 '''-------------------------------------------------------------F08------------------------------------------------------------'''
+
+'''-------------------- 1 --------------------'''
 def batchkumpul():
     import Visual
-    jinPengumpul = function_jin.count_jin("Pengumpul")
 
+    '''-------------------- 2 --------------------'''
+    jinPengumpul = function_jin.count_jin("Pengumpul")
+    '''-------------------- 2 --------------------'''
+
+
+    '''-------------------- 3 --------------------'''
     if jinPengumpul == 0:
         Visual.render_screen(["Kumpul gagal","Anda tidak punya jin pengumpul","Silahkan summon terlebih dahulu."],3)
         time.sleep(2)
@@ -499,6 +506,7 @@ def batchkumpul():
         Visual.printascii("kumpul",access)
         Visual.render_screen([f"Jin menemukan total {pasir} pasir, {batu} batu, dan {air} air."],1)
         time.sleep(2.5)
+    '''-------------------- 3 --------------------'''
 
     
 def batchbangun():  
