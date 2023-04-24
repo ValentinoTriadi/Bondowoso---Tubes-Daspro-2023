@@ -1,8 +1,8 @@
 import tempdata, function_jin, function_candi
 
-data_bahan = tempdata.data_bahan_bangunan # Mengambil data bahan dari tempdatas
-ter_mahal, harga_mahal = function_candi.canditer(True) # Mencari id candi termahal dengan harganya
-ter_murah, harga_murah = function_candi.canditer(False) # Mencari id candi termurah dengan harganya
+data_bahan = tempdata.data_bahan_bangunan # Mengambil data bahan dari module tempdatas
+ter_mahal, harga_mahal = function_candi.canditer(True) # Mencari id candi termahal dengan harganya (Parameter True berarti termahal)
+ter_murah, harga_murah = function_candi.canditer(False) # Mencari id candi termurah dengan harganya (Parameter False berarti termurah)
 
 
 laporancandi = [
