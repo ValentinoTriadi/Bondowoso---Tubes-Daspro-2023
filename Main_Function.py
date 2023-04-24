@@ -259,17 +259,17 @@ def hapusJin():
 
             '''-------------------- Mengupdate Data Candi yang Dihancurkan--------------------'''
 
-            ''' TODO: Menghitung banyak candi yang telah dibangun jin yang akan dihapus '''
+            # TODO: Menghitung banyak candi yang telah dibangun jin yang akan dihapus 
             count = 0 # Banyak candi yang telah dibangun oleh jin yang akan dihapus
             for i in range(tempdata.len_candi): # Menghitung banyak candi yang dibangun oleh jin yang akan dihapus
                 if datacandi[i][1] == username:
                     count+=1
 
-            ''' TODO: Inisialisasi Awal '''
+            # TODO: Inisialisasi Awal 
             j = 0
             tempdatas = [[] for i in range(tempdata.len_candi - count)] # Membuat list tempdatas baru untuk data candi
             
-            ''' TODO: Mengupdate data candi yang dihancurkan '''
+            # TODO: Mengupdate data candi yang dihancurkan
             for i in range(tempdata.len_candi): # Loop untuk mengisi tempdatas 
                 if datacandi[i][1] != username: # Jika candi tidak dibangun oleh jin yang akan dihapus
                     tempdatas[j] = datacandi[i] # Candi tersebut akan di-assign ke tempdatas
@@ -355,26 +355,46 @@ def ubahJin():
 '''-------------------------------------------------------------F06------------------------------------------------------------'''
 def bangun(username: str):
     import tempdata, Visual
-    # candi = commanddata.read_csv("candi.csv")
+
+    '''-------------------- 1 --------------------'''
     candi = tempdata.data_candi
-    # bahan = commanddata.read_csv(f"bahan_bangunan.csv")
     bahan = tempdata.data_bahan_bangunan
+    '''-------------------- 1 --------------------'''
+
+
+    '''-------------------- 2 --------------------'''
     pasir = util_function.randint(1,5) ; batu = util_function.randint(1,5) ; air = util_function.randint(1,5)
+    '''-------------------- 2 --------------------'''
 
         
+    '''-------------------- 3 --------------------'''
     if pasir <= int(bahan[0][0]) and batu <= int(bahan[0][1]) and air <= int(bahan[0][2]):
+
+        '''-------------------- 4 --------------------'''
         bahan[0][0] = str(int(bahan[0][0]) - pasir) ; bahan[0][1] = str(int(bahan[0][1]) - batu) ; bahan[0][2] = str(int(bahan[0][2]) - air )
         material = [str(pasir),str(batu),str(air)]
         tempdata.data_bahan_bangunan = bahan
+        '''-------------------- 4 --------------------'''
+
+
+        '''-------------------- 5 --------------------'''
         if tempdata.len_candi < 100:
+
+            '''-------------------- 6 --------------------'''
             if tempdata.jumlah_candi_yang_dihancurkan == 0:
+
+                '''-------------------- 10 --------------------'''
                 tempdatacandi = [[] for i in range(tempdata.len_candi + 1)]
                 for i in range(tempdata.len_candi):
                     tempdatacandi[i] = candi[i]
 
                 tempdatacandi[tempdata.len_candi-1] = function_candi.saveCandi(material, username)
                 tempdata.data_candi = tempdatacandi
+                '''-------------------- 10 --------------------'''
+
             else:
+
+                '''-------------------- 11 --------------------'''
                 tempdatacandi = [[] for i in range(tempdata.len_candi)]
                 cek = True
                 for i in range(tempdata.len_candi):
@@ -384,7 +404,11 @@ def bangun(username: str):
                     else:
                         tempdatacandi[i] = candi[i]
                 tempdata.data_candi = tempdatacandi
+                '''-------------------- 11 --------------------'''
+
+            '''-------------------- 6 --------------------'''
             
+
             '''-------------------- Cek apakah username ada di list jin_yang_pernah_membangun atau tidak --------------------'''
             # Kalau ada, maka list jin_yang_pernah_membangun tidak ditambahkan username
             # Kalau tidak ada, maka list jin_yang_pernah_membangun ditambahkan username
@@ -400,19 +424,34 @@ def bangun(username: str):
                         temp_jin_pembangun[i] = tempdata.data_jin_yang_pernah_membangun
                     else:
                         temp_jin_pembangun[i] = username
+            '''-------------------- Cek apakah username ada di list jin_yang_pernah_membangun atau tidak --------------------'''
 
 
+            '''-------------------- 7 --------------------'''
             Visual.printascii("bangun_candi",access)
             Visual.render_screen([f"Sisa candi yang perlu dibangun: {100-tempdata.len_candi}."],1)
             time.sleep(2.5)
+            '''-------------------- 7 --------------------'''
 
         else:
+
+            '''-------------------- 8 --------------------'''
             Visual.printascii("bangun_candi",access)
             Visual.render_screen(["Sisa candi yang perlu dibangun: 0."],1)
             time.sleep(2.5)
+            '''-------------------- 8 --------------------'''
+
+        '''-------------------- 5 --------------------'''
+
     else:
+
+        '''-------------------- 9 --------------------'''
         Visual.render_screen(["Bahan bangunan tidak mencukupi","Candi tidak bisa dibangun!"],2)
         time.sleep(2.5)
+        '''-------------------- 9 --------------------'''
+
+    '''-------------------- 3 --------------------'''
+
 '''-------------------------------------------------------------F06------------------------------------------------------------'''
 
 
@@ -420,15 +459,22 @@ def bangun(username: str):
 '''-------------------------------------------------------------F07------------------------------------------------------------'''
 def kumpul(batch: bool):
     import tempdata, Visual
+
+    '''-------------------- 1 --------------------'''
     pasir = util_function.randint(0,5) ; batu = util_function.randint(0,5) ; air = util_function.randint(0,5)
     bahan = tempdata.data_bahan_bangunan
     bahan[0][0] = str(int(bahan[0][0]) + pasir) ; bahan[0][1] = str(int(bahan[0][1]) + batu) ; bahan[0][2] = str(int(bahan[0][2]) + air )
+    '''-------------------- 1 --------------------'''
+
+    '''-------------------- 2 --------------------'''
     if batch :
         return [pasir,batu,air]
     else:
         Visual.printascii("kumpul", access)
         Visual.render_screen([f"Jin menemukan {pasir} pasir, {batu} batu, {air} air."],1)
         time.sleep(2.5)
+    '''-------------------- 2 --------------------'''
+    
 '''-------------------------------------------------------------F07------------------------------------------------------------'''
 
 
