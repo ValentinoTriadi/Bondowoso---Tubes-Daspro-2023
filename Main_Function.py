@@ -357,7 +357,8 @@ def bangun(username: str):
     import tempdata, Visual
 
     '''-------------------- 1 --------------------'''
-    candi = tempdata.data_candi
+    candi = tempdata.data_candi #Mengambil data candi dan di assign ke variabel lokal
+
     bahan = tempdata.data_bahan_bangunan
     '''-------------------- 1 --------------------'''
 
