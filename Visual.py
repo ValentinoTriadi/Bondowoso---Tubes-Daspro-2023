@@ -120,13 +120,13 @@ def printascii(typegambar: str,access: str):
     '''-------------------- Atur Warna Terminal--------------------'''
     os.system("cls||clear")
     if access == "bandung_bondowoso":
-        cmd = 'color 9'     
+        cmd = 'color 9' # Warna Biru
     elif access == "roro_jonggrang":
-        cmd = 'color 5'     
+        cmd = 'color 5' # Warna pink
     elif access == "Pembangun":
-        cmd = 'color 3'     
+        cmd = 'color 3' # Warna Aqua
     elif access == "Pengumpul":
-        cmd = 'color 2'     
+        cmd = 'color 2' # Warna Hijau
     else:
         cmd = "color 0"
     os.system(cmd)
