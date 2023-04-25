@@ -1,49 +1,69 @@
-'''----------------------------- Maks/Min -----------------------------'''
+'''---------------------------------------------------------- Maks/Min ----------------------------------------------------------'''
+
+'''-------------------- Maksimum --------------------'''
 def maksimum(arr: list,len_arr: int) -> int:
-    maks = arr[0]
-    for i in range(len_arr):
-        if maks < arr[i]:
-            maks = arr[i]
-    return maks
+    maks = arr[0] # Mengambil elemen pertama array sebagai nilai maksimum sementara
+    for i in range(len_arr): # Mencari nilai pada array yang memiliki nilai lebih besar dari nilai maksimum sementara
+        if maks < arr[i]: # Kondisi saat ditemukan nilai pada array yang lebih besar daripada nilai maksimum sementara
+            maks = arr[i] # Merubah nilai maksimum sementara menjadi nilai pada array yang lebih besar
+    return maks # Mengembalikan nilai maksimum
+'''-------------------- Maksimum --------------------'''
 
+
+'''-------------------- Minimum --------------------'''
 def minimum(arr: list, len_arr: int) -> int:
-    min = arr[0]
-    for i in range(len_arr):
-        if min > arr[i]:
-            min = arr[i]
-    return min
+    min = arr[0] # Mengambil elemen pertama array sebagai nilai minimum sementara
+    for i in range(len_arr): # Mencari nilai pada array yang memiliki nilai lebih kecil dari nilai minimum sementara
+        if min > arr[i]: # Kondisi saat ditemukan nilai pada array yang lebih kecil daripada nilai minimum sementara
+            min = arr[i] # Merubah nilai minimum sementara menjadi nilai pada array yang lebih kecil
+    return min # Mengembalikan nilai minimum
+'''-------------------- Minimum --------------------'''
+
+'''---------------------------------------------------------- Maks/Min ----------------------------------------------------------'''
 
 
-'''----------------------------- Leksikografi -----------------------------'''
+
+
+'''---------------------------------------------------------- Leksikografi ----------------------------------------------------------'''
+
+'''-------------------- Sort List (Insertion List Method) --------------------'''
 def sort(arr: list, length: int, operator: str) -> list:
-    for i in range(1,length):
-        for j in range(i, 0, -1):
-            if operator == '>':
-                if arr[j]>arr[j-1]:
-                    arr[j],arr[j-1] = arr[j-1],arr[j]
+    for i in range(1,length): # Mencacah seluruh elemen array
+        for j in range(i, 0, -1): # Mencacah elemen array sekarang (index i) hingga elemen pertama
+            if operator == '>': # Ketika hendak diurutkan dari terbesar
+                if arr[j]>arr[j-1]: # Ketika elemen yang sedang di cek lebih besar dari elemen sebelumnya
+                    arr[j],arr[j-1] = arr[j-1],arr[j] # Menukarkan elemen yang sedang di cek dengan elemen sebelumnya
                 else:
-                    break
-            elif operator == '<':
-                if arr[j] < arr[j-1]:
-                    arr[j],arr[j-1] = arr[j-1],arr[j]
+                    break # Kondisi untuk memberhentikan pengurutan elemen sekarang (index i) dan lanjut ke elemen selanjutnya
+            elif operator == '<': # Ketika hendak diurutkan dari terkecil
+                if arr[j] < arr[j-1]: # Ketika elemen yang sedang di cek lebih kecil dari elemen sebelumnya
+                    arr[j],arr[j-1] = arr[j-1],arr[j] # Menukarkan elemen yang sedang di cek dengan elemen sebelumnya
                 else:
-                    break
-    return arr
+                    break # Kondisi untuk memberhentikan pengurutan elemen sekarang (index i) dan lanjut ke elemen selanjutnya
+    return arr # Mengembalikan array yang sudah diurutkan
+'''-------------------- Sort List (Insertion List Method) --------------------'''
 
+
+'''-------------------- Leksikal --------------------'''
 def leksikal(arr: list,length: int, highest: bool) -> list:
-    # for i in range(length):
-    #     arr[i] = arr[i].lower()
-    if highest:
+    if highest: # Saat ingin mengurutkan leksikografi dari yang tinggi ke rendah
         arr = sort(arr,length, '>')
-    else:
+    else: # Saat ingin mengurutkan leksikografi dari yang rendah ke tinggi
         arr = sort(arr,length, '<')
-    return arr
+    return arr # Mengembalikan array yang sudah diurutkan leksikografinya
+'''-------------------- Leksikal --------------------'''
 
-'''----------------------------- RNG -----------------------------'''
+'''---------------------------------------------------------- Leksikografi ----------------------------------------------------------'''
+
+
+
+
+'''---------------------------------------------------------- RNG ----------------------------------------------------------'''
 j = 0
 import time
 def generate_random_seed(min_value: int, max_value:int) -> int: 
     current_time = int(time.time() * 1000)
+    print(current_time)
     return (current_time % (max_value - min_value + 1)) + min_value
 
 def lcg(x:int) -> tuple:
@@ -68,14 +88,22 @@ def rng(x: int, size: int, ranges: int, batas_bawah: int) -> int:
     for i in range (size):
         x,r = lcg(x)
         arr[i] = (buletin(batas_bawah, batas_bawah + ranges, (r * ranges) + batas_bawah))
-    j +=1
+
+    if j != 999:
+        j +=1
+    else:
+        j = 0
+
     return arr[j]
 
 def randint(min: int, maks: int) -> int:
     return rng(generate_random_seed(min,maks), 1000, maks - min, min)
+'''---------------------------------------------------------- RNG ----------------------------------------------------------'''
 
 
-'''----------------------------- Process Data -----------------------------'''
+
+
+'''---------------------------------------------------------- Process Data ----------------------------------------------------------'''
 def read_csv(name_file: str, name_folder: str) -> tuple:
     fo = open(f"./save/{name_folder}/{name_file}", 'r')
     length = 0
@@ -124,9 +152,12 @@ def split_koma (line: str,row: int) -> list:
         return split_value
     else:
         return []
+'''---------------------------------------------------------- Process Data ----------------------------------------------------------'''
 
 
-'''----------------------------- Save Data -----------------------------'''
+
+
+'''---------------------------------------------------------- Save Data ----------------------------------------------------------'''
 def write_csv(file_name: str, path_name: str):
     import tempdata
     file = open(f"./{path_name}/{file_name}","w")
@@ -154,3 +185,4 @@ def write_csv(file_name: str, path_name: str):
 
     file.writelines(tempdatas)
     file.close()
+'''---------------------------------------------------------- Save Data ----------------------------------------------------------'''
