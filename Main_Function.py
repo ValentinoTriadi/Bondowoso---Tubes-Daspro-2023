@@ -751,6 +751,7 @@ def laporancandi():
 '''-------------------------------------------------------------F11------------------------------------------------------------'''
 
 '''-------------------- 1 --------------------'''
+# modul cek id candi apakah ada atau tidak
 def cekid(id: int) -> bool:
     import tempdata
     '''-------------------- 2 --------------------'''
@@ -777,7 +778,7 @@ def cekid(id: int) -> bool:
 
 
 '''-------------------- 1 --------------------'''
-# TODO: Remove Specific line of data from array
+# Hapus id candi dari list
 def remove_dataid(id: int):
     import tempdata
 
@@ -786,8 +787,12 @@ def remove_dataid(id: int):
         cek = True
         for j in range(tempdata.jumlah_candi_yang_dihancurkan):
             if i + 1 == tempdata.id_candi_yang_dihancurkan[j]:
+                #id_candi_yang_dihancurkan merupakan kumpulan data berisi id candi yang telah dihapus
+                #jadi jika id candi tersebut telah dihancurkan maka tidak "dihancurkan"
                 cek = False
         if cek: 
+            #jka candi belum dihancurkan
+            #data candi digantikan dengan list kosong
             if int(tempdata.data_candi[i][0]) == id: # Asumsi id candi tidak ada yang sama
                 tempdata.data_candi[i] =  []
     '''-------------------- 2 --------------------'''
@@ -795,16 +800,18 @@ def remove_dataid(id: int):
 
     '''-------------------- 3 --------------------'''
     temphancur = [0 for i in range(tempdata.jumlah_candi_yang_dihancurkan+1)]
+    #id candi yang telah dihancurkan disalin ke temphancur
     for i in range(tempdata.jumlah_candi_yang_dihancurkan):
         temphancur[i] = tempdata.id_candi_yang_dihancurkan[i]
 
+    #add data pada jumlah candi yang dihancurkan beserta dengan id nya
     temphancur[tempdata.jumlah_candi_yang_dihancurkan] = id
     '''-------------------- 3 --------------------'''
 
 
     '''-------------------- 4 --------------------'''
-    tempdata.jumlah_candi_yang_dihancurkan += 1
-    tempdata.id_candi_yang_dihancurkan = util_function.sort(temphancur,tempdata.jumlah_candi_yang_dihancurkan, "<")
+    tempdata.jumlah_candi_yang_dihancurkan += 1 #Tracking jumlah candi yang telah dihancurkan
+    tempdata.id_candi_yang_dihancurkan = util_function.sort(temphancur,tempdata.jumlah_candi_yang_dihancurkan, "<") #sort id yang telah dihancurkan secara descending
     '''-------------------- 4 --------------------'''
 
 '''-------------------- 1 --------------------'''
@@ -815,15 +822,16 @@ def hancurkancandi():
     import Visual
 
     '''-------------------- 2 --------------------'''
-    id = int(input("Masukkan ID candi: "))
+    id = int(input("Masukkan ID candi: ")) #Input id candi yang akan dihancurkan
     '''-------------------- 2 --------------------'''
 
 
     '''-------------------- 3 --------------------'''
+    #cek candi apakah ada atau tidak
     if cekid(id):
 
         '''-------------------- 4 --------------------'''
-        confirm = input(f"Apakah anda yakin ingin menghancurkan candi ID: {id} (Y/N)? ")
+        confirm = input(f"Apakah anda yakin ingin menghancurkan candi ID: {id} (Y/N)? ")#confirmasi untuk hancurkan candi
         '''-------------------- 4 --------------------'''
 
 
@@ -834,7 +842,8 @@ def hancurkancandi():
 
         '''-------------------- 6 --------------------'''
         if confirm == "Y":
-            remove_dataid(id)
+            remove_dataid(id) # Menghapus id candi
+            #visual hancurkan candi
             Visual.printascii("hancur_candi",access)
             Visual.printascii(access,access)
         '''-------------------- 6 --------------------'''
