@@ -473,20 +473,18 @@ def bangun(username: str):
 def kumpul(batch: bool):
     import tempdata, Visual
 
-    '''-------------------- 1 --------------------'''
-    pasir = util_function.randint(0,5) ; batu = util_function.randint(0,5) ; air = util_function.randint(0,5)
-    bahan = tempdata.data_bahan_bangunan
-    bahan[0][0] = str(int(bahan[0][0]) + pasir) ; bahan[0][1] = str(int(bahan[0][1]) + batu) ; bahan[0][2] = str(int(bahan[0][2]) + air )
-    '''-------------------- 1 --------------------'''
+    '''-------------------- Inisialisasi Awal --------------------'''
+    pasir = util_function.randint(0,5) ; batu = util_function.randint(0,5) ; air = util_function.randint(0,5) # Mengeluarkan angka random antara angka 0 sampai 5
+    bahan = tempdata.data_bahan_bangunan # Mengambil data bahan bangunan dan memasukkan data ke variabel lokal
+    bahan[0][0] = str(int(bahan[0][0]) + pasir) ; bahan[0][1] = str(int(bahan[0][1]) + batu) ; bahan[0][2] = str(int(bahan[0][2]) + air ) # Update data bahan setelah ditambah bahan yang dikumpulkan
+    '''-------------------- Inisialisasi Awal --------------------'''
 
-    '''-------------------- 2 --------------------'''
-    if batch :
-        return [pasir,batu,air]
-    else:
+    if batch : # Saat fungsi kumpul dipanggil untuk melakukan batch kumpul
+        return [pasir,batu,air] # Mengembalikan banyak bahan bangunan yang dikumpulkan
+    else: # Saat fungsi kumpul dipanggil untuk melakukan satu kali kumpul bahan
         Visual.printascii("kumpul", access)
-        Visual.render_screen([f"Jin menemukan {pasir} pasir, {batu} batu, {air} air."],1)
+        Visual.render_screen([f"Jin menemukan {pasir} pasir, {batu} batu, {air} air."],1) 
         time.sleep(2.5)
-    '''-------------------- 2 --------------------'''
 
 '''-------------------------------------------------------------F07------------------------------------------------------------'''
 
@@ -765,17 +763,17 @@ def laporancandi():
 
 '''-------------------------------------------------------------F11------------------------------------------------------------'''
 
-'''-------------------- 1 --------------------'''
-# modul cek id candi apakah ada atau tidak
+'''-------------------- Cek ID --------------------'''
+# Fungsi cek id candi apakah ada atau tidak
 def cekid(id: int) -> bool:
     import tempdata
-    '''-------------------- 2 --------------------'''
-    data_candi = tempdata.data_candi
-    '''-------------------- 2 --------------------'''
+    '''-------------------- Inisialisasi Awal Data --------------------'''
+    data_candi = tempdata.data_candi # Mengambil data candi dan memasukkan ke variabel lokal
+    '''-------------------- Inisialisasi Awal Data --------------------'''
 
 
-    '''-------------------- 3 --------------------'''
-    for i in range (tempdata.len_candi):
+    '''-------------------- Cek ID --------------------'''
+    for i in range (tempdata.len_candi): # Loop untuk mencacah panjang candi
         cek = True # True berarti id tidak ada pada list id_candi_yang_dihancurkan
 
         for j in range(tempdata.jumlah_candi_yang_dihancurkan): # Loop untuk cek apakah id yang akan dihancurkan ada pada list id_candi_yang_dihancurkan
@@ -783,16 +781,16 @@ def cekid(id: int) -> bool:
                 cek = False # False berarti id ada pada list id_candi_yang_dihancurkan
 
         if cek: # Saat id yang akan dihancurkan tidak ada pada list id_candi_yang_dihancurkan 
-            if data_candi[i] != [] and id == int(data_candi[i][0]):
-                return True
-    '''-------------------- 3 --------------------'''
+            if data_candi[i] != [] and id == int(data_candi[i][0]): # Saat data candi yang sedang dicek tidak kosong dan id yang akan dihancurkan terdapat pada data candi
+                return True # Mengembalikan True yang berarti id yang akan dihancurkan terdapat pada data candi
+    '''-------------------- Cek ID --------------------'''
 
-    return False
+    return False # Mengembalikan False yang berarti id yang akan dihancurkan tidak terdapat pada data candi
 
-'''-------------------- 1 --------------------'''
+'''-------------------- Cek ID --------------------'''
 
 
-'''-------------------- 1 --------------------'''
+'''-------------------- Hapus ID --------------------'''
 # Hapus id candi dari list
 def remove_dataid(id: int):
     import tempdata
