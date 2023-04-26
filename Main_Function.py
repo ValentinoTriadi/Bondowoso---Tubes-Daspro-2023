@@ -399,7 +399,7 @@ def bangun(username: str):
                 tempdatacandi = [[] for i in range(tempdata.len_candi)]
                 cek = True
                 for i in range(tempdata.len_candi):
-                    if tempdatacandi[i] == [] and cek:
+                    if tempdata.data_candi[i] == [] and cek:
                         tempdatacandi[i] = function_candi.saveCandi(material, username)
                         cek = False
                     else:
@@ -414,13 +414,15 @@ def bangun(username: str):
             # Kalau ada, maka list jin_yang_pernah_membangun tidak ditambahkan username
             # Kalau tidak ada, maka list jin_yang_pernah_membangun ditambahkan username
             cek = True  # Kondisi awal apabila user tidak ditemukan dalam list jin_yang_pernah_membangun
-            for j in range(tempdata.len_pembangun): # Loop untuk mengecek apakah user ada didalam list jin_yang_pernah_membangun atau tidak
-                if tempdata.data_jin_yang_pernah_membangun[j] == username:   # Kondisi saat user ditemukan ada didalam list jin_yang_pernah_membangun
+            for i in range(tempdata.len_pembangun): # Loop untuk mengecek apakah user ada didalam list jin_yang_pernah_membangun atau tidak
+                if tempdata.data_jin_yang_pernah_membangun[i] == username:   # Kondisi saat user ditemukan ada didalam list jin_yang_pernah_membangun
                     cek = False
+
             if cek: # Kondisi saat user tidak ditemukan dalam list jin_yang_pernah_membangun
                 tempdata.len_pembangun += 1 # Panjang list jin_yang_pernah_membangun bertambah 1
+                
                 temp_jin_pembangun = ["" for i in range(tempdata.len_pembangun)]    # Inisialisasi awal list baru untuk menyimpan list jin_yang_pernah_membangun yang akan ditambah user baru
-                for j in range(tempdata.len_pembangun): # Loop untuk mengisi list baru dengan list jin_yang_pernah_membangun dan user baru
+                for i in range(tempdata.len_pembangun): # Loop untuk mengisi list baru dengan list jin_yang_pernah_membangun dan user baru
                     if i != tempdata.len_pembangun - 1:
                         temp_jin_pembangun[i] = tempdata.data_jin_yang_pernah_membangun
                     else:
@@ -430,7 +432,7 @@ def bangun(username: str):
 
             '''-------------------- 7 --------------------'''
             Visual.printascii("bangun_candi",access)
-            Visual.render_screen([f"Sisa candi yang perlu dibangun: {100-tempdata.len_candi}."],1)
+            Visual.render_screen([f"Sisa candi yang perlu dibangun: {100-tempdata.len_candi + tempdata.jumlah_candi_yang_dihancurkan}."],1)
             time.sleep(2.5)
             '''-------------------- 7 --------------------'''
 
@@ -454,6 +456,7 @@ def bangun(username: str):
     '''-------------------- 3 --------------------'''
 
 '''-------------------------------------------------------------F06------------------------------------------------------------'''
+
 
 
     
@@ -639,9 +642,11 @@ def batchbangun():
                     for j in range(tempdata.len_pembangun): # Loop untuk mengecek apakah user ada didalam list jin_yang_pernah_membangun atau tidak
                         if tempdata.data_jin_yang_pernah_membangun[j] == data_user[i][0]:   # Kondisi saat user ditemukan ada didalam list jin_yang_pernah_membangun
                             cek = False
+
                     if cek: # Kondisi saat user tidak ditemukan dalam list jin_yang_pernah_membangun
                         tempdata.len_pembangun += 1 # Panjang list jin_yang_pernah_membangun bertambah 1
-                        temp_jin_pembangun = ["" for i in range(tempdata.len_pembangun)]    # Inisialisasi awal list baru untuk menyimpan list jin_yang_pernah_membangun yang akan ditambah user baru
+                        
+                        temp_jin_pembangun = ["" for j in range(tempdata.len_pembangun)]    # Inisialisasi awal list baru untuk menyimpan list jin_yang_pernah_membangun yang akan ditambah user baru
                         for j in range(tempdata.len_pembangun): # Loop untuk mengisi list baru dengan list jin_yang_pernah_membangun dan user baru
                             if j != tempdata.len_pembangun - 1:
                                 temp_jin_pembangun[j] = tempdata.data_jin_yang_pernah_membangun

@@ -63,7 +63,6 @@ j = 0
 import time
 def generate_random_seed(min_value: int, max_value:int) -> int: 
     current_time = int(time.time() * 1000)
-    print(current_time)
     return (current_time % (max_value - min_value + 1)) + min_value
 
 def lcg(x:int) -> tuple:
