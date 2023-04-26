@@ -356,58 +356,66 @@ def ubahJin():
 def bangun(username: str):
     import tempdata, Visual
 
-    '''-------------------- 1 --------------------'''
+    '''-------------------- Inisialisasi Awal Data --------------------'''
     candi = tempdata.data_candi #Mengambil data candi dan di assign ke variabel lokal
+    bahan = tempdata.data_bahan_bangunan #Mengambil data bahan bangunan dalam bentuk csv dan di assign ke variabel lokal dalam bentuk matriks
+    '''-------------------- Inisialisasi Awal Data --------------------'''
 
-    bahan = tempdata.data_bahan_bangunan
-    '''-------------------- 1 --------------------'''
 
-
-    '''-------------------- 2 --------------------'''
+    '''-------------------- Penentuan Bahan Bangunan --------------------'''
+    #Menentukan banyaknya bahan yang dibutuhkan untuk membangun candi secara acak
     pasir = util_function.randint(1,5) ; batu = util_function.randint(1,5) ; air = util_function.randint(1,5)
-    '''-------------------- 2 --------------------'''
+    '''-------------------- Penentuan Bahan Bangunan --------------------'''
 
         
-    '''-------------------- 3 --------------------'''
-    if pasir <= int(bahan[0][0]) and batu <= int(bahan[0][1]) and air <= int(bahan[0][2]):
+    '''-------------------- Pembangunan Candi  --------------------'''
+    #Kondisional untuk bahan bangunan pembuatan candi
+    if pasir <= int(bahan[0][0]) and batu <= int(bahan[0][1]) and air <= int(bahan[0][2]): #Jika bahan bangunan mencukupi
 
-        '''-------------------- 4 --------------------'''
+        '''-------------------- Mengupdate Data Bahan Bangunan --------------------'''
+        #Jumlah bahan bangunan yang dimiliki (pasir, batu, dan air) akan dikurangi sesuai bahan bangunan yang diperlukan 
         bahan[0][0] = str(int(bahan[0][0]) - pasir) ; bahan[0][1] = str(int(bahan[0][1]) - batu) ; bahan[0][2] = str(int(bahan[0][2]) - air )
-        material = [str(pasir),str(batu),str(air)]
-        tempdata.data_bahan_bangunan = bahan
-        '''-------------------- 4 --------------------'''
+        material = [str(pasir),str(batu),str(air)] #Membuat variabel lokal baru berisikan data bahan bangunan dengan bentuk list of string 
+        tempdata.data_bahan_bangunan = bahan #Menyimpan kembali perubahan data bahan bangunan ke variabel global
+        '''-------------------- Mengupdate Data Bahan Bangunan --------------------'''
 
 
-        '''-------------------- 5 --------------------'''
-        if tempdata.len_candi < 100:
+        '''-------------------- Cek Jumlah Candi --------------------'''
+        #Kondisional untuk memeriksa jumlah candi
+        if tempdata.len_candi < 100: #Jika jumlah candi belum mencapai 100
 
-            '''-------------------- 6 --------------------'''
-            if tempdata.jumlah_candi_yang_dihancurkan == 0:
+            '''-------------------- Cek Apakah Candi Pernah Dihancurkan --------------------'''
+            #Kondisional untuk memeriksa data candi
+            if tempdata.jumlah_candi_yang_dihancurkan == 0: #Jika candi belum pernah dihancurkan 
 
-                '''-------------------- 10 --------------------'''
-                tempdatacandi = [[] for i in range(tempdata.len_candi + 1)]
-                for i in range(tempdata.len_candi):
+                '''-------------------- Mengupdate Data Candi  --------------------'''
+                #Apabila candi belum pernah dihancurkan, diperlukan data list baru untuk menyimpan candi dengan jumlah indeks yang bertambah satu
+                tempdatacandi = [[] for i in range(tempdata.len_candi + 1)] #Variabel lokal list baru untuk menyimpan data candi yang baru dengan panjang list bertambah 1
+                for i in range(tempdata.len_candi): #Loop untuk mengisi data candi yang lama dengan menyisakan satu indeks data kosong
                     tempdatacandi[i] = candi[i]
 
-                tempdatacandi[tempdata.len_candi-1] = function_candi.saveCandi(material, username)
-                tempdata.data_candi = tempdatacandi
-                '''-------------------- 10 --------------------'''
+                #Indeks data yang kosong akan diisi dengan data candi yang baru dibangun
+                tempdatacandi[tempdata.len_candi-1] = function_candi.saveCandi(material, username) 
+                tempdata.data_candi = tempdatacandi #Menyimpan data baru candi ke variabel global
+                '''-------------------- Mengupdate Data Candi --------------------'''
 
-            else:
+            else: #Jika candi pernah dihancurkan
 
-                '''-------------------- 11 --------------------'''
-                tempdatacandi = [[] for i in range(tempdata.len_candi)]
+                '''-------------------- Mengupdate Data Candi --------------------'''
+                #Apabila candi pernah dihancurkan, akan menyisakan indeks kosong yang mungkin berada di tengah-tengah data
+                tempdatacandi = [[] for i in range(tempdata.len_candi)] #Variabel lokal list baru untuk menyimpan data candi yang baru  
                 cek = True
-                for i in range(tempdata.len_candi):
-                    if tempdata.data_candi[i] == [] and cek:
-                        tempdatacandi[i] = function_candi.saveCandi(material, username)
-                        cek = False
-                    else:
-                        tempdatacandi[i] = candi[i]
-                tempdata.data_candi = tempdatacandi
-                '''-------------------- 11 --------------------'''
+                for i in range(tempdata.len_candi): #Loop untuk mengisi data candi
+                    #Kondisional pengisian data candi
+                    if tempdata.data_candi[i] == [] and cek: #Jika terdapat data candi (indeks) yang kosong
+                        tempdatacandi[i] = function_candi.saveCandi(material, username) #Data candi yang baru akan diisikan pada indeks yang kosong
+                        cek = False #
+                    else: #Jika tidak terdapat data candi (indeks) yang kosong
+                        tempdatacandi[i] = candi[i] #Menyimpan data candi yang lama
+                tempdata.data_candi = tempdatacandi #Menyimpan data candi baru ke variabel global
+                '''-------------------- Mengupdate Data CAndi --------------------'''
 
-            '''-------------------- 6 --------------------'''
+            '''-------------------- Cek Apakah Candi Pernah Dihancurkan --------------------'''
             
 
             '''-------------------- Cek apakah username ada di list jin_yang_pernah_membangun atau tidak --------------------'''
@@ -423,37 +431,38 @@ def bangun(username: str):
                 
                 temp_jin_pembangun = ["" for i in range(tempdata.len_pembangun)]    # Inisialisasi awal list baru untuk menyimpan list jin_yang_pernah_membangun yang akan ditambah user baru
                 for i in range(tempdata.len_pembangun): # Loop untuk mengisi list baru dengan list jin_yang_pernah_membangun dan user baru
-                    if i != tempdata.len_pembangun - 1:
-                        temp_jin_pembangun[i] = tempdata.data_jin_yang_pernah_membangun
-                    else:
-                        temp_jin_pembangun[i] = username
+                    #Kondisional untuk data jin
+                    if i != tempdata.len_pembangun - 1: # Jika belum mencapai indeks terakhir dari list
+                        temp_jin_pembangun[i] = tempdata.data_jin_yang_pernah_membangun # User jin yang pernah membangun sebelumnya diinputkan
+                    else: # Jika telah mencapai indeks terakhir dari list
+                        temp_jin_pembangun[i] = username # User Jin baru diinputkan
             '''-------------------- Cek apakah username ada di list jin_yang_pernah_membangun atau tidak --------------------'''
 
 
-            '''-------------------- 7 --------------------'''
+            '''-------------------- Tampilan Animasi Bangun Candi --------------------'''
             Visual.printascii("bangun_candi",access)
             Visual.render_screen([f"Sisa candi yang perlu dibangun: {100-tempdata.len_candi + tempdata.jumlah_candi_yang_dihancurkan}."],1)
             time.sleep(2.5)
-            '''-------------------- 7 --------------------'''
+            '''-------------------- Tampilan Animasi Bangun Candi --------------------'''
 
-        else:
+        else: #Jika jumlah candi telah mencapai 100
 
-            '''-------------------- 8 --------------------'''
+            '''-------------------- Tampilan Animasi Bangun Candi Berjumlah >= 100 --------------------'''
             Visual.printascii("bangun_candi",access)
             Visual.render_screen(["Sisa candi yang perlu dibangun: 0."],1)
             time.sleep(2.5)
-            '''-------------------- 8 --------------------'''
+            '''-------------------- Tampilan Animasi Bangun Candi Berjumlah >= 100--------------------'''
 
-        '''-------------------- 5 --------------------'''
+        '''-------------------- Cek Jumlah Candi --------------------'''
 
-    else:
+    else: #Jika bahan bangunan tidak tercukupi
 
-        '''-------------------- 9 --------------------'''
+        '''-------------------- Tampilan Animasi Bahan Bangunan Tidak Tercukupi --------------------'''
         Visual.render_screen(["Bahan bangunan tidak mencukupi","Candi tidak bisa dibangun!"],2)
         time.sleep(2.5)
-        '''-------------------- 9 --------------------'''
+        '''-------------------- Tampilan Animasi Bahan Bangunan Tidak Tecukupi --------------------'''
 
-    '''-------------------- 3 --------------------'''
+    '''-------------------- Pembangunan Candi --------------------'''
 
 '''-------------------------------------------------------------F06------------------------------------------------------------'''
 
