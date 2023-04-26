@@ -800,8 +800,8 @@ def remove_dataid(id: int):
         cek = True
         for j in range(tempdata.jumlah_candi_yang_dihancurkan):
             if i + 1 == tempdata.id_candi_yang_dihancurkan[j]:
-                #id_candi_yang_dihancurkan merupakan kumpulan data berisi id candi yang telah dihapus
-                #jadi jika id candi tersebut telah dihancurkan maka tidak "dihancurkan"
+                # id_candi_yang_dihancurkan merupakan kumpulan data berisi id candi yang telah dihapus
+                # jadi jika id candi tersebut telah dihancurkan maka tidak "dihancurkan"
                 cek = False
         if cek: 
             #jka candi belum dihancurkan
@@ -924,9 +924,9 @@ def save():
         '''-------------------- Membuat Folder --------------------'''
 
         '''-------------------- Menyimpan file CSV dalam folder --------------------'''
-        util_function.write_csv("candi.csv", path_folder)
-        util_function.write_csv("user.csv", path_folder)
-        util_function.write_csv("bahan_bangunan.csv", path_folder)
+        util_function.write_csv("candi.csv", path_folder) # Menulis File candi.csv
+        util_function.write_csv("user.csv", path_folder) # Menulis File user.csv
+        util_function.write_csv("bahan_bangunan.csv", path_folder) # Menulis File bahan_bangunan.csv
         '''-------------------- Menyimpan file CSV dalam folder --------------------'''
 
         '''-------------------- Tampilan Animasi --------------------'''
@@ -941,9 +941,9 @@ def save():
         '''-------------------- Membuat Folder --------------------'''
 
         '''-------------------- Menyimpan file CSV dalam folder --------------------'''
-        util_function.write_csv("candi.csv", path_folder)
-        util_function.write_csv("user.csv", path_folder)
-        util_function.write_csv("bahan_bangunan.csv", path_folder)
+        util_function.write_csv("candi.csv", path_folder) # Menulis File candi.csv
+        util_function.write_csv("user.csv", path_folder) # Menulis File user.csv
+        util_function.write_csv("bahan_bangunan.csv", path_folder) # Menulis File bahan_bangunan.csv
         '''-------------------- Menyimpan file CSV dalam folder --------------------'''
 
         '''-------------------- Tampilan Animasi --------------------'''
@@ -953,9 +953,9 @@ def save():
     elif os.path.isdir(f"./{path_folder}"): # Saat folder sudah ada dan folder parent 'save' sudah ada
 
         '''-------------------- Menyimpan file CSV dalam folder --------------------'''
-        util_function.write_csv("candi.csv", path_folder)
-        util_function.write_csv("user.csv", path_folder)
-        util_function.write_csv("bahan_bangunan.csv", path_folder)
+        util_function.write_csv("candi.csv", path_folder) # Menulis File candi.csv
+        util_function.write_csv("user.csv", path_folder) # Menulis File user.csv
+        util_function.write_csv("bahan_bangunan.csv", path_folder) # Menulis File bahan_bangunan.csv
         '''-------------------- Menyimpan file CSV dalam folder --------------------'''
 
         '''-------------------- Tampilan Animasi --------------------'''
