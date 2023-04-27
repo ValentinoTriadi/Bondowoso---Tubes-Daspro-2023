@@ -719,19 +719,21 @@ def laporanjin ():
     import Visual
     # Komentar berikut merupakan algoritma dasar dalam output laporan jin
     
-    # import tempdata
-    # data_bahan = tempdata.data_bahan_bangunan
+    """
+    import tempdata
+    data_bahan = tempdata.data_bahan_bangunan
 
-    # print("> Total Jin:", tempdata.len_user-2)
-    # print("> Total Jin Pengumpul:", function_jin.count_jin("Pengumpul"))
-    # print("> Total Jin Pembangun:", function_jin.count_jin("Pembangun"))
-    # print("> Jin Terajin:", function_jin.jinter(True))
-    # print("> Jin Termalas:", function_jin.jinter(False))
-    # print("> Jumlah Pasir:", data_bahan[0][0], "unit")
-    # print("> Jumlah Air:", data_bahan[0][2], "unit")
-    # print("> Jumlah Batu:", data_bahan[0][1], "unit")
+    print("> Total Jin:", tempdata.len_user-2)
+    print("> Total Jin Pengumpul:", function_jin.count_jin("Pengumpul"))
+    print("> Total Jin Pembangun:", function_jin.count_jin("Pembangun"))
+    print("> Jin Terajin:", function_jin.jinter(True))
+    print("> Jin Termalas:", function_jin.jinter(False))
+    print("> Jumlah Pasir:", data_bahan[0][0], "unit")
+    print("> Jumlah Air:", data_bahan[0][2], "unit")
+    print("> Jumlah Batu:", data_bahan[0][1], "unit")
+    """
 
-    # dalam kelompok kami, kami mengeluarkan output laporan jin yang dapat dilihat pada module laporan pada folder animasi
+    # dalam kelompok kami, kami mengeluarkan output laporan jin yang dapat dilihat pada module laporan
     Visual.printascii("laporan_jin", access)
     input()
 '''-------------------------------------------------------------F09------------------------------------------------------------'''
@@ -743,18 +745,19 @@ def laporancandi():
     import Visual
     # Komentar berikut merupakan algoritma dasar dalam output laporan jin
     
+    """
+    import tempdata
+    print("> Total Candi:", tempdata.len_candi)
+    print("> Total Pasir yang digunakan:", function_candi.countbahan("pasir"))
+    print("> Total Batu yang digunakan:", function_candi.countbahan("batu"))
+    print("> Total Air yang digunakan:", function_candi.countbahan("air"))
+    ter_mahal, harga_mahal = function_candi.canditer(True)
+    print("> ID Candi Termahal:", ter_mahal, f"({harga_mahal})")
+    ter_murah, harga_murah = function_candi.canditer(False)
+    print("> ID Candi Termurah:", ter_murah, f"({harga_murah})")
+    """
     
-    # import tempdata
-    # print("> Total Candi:", tempdata.len_candi)
-    # print("> Total Pasir yang digunakan:", function_candi.countbahan("pasir"))
-    # print("> Total Batu yang digunakan:", function_candi.countbahan("batu"))
-    # print("> Total Air yang digunakan:", function_candi.countbahan("air"))
-    # ter_mahal, harga_mahal = function_candi.canditer(True)
-    # print("> ID Candi Termahal:", ter_mahal, f"({harga_mahal})")
-    # ter_murah, harga_murah = function_candi.canditer(False)
-    # print("> ID Candi Termurah:", ter_murah, f"({harga_murah})")
-
-    # dalam kelompok kami, kami mengeluarkan output laporan jin yang dapat dilihat pada module laporan pada folder animasi
+    # dalam kelompok kami, kami mengeluarkan output laporan jin yang dapat dilihat pada module laporan
     Visual.printascii("laporan_candi", access)
     input()
 '''-------------------------------------------------------------F10------------------------------------------------------------'''
@@ -771,9 +774,7 @@ def cekid(id: int) -> bool:
     data_candi = tempdata.data_candi # Mengambil data candi dan memasukkan ke variabel lokal
     '''-------------------- Inisialisasi Awal Data --------------------'''
 
-
-    '''-------------------- Cek ID --------------------'''
-    for i in range (tempdata.len_candi): # Loop untuk mencacah panjang candi
+    for i in range (tempdata.len_candi): # Loop untuk mencacah panjang candi (id candi)
         cek = True # True berarti id tidak ada pada list id_candi_yang_dihancurkan
 
         for j in range(tempdata.jumlah_candi_yang_dihancurkan): # Loop untuk cek apakah id yang akan dihancurkan ada pada list id_candi_yang_dihancurkan
@@ -783,7 +784,6 @@ def cekid(id: int) -> bool:
         if cek: # Saat id yang akan dihancurkan tidak ada pada list id_candi_yang_dihancurkan 
             if data_candi[i] != [] and id == int(data_candi[i][0]): # Saat data candi yang sedang dicek tidak kosong dan id yang akan dihancurkan terdapat pada data candi
                 return True # Mengembalikan True yang berarti id yang akan dihancurkan terdapat pada data candi
-    '''-------------------- Cek ID --------------------'''
 
     return False # Mengembalikan False yang berarti id yang akan dihancurkan tidak terdapat pada data candi
 
@@ -795,21 +795,17 @@ def cekid(id: int) -> bool:
 def remove_dataid(id: int):
     import tempdata
 
-    '''-------------------- 2 --------------------'''
-    for i in range(tempdata.len_candi):
-        cek = True
-        for j in range(tempdata.jumlah_candi_yang_dihancurkan):
+    for i in range(tempdata.len_candi): # Loop untuk mencacah seluruh id candi
+        cek = True # Kondisi saat id candi yang ingin dihancurkan tidak ada pada list id_candi_yang_dihancurkan
+        for j in range(tempdata.jumlah_candi_yang_dihancurkan): # Loop untuk mencacah elemen pada list id_candi_yang_dihancurkan
             if i + 1 == tempdata.id_candi_yang_dihancurkan[j]:
                 # id_candi_yang_dihancurkan merupakan kumpulan data berisi id candi yang telah dihapus
-                # jadi jika id candi tersebut telah dihancurkan maka tidak "dihancurkan"
+                # jadi jika id candi tersebut telah dihancurkan maka tidak dapat "dihancurkan" lagi
                 cek = False
         if cek: 
-            #jka candi belum dihancurkan
-            #data candi digantikan dengan list kosong
+            # jika candi belum dihancurkan data candi digantikan dengan list kosong
             if int(tempdata.data_candi[i][0]) == id: # Asumsi id candi tidak ada yang sama
                 tempdata.data_candi[i] =  []
-    '''-------------------- 2 --------------------'''
-
 
     '''-------------------- 3 --------------------'''
     temphancur = [0 for i in range(tempdata.jumlah_candi_yang_dihancurkan+1)]
@@ -830,13 +826,13 @@ def remove_dataid(id: int):
 '''-------------------- 1 --------------------'''
 
 
-'''-------------------- 1 --------------------'''
+'''-------------------- Hancurkan Candi --------------------'''
 def hancurkancandi():
     import Visual
 
-    '''-------------------- 2 --------------------'''
+    '''-------------------- Input ID --------------------'''
     id = int(input("Masukkan ID candi: ")) #Input id candi yang akan dihancurkan
-    '''-------------------- 2 --------------------'''
+    '''-------------------- Input ID --------------------'''
 
 
     '''-------------------- 3 --------------------'''
@@ -870,7 +866,7 @@ def hancurkancandi():
 
     '''-------------------- 3 --------------------'''
 
-'''-------------------- 1 --------------------'''
+'''-------------------- Hancurkan Candi --------------------'''
 
 '''-------------------------------------------------------------F11------------------------------------------------------------'''
 
