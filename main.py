@@ -31,6 +31,7 @@ if __name__ == "__main__":
 
         elif menu == "hapusjin" and Main_Function.access == "bandung_bondowoso": # Saat user memasukan command hapusjin dan memiliki akses Bondowoso
             Main_Function.hapusJin()
+            Main_Function.update_stack("hapus")
             Visual.printascii(Main_Function.access,Main_Function.access) # Tampilan Karakter sesuai dengan role
 
         elif menu == "ubahjin" and Main_Function.access == "bandung_bondowoso": # Saat user memasukan command ubahjin dan memiliki akses Bondowoso
@@ -61,6 +62,10 @@ if __name__ == "__main__":
             Main_Function.laporancandi()
             Visual.printascii(Main_Function.access,Main_Function.access) # Tampilan Karakter sesuai dengan role
             
+        elif menu == "undo" and Main_Function.access == "bandung_bondowoso": # Saat user memasukan command undo dan memiliki akses Bondowoso
+            Main_Function.undo()
+            Visual.printascii(Main_Function.access,Main_Function.access) # Tampilan Karakter sesuai dengan role
+
         elif menu == "hancurkancandi" and Main_Function.access == "roro_jonggrang": # Saat user memasukan command hancurkancandi dan memiliki akses Roro
             Main_Function.hancurkancandi()
             Visual.printascii(Main_Function.access,Main_Function.access) # Tampilan Karakter sesuai dengan role
@@ -75,10 +80,11 @@ if __name__ == "__main__":
 
         elif menu == "help": # Saat user memasukan command help
             Main_Function.help()
-            
+
         elif menu == "save": # Saat user memasukan command save
             Main_Function.save()
             Visual.printascii(Main_Function.access,Main_Function.access) # Tampilan Karakter sesuai dengan role 
+            Main_Function.update_stack("save")
 
         elif Main_Function.logins: # Validasi saat user sudah login namun salah menginputkan command yang tidak sesuai dengan akses user
             Visual.render_screen(["ACCESS DENIED",'Command yang dimasukan salah!'],2) # Pesan Kesalahan
@@ -89,5 +95,6 @@ if __name__ == "__main__":
             Visual.render_screen(["ACCESS DENIED","Anda Belum Login!"],2) # Pesan Kesalahan
             time.sleep(1.5)
             Visual.printascii("home",None) # Tampilan Home Awal
+
 
 '''---------------------------------------------------------- Starting Point ----------------------------------------------------------'''

@@ -115,7 +115,7 @@ def render_screen(ascii: list, height_of_ascii: int):
 
 '''------------------------------------------------------------ Animasi ------------------------------------------------------------'''
 def printascii(typegambar: str,access: str):
-    import ayamKokok, animasi.bangunCandi, animasi.batchBangun, animasi.door, animasi.hancurCandi, animasi.hapusJin, animasi.jinBangun, animasi.jinKumpul, animasi.karakterGame, animasi.kumpul, laporan, animasi.saving, animasi.ubahJin
+    import ayamKokok, animasi.bangunCandi, animasi.batchBangun, animasi.door, animasi.hancurCandi, animasi.hapusJin, animasi.jinBangun, animasi.jinKumpul, animasi.karakterGame, animasi.kumpul, laporan, animasi.saving, animasi.ubahJin, animasi.undo
 
     '''-------------------- Atur Warna Terminal--------------------'''
     os.system("cls||clear")
@@ -128,7 +128,7 @@ def printascii(typegambar: str,access: str):
     elif access == "Pengumpul":
         cmd = 'color 2' # Warna Hijau
     else:
-        cmd = "color 0"
+        cmd = "color 7"
     os.system(cmd)
     '''-------------------- Atur Warna Terminal --------------------'''
 
@@ -313,6 +313,12 @@ def printascii(typegambar: str,access: str):
     elif typegambar == "exit": # Menampilkan Animasi Keluar
         for i in range(animasi.door.animasi):
             render_screen(animasi.door.exit[i], animasi.door.length)
+            time.sleep(0.5)
+        time.sleep(2)
+
+    elif typegambar == "undo": # Menampilkan Animasi Keluar
+        for i in range(animasi.undo.animasi):
+            render_screen(animasi.undo.undo[i], animasi.undo.length)
             time.sleep(0.5)
         time.sleep(2)
 
