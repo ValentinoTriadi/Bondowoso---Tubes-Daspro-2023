@@ -89,65 +89,81 @@ def summonJin():
     if tempdata.len_user < 102: # Jika total jin masih di bawah 100 (< 102 dikarenakan ada user Bondowoso dan Roro yang bukan merupakan jin tetapi terdapat pada data user)
 
         '''-------------------- Input Jenis Jin --------------------'''
-        Visual.render_screen(["Jenis jin yang dapat dipanggil: ", # Animasi opsi jenis jin
-        "(1) Pengumpul - Bertugas mengumpulkan bahan bangunan",
-        "(2) Pembangun - Bertugas membangun candi"], 3)
-
-        jin = int(input("Masukkan nomor jenis jin yang ingin dipanggil: ")) # Menerima input jenis jin yang akan dipanggil
-
-        # TODO: Validasi input
-        while jin != 2 and jin != 1: # Loop untuk validasi input
-            Visual.render_screen([f'Tidak ada jenis jin bernomor "{jin}"!'], 1) # Jika input di luar dari opsi
-            time.sleep(2.5)
-            Visual.render_screen(["Jenis jin yang dapat dipanggil: ",
+        def mintaJenisJin():   
+            Visual.render_screen(["Jenis jin yang dapat dipanggil: ", # Animasi opsi jenis jin
             "(1) Pengumpul - Bertugas mengumpulkan bahan bangunan",
             "(2) Pembangun - Bertugas membangun candi"], 3)
-            jin = int(input("Masukkan nomor jenis jin yang ingin dipanggil: ")) # Looping meminta input jenis jin
+
+            jin = input("Masukkan nomor jenis jin yang ingin dipanggil: ") # Menerima input jenis jin yang akan dipanggil
+
+            # TODO: Validasi input
+            if jin != "2" and jin != "1": # Loop untuk validasi input
+                Visual.render_screen([f'Tidak ada jenis jin bernomor "{jin}"!'], 1) # Jika input di luar dari opsi
+                time.sleep(2.5)
+                return mintaJenisJin() # Looping meminta input jenis jin jika masih tidak sesuai
+            else:
+                return int(jin) # Mengembalikan jenis jin jika sudah sesuai dengan pilihan yang tersedia
+            
+        jin = mintaJenisJin() # Assign jenis jin dari fungsi rekursif mintaJenisJin
         '''-------------------- Input Jenis Jin --------------------'''
 
 
         '''-------------------- Input Username Jin --------------------'''
-        if jin == 1: # Ketika user menginput opsi 1
-            role = "Pengumpul"
-            Visual.render_screen(['Memilih jin "Pengumpul".'], 1)
-            username = input("Masukkan username jin: ") # Memasukkan username jin yang akan dipanggil
-
-            # TODO: Validasi username
-            while function_jin.Cek_User(username): # Jika username sudah terdaftar akan looping meminta input
-                Visual.render_screen([f'Username "{username}" sudah diambil!'],1) 
-                time.sleep(2)
+        def mintaUserJin(jin):   
+            # TODO: Meminta input sesuai tipe jin yang diinput sebelumnya
+            if jin == 1: # Ketika user menginput opsi 1
+                role = "Pengumpul"
                 Visual.render_screen(['Memilih jin "Pengumpul".'], 1)
-                username = input("Masukkan username jin: ")
-        else: # Ketika user menginput opsi 2
-            role = "Pembangun"
-            Visual.render_screen(['Memilih jin "Pembangun".'], 1)
-            username = input("Masukkan username jin: ") # Memasukkan username jin yang akan dipanggil
+                username = input("Masukkan username jin: ") # Memasukkan username jin yang akan dipanggil
 
-            # TODO: Validasi username
-            while function_jin.Cek_User(username): # Jika username sudah terdaftar akan looping meminta input
-                Visual.render_screen([f'Username "{username}" sudah diambil!'],1)  
-                time.sleep(2)
+                # # TODO: Validasi username
+                if function_jin.Cek_User(username): # Jika username sudah terdaftar akan looping meminta input
+                    Visual.render_screen([f'Username "{username}" sudah diambil!'],1) 
+                    time.sleep(2)
+                    Visual.render_screen(['Memilih jin "Pengumpul".'], 1)
+                    return mintaUserJin(jin)
+                else:
+                    return username, role
+                
+            else: # Ketika user menginput opsi 2
+                role = "Pembangun"
                 Visual.render_screen(['Memilih jin "Pembangun".'], 1)
-                username = input("Masukkan username jin: ")
+                username = input("Masukkan username jin: ") # Memasukkan username jin yang akan dipanggil
 
-        username_jin_summon = username # Username jin yang di summon akan disave pada variabel global yang diperuntukkan animasi
+                # TODO: Validasi username
+                if function_jin.Cek_User(username): # Jika username sudah terdaftar akan looping meminta input
+                    Visual.render_screen([f'Username "{username}" sudah diambil!'],1)  
+                    time.sleep(2)
+                    Visual.render_screen(['Memilih jin "Pembangun".'], 1)
+                    return mintaUserJin(jin) # Looping rekursif fungsi meminta username Jin
+                else:
+                    return username, role # Mengembalikan username dan role jin ketika sudah benar
+
+        username, role = mintaUserJin(jin) # Username dan role jin yang disummon akan disave pada variabel global untuk animasi
         '''-------------------- Input Username Jin --------------------'''
 
 
         '''-------------------- Input Password Jin --------------------'''
-        password = input("Masukkan password jin: ") # Meminta data password untuk username jin yang akan disummon
+        def mintaPass():
+            # TODO: Meminta password dari user
+            password = input("Masukkan password jin: ") # Meminta data password untuk username jin yang akan disummon
 
-        # TODO: Validasi panjang password
-        while not 5 <= util_function.length(password + '.', '.') <= 25: # Jika password panjangnya tidak dari 5 sampai 25 huruf
-            Visual.render_screen(["Password panjangnya harus 5-25 karakter!"],1) # Menampilkan pesan kesalahan
-            time.sleep(2.5)
-            if role == "Pengumpul": # Sesuai opsi jenis jin yang dipilih di atas
-                Visual.render_screen(['Memilih jin "Pengumpul".'], 1) # Menampilkan animasi
-            elif role == "Pembangun": # Sesuai opsi jenis jin yang dipilih di atas
-                Visual.render_screen(['Memilih jin "Pembangun".'], 1) # Menampilkan animasi
-            password = input("Masukkan password jin: ") 
+            # TODO: Validasi panjang password
+            if 5 <= util_function.length(password + '.', '.') <= 25: # Jika password panjangnya tidak dari 5 sampai 25 huruf
+                time.sleep(2.5)
+                if role == "Pengumpul": # Sesuai opsi jenis jin yang dipilih di atas
+                    Visual.render_screen(['Memilih jin "Pengumpul".'], 1) 
+                    return password
+                elif role == "Pembangun": # Sesuai opsi jenis jin yang dipilih di atas
+                    Visual.render_screen(['Memilih jin "Pembangun".'], 1)
+                    return password
+            else:
+                Visual.render_screen(["Password panjangnya harus 5-25 karakter!"],1) # Menampilkan pesan kesalahan
+                time.sleep(2.5)
+                return mintaPass() # Looping rekursif fungsi meminta password
+            
+        password = mintaPass() # Assign password berdasarkan input user dari fungsi rekursif mintaPass
         '''-------------------- Input Password Jin --------------------'''
-
 
         '''-------------------- Update Data User --------------------'''
         datas = [username,password,role] # Mengubah inputan data menjadi bentuk list bernama datas
@@ -211,17 +227,21 @@ def hapusJin():
 
     elif function_jin.Cek_User(username): # Jika username terdaftar di dalam data
 
-        '''-------------------- Konfirmasi --------------------'''
-        option = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ") # Input user terkait konfirmasi penghapusan jin
-        '''-------------------- Konfirmasi --------------------'''
-
-
-        '''-------------------- Validasi Konfirmasi --------------------'''
-        while option != "Y" and option != "N":
-            Visual.render_screen(["Input tidak sesuai!","Silakan masukan (Y/N)!"],2) # Pesan kesalahan
+        def konfirmNamaJin():
+            '''-------------------- Konfirmasi --------------------'''
             option = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ") # Input user terkait konfirmasi penghapusan jin
-        '''-------------------- Validasi Konfirmasi --------------------'''
+            '''-------------------- Konfirmasi --------------------'''
 
+
+            '''-------------------- Validasi Konfirmasi --------------------'''
+            if option != "Y" and option != "N":
+                Visual.render_screen(["Input tidak sesuai!","Silakan masukan (Y/N)!"],2) # Pesan kesalahan
+                return konfirmNamaJin()
+            else:
+                return option
+            '''-------------------- Validasi Konfirmasi --------------------'''
+        
+        option = konfirmNamaJin() # Assign variabel option dengan input dari fungsi rekursif nama Jin
 
         '''-------------------- Penghapusan Jin --------------------'''
         if option == "Y": # Jika input user adalah Ya
@@ -1046,5 +1066,3 @@ def keluar():
         save()
     Visual.printascii("exit",access)
 '''------------------------------------------------------------F16------------------------------------------------------------'''
-    
-    
