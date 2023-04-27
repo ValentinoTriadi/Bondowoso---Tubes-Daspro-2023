@@ -137,3 +137,20 @@ for i in range(len_candi): # Loop untuk mengecek dan menambahkan data jin yang p
 '''-------------------- Mengisi Data Jin Yang Pernah Membangun Dari Data Candi --------------------'''
 
 '''------------------------------------------------------------ DATA JIN PEMBANGUN YANG PERNAH MEMBANGUN DAN TERDAFTAR SEBAGAI PEMBANGUN ------------------------------------------------------------'''
+
+
+
+
+'''------------------------------------------------------------ DATA STACK ------------------------------------------------------------'''
+jumlah_stack = 1
+undo_stack = [[data_candi, len_candi, data_user, len_user]] # Data awal stack
+
+# Struktur stack
+"""
+undo_stack = [[data candi, panjang data candi, data user, panjang data user],[...],...]
+undo_stack[...][0] = Data candi
+undo_stack[...][1] = Panjang data candi
+undo_stack[...][2] = Data user
+undo_stack[...][3] = Panjang data user
+"""
+'''------------------------------------------------------------ DATA STACK ------------------------------------------------------------'''

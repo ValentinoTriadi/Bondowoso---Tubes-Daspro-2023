@@ -43,7 +43,11 @@ def login():
     if not cekuser: # Saat user tidak ditemukan pada data
         Visual.render_screen(["Username tidak terdaftar!"],1) # Menampilkan pesan
         time.sleep(2.5)
-        login() # Mengulangi fungsi login
+
+        '''~~~~~~~~~~~~~~~~~~~~ Rekursif ~~~~~~~~~~~~~~~~~~~~'''
+        login() # Mengulangi fungsi login 
+        '''~~~~~~~~~~~~~~~~~~~~ Rekursif ~~~~~~~~~~~~~~~~~~~~'''
+
     else: # Saat user ditemukan pada data
         if password == cekpass: # ketika password yang diinput benar
             logins = True # Merubah variabel logins global menjadi benar (sudah login)
@@ -54,7 +58,11 @@ def login():
         else: # ketika password yang diinput salah
             Visual.render_screen(["Password salah!"],1) # Menampilkan pesan
             time.sleep(2.5)
+
+            '''~~~~~~~~~~~~~~~~~~~~ Rekursif ~~~~~~~~~~~~~~~~~~~~'''
             login() # Mengulang fungsi login
+            '''~~~~~~~~~~~~~~~~~~~~ Rekursif ~~~~~~~~~~~~~~~~~~~~'''
+                        
     '''-------------------- Validasi Login --------------------'''
 
 '''-------------------------------------------------------------F01------------------------------------------------------------'''
@@ -88,8 +96,9 @@ def summonJin():
     '''-------------------- Mengecek Jumlah Jin --------------------'''
     if tempdata.len_user < 102: # Jika total jin masih di bawah 100 (< 102 dikarenakan ada user Bondowoso dan Roro yang bukan merupakan jin tetapi terdapat pada data user)
 
+        '''~~~~~~~~~~~~~~~~~~~~~    Rekursif    ~~~~~~~~~~~~~~~~~~~~~'''
         '''-------------------- Input Jenis Jin --------------------'''
-        def mintaJenisJin():   
+        def minta_Jenis_Jin():   
             Visual.render_screen(["Jenis jin yang dapat dipanggil: ", # Animasi opsi jenis jin
             "(1) Pengumpul - Bertugas mengumpulkan bahan bangunan",
             "(2) Pembangun - Bertugas membangun candi"], 3)
@@ -100,16 +109,18 @@ def summonJin():
             if jin != "2" and jin != "1": # Loop untuk validasi input
                 Visual.render_screen([f'Tidak ada jenis jin bernomor "{jin}"!'], 1) # Jika input di luar dari opsi
                 time.sleep(2.5)
-                return mintaJenisJin() # Looping meminta input jenis jin jika masih tidak sesuai
+                return minta_Jenis_Jin() # Looping meminta input jenis jin jika masih tidak sesuai
             else:
                 return int(jin) # Mengembalikan jenis jin jika sudah sesuai dengan pilihan yang tersedia
             
-        jin = mintaJenisJin() # Assign jenis jin dari fungsi rekursif mintaJenisJin
+        jin = minta_Jenis_Jin() # Assign jenis jin dari fungsi rekursif mintaJenisJin
         '''-------------------- Input Jenis Jin --------------------'''
+        '''~~~~~~~~~~~~~~~~~~~~    Rekursif     ~~~~~~~~~~~~~~~~~~~~'''
 
 
+        '''~~~~~~~~~~~~~~~~~~~~      Rekursif      ~~~~~~~~~~~~~~~~~~~~'''
         '''-------------------- Input Username Jin --------------------'''
-        def mintaUserJin(jin):   
+        def minta_User_Jin(jin):   
             # TODO: Meminta input sesuai tipe jin yang diinput sebelumnya
             if jin == 1: # Ketika user menginput opsi 1
                 role = "Pengumpul"
@@ -121,7 +132,7 @@ def summonJin():
                     Visual.render_screen([f'Username "{username}" sudah diambil!'],1) 
                     time.sleep(2)
                     Visual.render_screen(['Memilih jin "Pengumpul".'], 1)
-                    return mintaUserJin(jin)
+                    return minta_User_Jin(jin)
                 else:
                     return username, role
                 
@@ -135,16 +146,18 @@ def summonJin():
                     Visual.render_screen([f'Username "{username}" sudah diambil!'],1)  
                     time.sleep(2)
                     Visual.render_screen(['Memilih jin "Pembangun".'], 1)
-                    return mintaUserJin(jin) # Looping rekursif fungsi meminta username Jin
+                    return minta_User_Jin(jin) # Looping rekursif fungsi meminta username Jin
                 else:
                     return username, role # Mengembalikan username dan role jin ketika sudah benar
 
-        username, role = mintaUserJin(jin) # Username dan role jin yang disummon akan disave pada variabel global untuk animasi
+        username, role = minta_User_Jin(jin) # Username dan role jin yang disummon akan disave pada variabel global untuk animasi
         '''-------------------- Input Username Jin --------------------'''
+        '''~~~~~~~~~~~~~~~~~~~~      Rekursif      ~~~~~~~~~~~~~~~~~~~~'''
 
 
+        '''~~~~~~~~~~~~~~~~~~~~      Rekursif      ~~~~~~~~~~~~~~~~~~~~'''
         '''-------------------- Input Password Jin --------------------'''
-        def mintaPass():
+        def minta_Pass():
             # TODO: Meminta password dari user
             password = input("Masukkan password jin: ") # Meminta data password untuk username jin yang akan disummon
 
@@ -160,10 +173,12 @@ def summonJin():
             else:
                 Visual.render_screen(["Password panjangnya harus 5-25 karakter!"],1) # Menampilkan pesan kesalahan
                 time.sleep(2.5)
-                return mintaPass() # Looping rekursif fungsi meminta password
+                return minta_Pass() # Looping rekursif fungsi meminta password
             
-        password = mintaPass() # Assign password berdasarkan input user dari fungsi rekursif mintaPass
+        password = minta_Pass() # Assign password berdasarkan input user dari fungsi rekursif mintaPass
         '''-------------------- Input Password Jin --------------------'''
+        '''~~~~~~~~~~~~~~~~~~~~      Rekursif      ~~~~~~~~~~~~~~~~~~~~'''
+
 
         '''-------------------- Update Data User --------------------'''
         datas = [username,password,role] # Mengubah inputan data menjadi bentuk list bernama datas
@@ -227,24 +242,27 @@ def hapusJin():
 
     elif function_jin.Cek_User(username): # Jika username terdaftar di dalam data
 
-        def konfirmNamaJin():
+        '''~~~~~~~~~~~~~~~~~~~~      Rekursif      ~~~~~~~~~~~~~~~~~~~~'''
+        def konfirmasi_Nama_Jin():
+
             '''-------------------- Konfirmasi --------------------'''
-            option = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ") # Input user terkait konfirmasi penghapusan jin
+            opsi = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ") # Input user terkait konfirmasi penghapusan jin
             '''-------------------- Konfirmasi --------------------'''
 
 
             '''-------------------- Validasi Konfirmasi --------------------'''
-            if option != "Y" and option != "N":
+            if opsi != "Y" and opsi != "N":
                 Visual.render_screen(["Input tidak sesuai!","Silakan masukan (Y/N)!"],2) # Pesan kesalahan
-                return konfirmNamaJin()
+                return konfirmasi_Nama_Jin()
             else:
-                return option
+                return opsi
             '''-------------------- Validasi Konfirmasi --------------------'''
         
-        option = konfirmNamaJin() # Assign variabel option dengan input dari fungsi rekursif nama Jin
+        opsi = konfirmasi_Nama_Jin() # Assign variabel opsi dengan input dari fungsi rekursif konfirmasi_Nama_Jin
+        '''~~~~~~~~~~~~~~~~~~~~      Rekursif      ~~~~~~~~~~~~~~~~~~~~'''
 
         '''-------------------- Penghapusan Jin --------------------'''
-        if option == "Y": # Jika input user adalah Ya
+        if opsi == "Y": # Jika input user adalah Ya
 
             '''-------------------- Inisialisasi Awal Data --------------------'''
             data_user = tempdata.data_user # Mengambil data user
@@ -260,20 +278,18 @@ def hapusJin():
 
 
             '''-------------------- Menghapus Username Dari Data --------------------'''
-            for i in range(index,tempdata.len_user-1): # Loop untuk menghapus data jin lalu menaikkan semua data di bawahnya 1 indeks ke atas
-                tempdata.data_user[i] = tempdata.data_user[i+1] 
+            temp_data_user = [[] for i in range(tempdata.len_user - 1)] # list baru sebagai tempat untuk data user setelah jin dihilangkan
+            j = 0 # Index untuk mencacah temp_data_user 
+            for i in range(tempdata.len_user): # Loop untuk menghapus data jin lalu menaikkan semua data di bawahnya 1 indeks ke atas
+                if i != index: # Ketika index pencacah data user tidak sama dengan index jin yang ingin dihapus
+                    temp_data_user[j] = tempdata.data_user[i] 
+                    j += 1 # Index pencacah bertambah 1
             '''-------------------- Menghapus Username Dari Data --------------------'''
 
 
             '''-------------------- Mengupdate Data User --------------------'''
             tempdata.len_user -= 1 # mengupdate panjang data user menjadi berkurang 1
-
-            # TODO: Mengupdate data user
-            tempdatas = [[] for i in range(tempdata.len_user)] # Membuat ulang tempdata yang baru dengan jumlah elemen yang sesuai dengan panjang data (sehingga list tidak ada elemen kosong)
-            for i in range(tempdata.len_user): # Loop untuk memasukan data lama ke list baru
-                tempdatas[i] = tempdata.data_user[i]
-
-            tempdata.data_user = tempdatas # Meng-assign kembali tempdatas untuk data user
+            tempdata.data_user = temp_data_user # Meng-assign kembali tempdatas untuk data user
             '''-------------------- Mengupdate Data User --------------------'''
 
 
@@ -282,28 +298,31 @@ def hapusJin():
             # TODO: Menghitung banyak candi yang telah dibangun jin yang akan dihapus 
             count = 0 # Banyak candi yang telah dibangun oleh jin yang akan dihapus
             for i in range(tempdata.len_candi): # Menghitung banyak candi yang dibangun oleh jin yang akan dihapus
-                if datacandi[i][1] == username:
-                    count+=1
+                if datacandi[i] != []:  
+                    if datacandi[i][1] == username:
+                        count += 1
 
             # TODO: Inisialisasi Awal 
-            j = 0
-            tempdatas = [[] for i in range(tempdata.len_candi - count)] # Membuat list tempdatas baru untuk data candi
+            tempdatas = [[] for i in range(tempdata.len_candi)] # Membuat list tempdatas baru untuk data candi
             
             # TODO: Mengupdate data candi yang dihancurkan
             for i in range(tempdata.len_candi): # Loop untuk mengisi tempdatas 
-                if datacandi[i][1] != username: # Jika candi tidak dibangun oleh jin yang akan dihapus
-                    tempdatas[j] = datacandi[i] # Candi tersebut akan di-assign ke tempdatas
-                    j+=1
-                else: # Jika candi dibuat oleh jin yang akan dihapus
-                    tempdata.len_candi-=1 # Panjang data candi berkurang 1
-                    id = datacandi[i][0] # ID Candi akan masuk ke variabel id
+                if datacandi[i] != []: # Ketika data candi yang dicacah tidak kosong
 
-                    temphancur = [0 for i in range(tempdata.jumlah_candi_yang_dihancurkan + 1)] # List sementara candi yang dihancurkan
-                    for i in range(tempdata.jumlah_candi_yang_dihancurkan): # Loop untuk mengisi list sementara dengan data yang sudah ada sebelum ditambahkan id baru
-                        temphancur[i] = tempdata.id_candi_yang_dihancurkan[i]
-                    temphancur[tempdata.jumlah_candi_yang_dihancurkan] = id # Meng-assign id candi yang dohancurkan
-                    tempdata.jumlah_candi_yang_dihancurkan += 1 # Jumlah candi yang dihancurkan bertambah 1
-                    tempdata.id_candi_yang_dihancurkan = util_function.sort(temphancur,tempdata.jumlah_candi_yang_dihancurkan, "<") # Mengurutkan data id candi yang dihancurkan dari yang terkecil
+                    if datacandi[i][1] != username: # Jika candi tidak dibangun oleh jin yang akan dihapus
+                        tempdatas[i] = datacandi[i] # Candi tersebut akan di-assign ke tempdatas
+
+                    else: # Jika candi dibuat oleh jin yang akan dihapus (tidak akan ditambahkan ke tempdatas)
+                        id = datacandi[i][0] # ID Candi akan masuk ke variabel id
+
+                        temphancur = [0 for i in range(tempdata.jumlah_candi_yang_dihancurkan + 1)] # List sementara candi yang dihancurkan
+                        for i in range(tempdata.jumlah_candi_yang_dihancurkan): # Loop untuk mengisi list sementara dengan data yang sudah ada sebelum ditambahkan id baru
+                            temphancur[i] = tempdata.id_candi_yang_dihancurkan[i]
+
+                        temphancur[tempdata.jumlah_candi_yang_dihancurkan] = id # Meng-assign id candi yang dohancurkan
+
+                        tempdata.jumlah_candi_yang_dihancurkan += 1 # Jumlah candi yang dihancurkan bertambah 1
+                        tempdata.id_candi_yang_dihancurkan = util_function.sort(temphancur,tempdata.jumlah_candi_yang_dihancurkan, "<") # Mengurutkan data id candi yang dihancurkan dari yang terkecil
 
             tempdata.data_candi = tempdatas # Data candi terbaru dari tempdatas
             '''-------------------- Mengupdate Data Candi yang Dihancurkan--------------------'''
@@ -327,6 +346,12 @@ def hapusJin():
 '''------------------------------------------------------------F05------------------------------------------------------------'''
 def ubahJin():
     import tempdata, Visual
+
+    '''-------------------- Tampilan Awal --------------------'''
+    Visual.render_screen(["Ubah Jin"],1) # Menampilkan screen 'Ubah Jin'
+    time.sleep(0.5)
+    '''-------------------- Tampilan Awal --------------------'''
+
 
     '''-------------------- Input Username --------------------'''
     username = input("Masukkan username jin : ") # Meminta input username yang akan dirubah tipenya
@@ -355,16 +380,18 @@ def ubahJin():
 
 
         '''-------------------- Mengubah Tipe Username --------------------'''
-        tempdata.data_user[index][2] = function_jin.ubah_role(tempdata.data_user[index][2]) # Memanggil fungsi ubah_role
+        temp_role = function_jin.ubah_role(tempdata.data_user[index][2]) # Memanggil fungsi ubah_role
         '''-------------------- Mengubah Tipe Username --------------------'''
 
+        if temp_role != "Tidak Jadi": # Ketika user jadi mengubah jin (return dari fungsi ubah_role bukan "Tidak Jadi" melainkan role jin yang telah diubah)
+            tempdata.data_user[index][2] = temp_role 
 
-        '''-------------------- Tampilan Animasi --------------------'''
-        if tempdata.data_user[index][2] == "Pembangun": # Jika jin diubah menjadi tipe pembangun
-            Visual.printascii("ubah_kumpul_bangun",access)
-        elif tempdata.data_user[index][2] == "Pengumpul": # Jika jin diubah menjadi tipe pengumpul
-            Visual.printascii("ubah_bangun_kumpul",access)
-        '''-------------------- Tampilan Animasi --------------------'''
+            '''-------------------- Tampilan Animasi --------------------'''
+            if tempdata.data_user[index][2] == "Pembangun": # Jika jin diubah menjadi tipe pembangun
+                Visual.printascii("ubah_kumpul_bangun",access)
+            elif tempdata.data_user[index][2] == "Pengumpul": # Jika jin diubah menjadi tipe pengumpul
+                Visual.printascii("ubah_bangun_kumpul",access)
+            '''-------------------- Tampilan Animasi --------------------'''
 
     '''-------------------- Cek Username --------------------'''
     
@@ -1066,3 +1093,89 @@ def keluar():
         save()
     Visual.printascii("exit",access)
 '''------------------------------------------------------------F16------------------------------------------------------------'''
+
+
+
+
+'''------------------------------------------------------------B04------------------------------------------------------------'''
+def undo():
+    import Visual, time, tempdata
+    '''-------------------- Cek Jumlah Langkah (Stack) --------------------'''
+    if tempdata.jumlah_stack == 1: # Ketika tidak ada langkah yang terekam
+        
+        '''-------------------- Tampilan Kesalahan --------------------'''
+        Visual.render_screen(["Tidak ada data yang bisa di undo!", "Silakan melakukan penghapusan jin terlebih dahulu sebelum melakukan undo."],2) # Pesan Kesalahan
+        time.sleep(2)
+        '''-------------------- Tampilan Kesalahan --------------------'''
+
+    else: # Ketika ada langkah yang terekam
+
+        Visual.render_screen(["Apakah ingin melakukan undo penghapusan jin? (Y/N)"],1)
+        
+        '''-------------------- Konfirmasi Undo --------------------'''
+        def Konfirmasi():
+            konfirmasi = input("(Y/N)? ") # Meminta konfirmasi user
+
+            '''-------------------- Validasi Konfirmasi Undo --------------------'''
+            if konfirmasi != "Y" and konfirmasi != "N": # Ketika input user tidak sesuai ketentuan
+                Visual.render_screen(["Input tidak sesuai!","Silakan masukan (Y/N)!"],2) # Pesan kesalahan
+                return Konfirmasi() # memanggil fungsi Konfirmasi 
+            else:
+                return konfirmasi # Mengembalikan input user
+            '''-------------------- Validasi Konfirmasi Undo --------------------'''
+            
+        konfirmasi = Konfirmasi() # Meminta konfirmasi user
+        '''-------------------- Konfirmasi Undo --------------------'''
+
+
+        if konfirmasi == "Y":
+            tempdata.jumlah_stack -= 1
+
+            '''-------------------- Update Data Setelah diUndo --------------------'''
+            tempdata.data_candi = tempdata.undo_stack[tempdata.jumlah_stack-1][0] # Update data candi
+            tempdata.len_candi = tempdata.undo_stack[tempdata.jumlah_stack-1][1] # Update panjang candi
+            tempdata.data_user = tempdata.undo_stack[tempdata.jumlah_stack-1][2] # Update data user
+            tempdata.len_user = tempdata.undo_stack[tempdata.jumlah_stack-1][3] # Update panjang user
+            '''-------------------- Update Data Setelah diUndo --------------------'''
+
+
+            '''-------------------- Update Stack Setelah diUndo --------------------'''
+            temp_undo_stack = [[] for i in range(tempdata.jumlah_stack)] # Tempat untuk data stack setelah melakukan undo 
+            for i in range(tempdata.jumlah_stack): # Loop untuk mengisi stack data terbaru dengan data yang lama setelah dilakukan undo (panjang berkurang 1)
+                temp_undo_stack[i] = tempdata.undo_stack[i] 
+            '''-------------------- Update Stack Setelah diUndo --------------------'''
+
+
+            '''-------------------- Tampilan Animasi --------------------'''
+            Visual.printascii("undo",access)
+            '''-------------------- Tampilan Animasi --------------------'''
+
+    '''-------------------- Cek Jumlah Langkah (Stack) --------------------'''
+                
+def update_stack(command):
+    import tempdata
+    if command == "save": # Ketika ingin update data stack setelah melakukan save (Reset data stack)
+
+        '''-------------------- Update Isi Stack --------------------'''
+        tempdata.jumlah_stack = 1
+        tempdata.undo_stack = [[tempdata.data_candi, tempdata.len_candi, tempdata.data_user, tempdata.len_user]]
+        '''-------------------- Update Isi Stack --------------------'''
+
+    elif command == "hapus": # Ketika ingin update stack setelah melakukan hapus jin
+
+        '''-------------------- Update Panjang Stack --------------------'''
+        tempdata.jumlah_stack += 1 # banyak langkah yang dijalankan bertambah 1
+        '''-------------------- Update Panjang Stack --------------------'''
+
+        '''-------------------- Update Isi Stack --------------------'''
+        temp_undo_stack = [[] for i in range(tempdata.jumlah_stack)] # list sebagai tempat untuk data stack terbaru
+        for i in range(tempdata.jumlah_stack - 1): # Mengisi list dengan data stack yang lama
+            temp_undo_stack[i] = tempdata.undo_stack[i]
+
+        temp_undo_stack[tempdata.jumlah_stack-1] = [tempdata.data_candi,tempdata.len_candi,tempdata.data_user,tempdata.len_user] # Menambahkan data stack terbaru setelah user menghapus jin
+
+        tempdata.undo_stack = temp_undo_stack # Update data stack
+        '''-------------------- Update Isi Stack --------------------'''
+
+
+'''------------------------------------------------------------B04------------------------------------------------------------'''
