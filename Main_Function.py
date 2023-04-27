@@ -562,6 +562,7 @@ def batchbangun():
 
         '''-------------------- Inisialisasi Awal --------------------'''
         temp_candi = [[] for i in range(lendata)] # Tempat untuk menyimpan data candi terbaru
+        panjang_data_candi = tempdata.len_candi # Mengambil panjang data candi
 
         bahan = tempdata.data_bahan_bangunan # Mengambil data bahan bangunan dan memasukan ke variabel lokal
         total_Material = [0,0,0] # Tempat untuk menyimpan total material yang digunakan
@@ -600,8 +601,8 @@ def batchbangun():
 
                 '''-------------------- Menentukan ID Candi --------------------'''
                 if temp_jumlah_candi_yang_dihancurkan == 0: # Kondisi ketika tidak ada candi yg hancur
-                    index = tempdata.len_candi + 1 # ID Candi merupakan ID setelah ID terakhir pada data candi
-                    tempdata.len_candi+=1 # Panjang data akan bertambah 1
+                    index = panjang_data_candi + 1 # ID Candi merupakan ID setelah ID terakhir pada data candi
+                    panjang_data_candi+=1 # Panjang data akan bertambah 1
                 else: # Kondisi ketika ada candi yg hancur
                     index = temp_id_candi_yang_dihancurkan[0] # mengambil id dari candi yang telah dihancurkan dan terkecil (mengambil index pertama karena data id candi yang dihancurkan sudah diurutkan)
 
@@ -660,6 +661,7 @@ def batchbangun():
 
             '''-------------------- Update Data --------------------'''
             tempdata.data_bahan_bangunan = bahan # Mengupdate data bahan setelah digunakan
+            tempdata.len_candi = panjang_data_candi
 
             if lendata > 100: # Ketika jumlah candi yang terbangun lebih dari 100 maka data akan dipotong hanya 100 data
                 temp_candi2 = [[] for i in range(100)] # tempat untuk menyimpan 100 data candi
