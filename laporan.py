@@ -42,8 +42,8 @@ laporanjin = [
 "         &%%##((#      "+f"> Jin Terajin: {function_jin.jinter(True)}".ljust(36," ")+"       #%%#(##        ", # Mencari jin dengan jumlah candi yang dibuat terbanyak
 "         &%###((       "+f"> Jin Termalas: {function_jin.jinter(False)}".ljust(36," ")+"       #&%#(##        ", # Mencari jin dengan jumlah candi yang dibuat tersedikit
 "         &%###((#      "+f"> Jumlah Pasir: {data_bahan[0][0]} unit".ljust(36," ")+"       #&%#((#        ", # Menghitung banyak pasir yang sudah digunakan 
-"         %%#%#((##     "+f"> Jumlah Air: {data_bahan[0][0]} unit".ljust(36," ")+"      #&&%####        ", # Menghitung banyak batu yang sudah digunakan
-"        &&%#%(((##     "+f"> Jumlah Batu: {data_bahan[0][0]} unit".ljust(36," ")+"    %##&&%###%        ", # Menghitung banyak batu yang sudah digunakan
+"         %%#%#((##     "+f"> Jumlah Air: {data_bahan[0][1]} unit".ljust(36," ")+"      #&&%####        ", # Menghitung banyak batu yang sudah digunakan
+"        &&%#%(((##     "+f"> Jumlah Batu: {data_bahan[0][2]} unit".ljust(36," ")+"    %##&&%###%        ", # Menghitung banyak batu yang sudah digunakan
 "        &%%##(((##%%                                         %%%%#&&%####        ",
 "        &&###/((###%%%                                     #######&&%####        ",
 "        &%###//(####%##%%###%%%%#################################%&%####(        ",

@@ -163,7 +163,6 @@ def summonJin():
 
             # TODO: Validasi panjang password
             if 5 <= util_function.length(password + '.', '.') <= 25: # Jika password panjangnya tidak dari 5 sampai 25 huruf
-                time.sleep(2.5)
                 if role == "Pengumpul": # Sesuai opsi jenis jin yang dipilih di atas
                     Visual.render_screen(['Memilih jin "Pengumpul".'], 1) 
                     return password
@@ -194,14 +193,28 @@ def summonJin():
         '''-------------------- Update Data User --------------------'''
 
 
+        '''-------------------- Update Data Jin Yang Pernah Membangun Jika Role Jin Adalah Pembangun --------------------'''
+        if role == "Pembangun":
+            tempdata.len_pembangun += 1 # Panjang data bertambah 1 (ditambahkan jin yang baru disummon)
+
+            temp_jin_yang_pernah_membangun = ['' for i in range(tempdata.len_pembangun)] # List sebagai tempat untuk menyimpan data baru
+            for i in range(tempdata.len_pembangun-1): # Loop untuk mengisi data baru dengan data lama
+                temp_jin_yang_pernah_membangun[i] = tempdata.data_jin_yang_pernah_membangun[i]
+
+            temp_jin_yang_pernah_membangun[tempdata.len_pembangun-1] = username # Mengisi elemen terakhir list dengan jin pembangun yang baru di summon
+
+            tempdata.data_jin_yang_pernah_membangun = temp_jin_yang_pernah_membangun # Mengupdate data global
+        '''-------------------- Update Data Jin Yang Pernah Membangun Jika Role Jin Adalah Pembangun --------------------'''
+
+
         '''-------------------- Tampilan Animasi --------------------'''
         time.sleep(1)
+        tempdata.data_user = tempdatas
         if role == "Pengumpul":
             Visual.printascii("summon_pengumpul",access) # Menampilkan animasi summon jin pengumpul
         elif role == "Pembangun":
             Visual.printascii("summon_pembangun",access) # Menampilkan animasi summon jin pembangun
         '''-------------------- Tampilan Animasi --------------------'''
-
         
     else: # Jika jin yang terdaftar sudah 100
 
@@ -293,8 +306,7 @@ def hapusJin():
             '''-------------------- Mengupdate Data User --------------------'''
 
 
-            '''-------------------- Mengupdate Data Candi yang Dihancurkan--------------------'''
-
+            '''-------------------- Mengupdate Data Candi yang Dihancurkan --------------------'''
             # TODO: Menghitung banyak candi yang telah dibangun jin yang akan dihapus 
             count = 0 # Banyak candi yang telah dibangun oleh jin yang akan dihapus
             for i in range(tempdata.len_candi): # Menghitung banyak candi yang dibangun oleh jin yang akan dihapus
@@ -325,14 +337,34 @@ def hapusJin():
                         tempdata.id_candi_yang_dihancurkan = util_function.sort(temphancur,tempdata.jumlah_candi_yang_dihancurkan, "<") # Mengurutkan data id candi yang dihancurkan dari yang terkecil
 
             tempdata.data_candi = tempdatas # Data candi terbaru dari tempdatas
-            '''-------------------- Mengupdate Data Candi yang Dihancurkan--------------------'''
+            '''-------------------- Mengupdate Data Candi yang Dihancurkan --------------------'''
+
+
+            '''-------------------- Mengupdate Data Jin Yang Pernah Membangun --------------------'''
+            for i in range(tempdata.len_pembangun): # Loop untuk mencari username di data jin yang pernah membangun
+                if tempdata.data_jin_yang_pernah_membangun[i] == username: # Ketika username ditemukan pada data jin yang pernah membangun
+                    cek = True # Mengembalikan True yang berarti jin yang ingin dihapus ditemukan di data jin yang pernah membangun 
+
+            if cek: # Kondisi saat jin yang ingin dihapus ditemukan di data jin yang pernah membangun
+                tempdata.len_pembangun -= 1 # Panjang data kurang 1 karena jin yang akan dihapus akan dihapus dari data
+                temp_data_jin_yang_pernah_membangun = ['' for i in range(tempdata.len_pembangun)] # List sebagai tempat untuk menyimpan data baru setelah jin dihapus
+                j = 0 # Index untuk mencacah list temp_data_jin_yang_pernah_membangun 
+                for i in range(tempdata.len_pembangun): # Loop untuk mengisi list baru
+                    if tempdata.data_jin_yang_pernah_membangun[i] != username: # Ketika data lama yang akan dimasukan ke list baru bukan merupakan user jin yang ingin dihapus
+                        temp_data_jin_yang_pernah_membangun[j] = tempdata.data_jin_yang_pernah_membangun[i] # Memasukan data lama ke list baru
+                        j += 1 # Index list bertamabah 1
+            '''-------------------- Mengupdate Data Jin Yang Pernah Membangun --------------------'''
 
 
             '''-------------------- Tampilan Animasi --------------------'''
             if data_user[index][2] == "Pembangun": # Jika role jin yang dihapus adalah pembangun
                 Visual.printascii("hapus_jin_bangun",access) # Menampilkan animasi jin dihapus
+                Visual.render_screen(["Jin telah berhasil dihapus dari alam gaib."],1)
+                time.sleep(2)
             elif data_user[index][2] == "Pengumpul": # Jika role jin yang dihapus adalah pembangun
                 Visual.printascii("hapus_jin_kumpul",access) # Menampilkan animasi jin dihapus
+                Visual.render_screen(["Jin telah berhasil dihapus dari alam gaib."],1)
+                time.sleep(2)
             '''-------------------- Tampilan Animasi --------------------'''
 
         '''-------------------- Penghapusan Jin --------------------'''
@@ -664,7 +696,7 @@ def batchbangun():
 
                 '''-------------------- Melengkapi Data Candi --------------------'''
                 harga = int(pasir) * 10000 + int(batu) * 15000 + int(air) * 7500 # Menentukan Harga Candi
-                temp_candi[i] = [index,jin[j],pasir,batu,air,harga] # Memplotkan data candi sesuai struktur
+                temp_candi[i] = [str(index),jin[j],str(pasir),str(batu),str(air),str(harga)] # Memplotkan data candi sesuai struktur
                 j += 1 # Index jin yang membangun bertambah 1
                 total_Material[0] += pasir ; total_Material[1] += batu ; total_Material[2] += air # Menjumlahkan total material yang digunakan
                 '''-------------------- Melengkapi Data Candi --------------------'''
@@ -1026,7 +1058,8 @@ def help():
             "7. laporanjin".ljust(80," "),"   Untuk mengambil laporan jin yang berisi kinerja para jin".ljust(80," "),
             "8. laporancandi".ljust(80," "),"   Untuk mengambil laporan candi yang berisi progress pembangunan candi".ljust(80," "),
             "9. save".ljust(80," "),"   Untuk menyimpan data yang berada di program".ljust(80," "),
-            "10. exit".ljust(80," "),"   Untuk keluar dari permainan".ljust(80," ")], 22)
+            "10. undo".ljust(80," "),"   Untuk mengembalikan jin yang telah dihapus".ljust(80," "),
+            "11. exit".ljust(80," "),"   Untuk keluar dari permainan".ljust(80," ")], 24)
             '''-------------------- Tampilan Help Bondowoso --------------------'''
 
         elif access == "roro_jonggrang": # Saat role user adalah roro_jonggrang
@@ -1138,6 +1171,8 @@ def undo():
             tempdata.len_candi = tempdata.undo_stack[tempdata.jumlah_stack-1][1] # Update panjang candi
             tempdata.data_user = tempdata.undo_stack[tempdata.jumlah_stack-1][2] # Update data user
             tempdata.len_user = tempdata.undo_stack[tempdata.jumlah_stack-1][3] # Update panjang user
+            tempdata.data_jin_yang_pernah_membangun = tempdata.undo_stack[tempdata.jumlah_stack-1][4] # Update data jin yang pernah membangun
+            tempdata.len_pembangun = tempdata.undo_stack[tempdata.jumlah_stack-1][5] # Update panjang data jin yang pernah membangun
             '''-------------------- Update Data Setelah diUndo --------------------'''
 
 
@@ -1154,13 +1189,13 @@ def undo():
 
     '''-------------------- Cek Jumlah Langkah (Stack) --------------------'''
                 
-def update_stack(command):
+def update_stack(command: str):
     import tempdata
     if command == "save": # Ketika ingin update data stack setelah melakukan save (Reset data stack)
 
         '''-------------------- Update Isi Stack --------------------'''
         tempdata.jumlah_stack = 1
-        tempdata.undo_stack = [[tempdata.data_candi, tempdata.len_candi, tempdata.data_user, tempdata.len_user]]
+        tempdata.undo_stack = [[tempdata.data_candi, tempdata.len_candi, tempdata.data_user, tempdata.len_user, tempdata.data_jin_yang_pernah_membangun, tempdata.len_pembangun]]
         '''-------------------- Update Isi Stack --------------------'''
 
     elif command == "hapus": # Ketika ingin update stack setelah melakukan hapus jin
@@ -1174,7 +1209,7 @@ def update_stack(command):
         for i in range(tempdata.jumlah_stack - 1): # Mengisi list dengan data stack yang lama
             temp_undo_stack[i] = tempdata.undo_stack[i]
 
-        temp_undo_stack[tempdata.jumlah_stack-1] = [tempdata.data_candi,tempdata.len_candi,tempdata.data_user,tempdata.len_user] # Menambahkan data stack terbaru setelah user menghapus jin
+        temp_undo_stack[tempdata.jumlah_stack-1] = [tempdata.data_candi, tempdata.len_candi, tempdata.data_user, tempdata.len_user, tempdata.data_jin_yang_pernah_membangun, tempdata.len_pembangun] # Menambahkan data stack terbaru setelah user menghapus jin
 
         tempdata.undo_stack = temp_undo_stack # Update data stack
         '''-------------------- Update Isi Stack --------------------'''

@@ -228,16 +228,17 @@ def write_csv(file_name: str, path_name: str):
     elif file_name == "user.csv": # Ketika ingin melakukan penyimpanan file user.csv
         data = tempdata.data_user # Mengambil data user
         tempdatas = ["" for i in range(tempdata.len_user + 1)] # Menyiapkan tempat untuk menuliskan data ke file csv
-        tempdatas[0] = f"username;password;role.\n" # Membuat header file
+        tempdatas[0] = f"username;password;role\n" # Membuat header file
 
         for i in range(tempdata.len_user): # Loop untuk mengisi list
             tempdatas[i+1] = f"{data[i][0]};{data[i][1]};{data[i][2]}\n" # Mengisi list dengan string yang di format sesuai struktur data
 
     elif file_name == "bahan_bangunan.csv": # Ketika ingin melakukan penyimpanan file bahan_bangunan.csv
         data = tempdata.data_bahan_bangunan # Mengambil data bahan bagunan
-        tempdatas = ["" for i in range(2)] # Menyiapkan tempat untuk menuliskan data ke file csv
-        tempdatas[0] = f"pasir;batu;air.\n" # Membuat header
-        tempdatas[1] = f"{data[0][0]};{data[0][1]};{data[0][2]}\n" # Mengisi list dengn string yang di format sesuai struktur data
+        tempdatas = ["" for i in range(3)] # Menyiapkan tempat untuk menuliskan data ke file csv
+        tempdatas[0] = f"pasir;batu;air\n" # Membuat header
+        tempdatas[1] = f"Bahan pasir yang tersedia;Bahan batu yang tersedia;Bahan air yang tersedia\n" # Membuat header
+        tempdatas[2] = f"{data[0][0]};{data[0][1]};{data[0][2]}\n" # Mengisi list dengn string yang di format sesuai struktur data
 
     file.writelines(tempdatas) # Menuliskan list kedalam csv
     file.close() # Menutup file

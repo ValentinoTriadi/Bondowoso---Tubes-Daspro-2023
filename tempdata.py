@@ -56,7 +56,7 @@ databahanbangunan = util_function.read_csv("bahan_bangunan.csv", name_folders)[0
 
 '''-------------------- Membuat Matriks Data --------------------'''
 data_bahan_bangunan = [[]]
-data_bahan_bangunan[0] = util_function.split_koma(databahanbangunan[0],3) # Memisahkan string menjadi list dengan jumlah kolom sebanyak 3
+data_bahan_bangunan[0] = util_function.split_koma(databahanbangunan[1],3) # Memisahkan string menjadi list dengan jumlah kolom sebanyak 3
 '''-------------------- Membuat Matriks Data --------------------'''
 
 '''------------------------------------------------------------ DATA BAHAN BANGUNAN ------------------------------------------------------------'''
@@ -143,14 +143,16 @@ for i in range(len_candi): # Loop untuk mengecek dan menambahkan data jin yang p
 
 '''------------------------------------------------------------ DATA STACK ------------------------------------------------------------'''
 jumlah_stack = 1
-undo_stack = [[data_candi, len_candi, data_user, len_user]] # Data awal stack
+undo_stack = [[data_candi, len_candi, data_user, len_user, data_jin_yang_pernah_membangun, len_pembangun]] # Data awal stack
 
 # Struktur stack
 """
-undo_stack = [[data candi, panjang data candi, data user, panjang data user],[...],...]
+undo_stack = [[data candi, panjang data candi, data user, panjang data user, data jin yang pernah membangun, panjang data jin yang pernah membangun],[...],...]
 undo_stack[...][0] = Data candi
 undo_stack[...][1] = Panjang data candi
 undo_stack[...][2] = Data user
 undo_stack[...][3] = Panjang data user
+undo_stack[...][4] = Data jin yang pernah membangun
+undo_stack[...][5] = Panjang data jin yang pernah membangun
 """
 '''------------------------------------------------------------ DATA STACK ------------------------------------------------------------'''

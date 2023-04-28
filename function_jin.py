@@ -150,7 +150,7 @@ def jinter(rajin: bool) -> str:
     else: # Saat ingin mengembalikan jin terajin
 
         '''-------------------- Inisialisasi Awal --------------------'''
-        mins = util_function.maksimum(jumlah_yg_dibangun_jin, tempdata.len_pembangun) # Mencari jumlah candi terdikit yang dibangun oleh jin
+        mins = util_function.minimum(jumlah_yg_dibangun_jin, tempdata.len_pembangun) # Mencari jumlah candi terdikit yang dibangun oleh jin
         jumlah_jin_termalas = 0 # Inisialisasi awal sebagai tempat jumlah jin dengan jumlah candi yang dibangun sama dan terdikit
         '''-------------------- Inisialisasi Awal --------------------'''
 
