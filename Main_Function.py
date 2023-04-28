@@ -1112,6 +1112,7 @@ def undo():
 
         Visual.render_screen(["Apakah ingin melakukan undo penghapusan jin? (Y/N)"],1)
         
+        '''~~~~~~~~~~~~~~~~~~~~    Rekursif     ~~~~~~~~~~~~~~~~~~~~'''
         '''-------------------- Konfirmasi Undo --------------------'''
         def Konfirmasi():
             konfirmasi = input("(Y/N)? ") # Meminta konfirmasi user
@@ -1126,6 +1127,7 @@ def undo():
             
         konfirmasi = Konfirmasi() # Meminta konfirmasi user
         '''-------------------- Konfirmasi Undo --------------------'''
+        '''~~~~~~~~~~~~~~~~~~~~    Rekursif     ~~~~~~~~~~~~~~~~~~~~'''
 
 
         if konfirmasi == "Y":
