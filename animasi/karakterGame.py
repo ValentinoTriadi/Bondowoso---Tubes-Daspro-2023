@@ -130,5 +130,5 @@ jinKumpul = [
 "                         ****\|/**                   ",
 "                            ****                     "]
 
-length = 31
-animasi = 1
+animasi = 1 # Jumlah animasi
+length = 31 # Tinggi animasi

@@ -99,5 +99,6 @@ ubah3 = [
 
 bangun_ke_kumpul = [ubah1,ubah2,ubah3]
 kumpul_ke_bangun = [ubah3,ubah2,ubah1]
-animasi = 3
-length = 31
+
+animasi = 3 # Jumlah animasi
+length = 31 # Tinggi animasi

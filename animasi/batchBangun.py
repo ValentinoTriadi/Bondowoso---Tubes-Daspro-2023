@@ -69,5 +69,5 @@ bangun3 = [
 
 batchbangun = [bangun3, bangun2, bangun1]
 
-animasi = 3
-length = 20
+animasi = 3 # Jumlah animasi
+length = 20 # Tinggi animasi

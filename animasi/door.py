@@ -99,5 +99,5 @@ door3 = [
 ]
 
 exit = [door1,door2,door3]
-animasi = 3
-length = 30
+animasi = 3 # Jumlah animasi
+length = 30 # Tinggi animasi

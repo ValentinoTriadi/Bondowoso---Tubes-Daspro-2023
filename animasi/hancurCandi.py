@@ -148,5 +148,5 @@ success = [
 "",
 ""]
 hancurkancandi = [candi1,candi2,candi3,candi4,success]
-animasi = 5
-length = 28
+animasi = 5 # Jumlah animasi
+length = 28 # Tinggi animasi

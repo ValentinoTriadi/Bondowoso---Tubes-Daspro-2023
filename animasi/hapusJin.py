@@ -198,5 +198,5 @@ hapus6 = [
 
 hapusjinbangun = [hapus4,hapus5,hapus6]
 hapusjinkumpul = [hapus1,hapus2,hapus3]
-animasi = 3
-length = 31
+animasi = 3 # Jumlah animasi
+length = 31 # Tinggi animasi

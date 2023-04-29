@@ -136,14 +136,16 @@ def printascii(typegambar: str,access: str):
     '''-------------------- Tipe Animasi --------------------'''
 
     if typegambar == "laporan_jin": # Menampilkan Animasi Laporan Jin
-        for i in range(laporan.animasi):
-            render_screen(laporan.laporan_jin[i], laporan.length)
+        array_ascii = laporan.lapor("jin") # Mengambil array of asci dari module laporan
+        for i in range(laporan.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(array_ascii[i], laporan.length) # Untuk menampilkan ascii
             time.sleep(0.5)
         time.sleep(2)
 
     elif typegambar == "laporan_candi": # Menampilkan Animasi Laporan Jin
-        for i in range(laporan.animasi):
-            render_screen(laporan.laporan_candi[i], laporan.length)
+        array_ascii = laporan.lapor("candi") # Mengambil array of asci dari module laporan
+        for i in range(laporan.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(laporan.lapor("candi")[i], laporan.length) # Untuk menampilkan ascii
             time.sleep(0.5)
         time.sleep(2)
 
@@ -155,8 +157,8 @@ def printascii(typegambar: str,access: str):
         arr_print[animasi.karakterGame.length] = " "
         arr_print[animasi.karakterGame.length + 1] = f"Selamat datang, {user}!"
         arr_print[animasi.karakterGame.length + 2] = "Masukkan command \"help\" untuk daftar command yang dapat kamu panggil."
-        for i in range(animasi.karakterGame.animasi):
-            render_screen(arr_print, animasi.karakterGame.length + 3)
+        for i in range(animasi.karakterGame.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(arr_print, animasi.karakterGame.length + 3) # Untuk menampilkan ascii
             time.sleep(0.5)            
 
     elif typegambar == "roro_jonggrang": # Menampilkan Animasi Karakter Roro
@@ -167,8 +169,8 @@ def printascii(typegambar: str,access: str):
         arr_print[animasi.karakterGame.length] = " "
         arr_print[animasi.karakterGame.length + 1] = f"Selamat datang, {user}!"
         arr_print[animasi.karakterGame.length + 2] = "Masukkan command \"help\" untuk daftar command yang dapat kamu panggil."
-        for i in range(animasi.karakterGame.animasi):
-            render_screen(arr_print, animasi.karakterGame.length + 3)
+        for i in range(animasi.karakterGame.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(arr_print, animasi.karakterGame.length + 3) # Untuk menampilkan ascii
             time.sleep(0.5)            
 
     elif typegambar == "Pembangun": # Menampilkan Animasi Karakter Jin Pembangun
@@ -179,8 +181,8 @@ def printascii(typegambar: str,access: str):
         arr_print[animasi.karakterGame.length] = " "
         arr_print[animasi.karakterGame.length + 1] = f"Selamat datang, {user}!"
         arr_print[animasi.karakterGame.length + 2] = "Masukkan command \"help\" untuk daftar command yang dapat kamu panggil."
-        for i in range(animasi.karakterGame.animasi):
-            render_screen(arr_print, animasi.karakterGame.length + 3)
+        for i in range(animasi.karakterGame.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(arr_print, animasi.karakterGame.length + 3) # Untuk menampilkan ascii
             time.sleep(0.5)        
 
     elif typegambar == "Pengumpul": # Menampilkan Animasi Karakter Jin Pengumpul
@@ -191,89 +193,89 @@ def printascii(typegambar: str,access: str):
         arr_print[animasi.karakterGame.length] = " "
         arr_print[animasi.karakterGame.length + 1] = f"Selamat datang, {user}!"
         arr_print[animasi.karakterGame.length + 2] = "Masukkan command \"help\" untuk daftar command yang dapat kamu panggil."
-        for i in range(animasi.karakterGame.animasi):
-            render_screen(arr_print, animasi.karakterGame.length + 3)
+        for i in range(animasi.karakterGame.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(arr_print, animasi.karakterGame.length + 3) # Untuk menampilkan ascii
             time.sleep(0.5)            
 
     elif typegambar == "logout": # Menampilkan Animasi Logout
-        for i in range(animasi.door.animasi):
-            render_screen(animasi.door.exit[i], animasi.door.length)
+        for i in range(animasi.door.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(animasi.door.exit[i], animasi.door.length) # Untuk menampilkan ascii
             time.sleep(0.5)
         time.sleep(2)
 
     elif typegambar == "summon_pembangun": # Menampilkan Animasi Summon Jin Pembangun
         from Main_Function import username_jin_summon
         animasi.jinBangun.summon[6][32] = f"Jin {username_jin_summon} berhasil dipanggil!"
-        for i in range(animasi.jinBangun.animasi):
-            render_screen(animasi.jinBangun.summon[i], animasi.jinBangun.length)
+        for i in range(animasi.jinBangun.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(animasi.jinBangun.summon[i], animasi.jinBangun.length) # Untuk menampilkan ascii
             time.sleep(0.5)            
         time.sleep(2)
 
     elif typegambar == "summon_pengumpul": # Menampilkan Animasi Summon Jin Pengumpul
         from Main_Function import username_jin_summon
         animasi.jinKumpul.summon[6][32] = f"Jin {username_jin_summon} berhasil dipanggil!"
-        for i in range(animasi.jinKumpul.animasi):
-            render_screen(animasi.jinKumpul.summon[i], animasi.jinKumpul.length )
+        for i in range(animasi.jinKumpul.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(animasi.jinKumpul.summon[i], animasi.jinKumpul.length ) # Untuk menampilkan ascii
             time.sleep(0.5)            
         time.sleep(2)
 
     elif typegambar == "hapus_jin_bangun": # Menampilkan Animasi Hapus Jin Bangun
-        for i in range(animasi.hapusJin.animasi):
-            render_screen(animasi.hapusJin.hapusjinbangun[i], animasi.hapusJin.length)
+        for i in range(animasi.hapusJin.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(animasi.hapusJin.hapusjinbangun[i], animasi.hapusJin.length) # Untuk menampilkan ascii
             time.sleep(0.5)
         time.sleep(2)
 
     elif typegambar == "hapus_jin_kumpul": # Menampilkan Animasi Hapus Jin Kumpul
-        for i in range(animasi.hapusJin.animasi):
-            render_screen(animasi.hapusJin.hapusjinkumpul[i], animasi.hapusJin.length)
+        for i in range(animasi.hapusJin.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(animasi.hapusJin.hapusjinkumpul[i], animasi.hapusJin.length) # Untuk menampilkan ascii
             time.sleep(0.5)
         time.sleep(2)
 
     elif typegambar == "ubah_kumpul_bangun": # Menampilkan Animasi Ubah Jin Kumpul Menjadi Jin Bangun 
-        for i in range(animasi.ubahJin.animasi):
-            render_screen(animasi.ubahJin.kumpul_ke_bangun[i], animasi.ubahJin.length)
+        for i in range(animasi.ubahJin.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(animasi.ubahJin.kumpul_ke_bangun[i], animasi.ubahJin.length) # Untuk menampilkan ascii
             time.sleep(0.5)
         time.sleep(2)
 
     elif typegambar == "ubah_bangun_kumpul": # Menampilkan Animasi Ubah Jin Bangun Menjadi Jin Kumpul
-        for i in range(animasi.ubahJin.animasi):
-            render_screen(animasi.ubahJin.bangun_ke_kumpul[i], animasi.ubahJin.length)
+        for i in range(animasi.ubahJin.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(animasi.ubahJin.bangun_ke_kumpul[i], animasi.ubahJin.length) # Untuk menampilkan ascii
             time.sleep(0.5)
         time.sleep(2)
 
     elif typegambar == "kumpul": # Menampilkan Animasi Kumpul Bahan
-        for i in range(animasi.kumpul.animasi):
-            render_screen(animasi.kumpul.kumpul[i], animasi.kumpul.length)
+        for i in range(animasi.kumpul.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(animasi.kumpul.kumpul[i], animasi.kumpul.length) # Untuk menampilkan ascii
             time.sleep(0.5)
         time.sleep(1)
 
     elif typegambar == "bangun_candi": # Menampilkan Animasi Bangun Candi
-        for i in range(animasi.bangunCandi.animasi):
-            render_screen(animasi.bangunCandi.banguncandi[i], animasi.bangunCandi.length)
+        for i in range(animasi.bangunCandi.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(animasi.bangunCandi.banguncandi[i], animasi.bangunCandi.length) # Untuk menampilkan ascii
             time.sleep(0.5)
         time.sleep(2)
 
     elif typegambar == "batch_bangun": # Menampilkan Animasi Batch Bangun
-        for i in range(animasi.batchBangun.animasi):
-            render_screen(animasi.batchBangun.batchbangun[i], animasi.batchBangun.length)
+        for i in range(animasi.batchBangun.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(animasi.batchBangun.batchbangun[i], animasi.batchBangun.length) # Untuk menampilkan ascii
             time.sleep(0.5)
         time.sleep(2) 
 
     elif typegambar == "hancur_candi": # Menampilkan Animasi Hancurkan Candi
-        for i in range(animasi.hancurCandi.animasi):
-            render_screen(animasi.hancurCandi.hancurkancandi[i], animasi.hancurCandi.length)
+        for i in range(animasi.hancurCandi.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(animasi.hancurCandi.hancurkancandi[i], animasi.hancurCandi.length) # Untuk menampilkan ascii
             time.sleep(0.5)
         time.sleep(2)
 
     elif typegambar == "bondo_menang": # Menampilkan Animasi Ayam Berkokok Saat Bondo Menang
-        for i in range(ayamKokok.animasi):
-            render_screen(ayamKokok.bondomenang[i], ayamKokok.length)
+        for i in range(ayamKokok.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(ayamKokok.bondomenang[i], ayamKokok.length) # Untuk menampilkan ascii
             time.sleep(0.5)
         time.sleep(2)
 
     elif typegambar == "roro_menang": # Menampilkan Animasi Ayam Berkokok Saat Roro Menang
-        for i in range(ayamKokok.animasi):
-            render_screen(ayamKokok.roromenang[i], ayamKokok.length)
+        for i in range(ayamKokok.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(ayamKokok.roromenang[i], ayamKokok.length) # Untuk menampilkan ascii
             time.sleep(0.5)
         time.sleep(2)
 
@@ -283,8 +285,8 @@ def printascii(typegambar: str,access: str):
         animasi.saving.save[1][23] = f"Menyimpan data pada folder {path_folder}   "
         animasi.saving.save[2][23] = f"Menyimpan data pada folder {path_folder}   "
         animasi.saving.save[3][23] = f"Berhasil menyimpan data di folder {path_folder}!"
-        for i in range(animasi.saving.animasi):
-            render_screen(animasi.saving.save[i], animasi.saving.length)
+        for i in range(animasi.saving.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(animasi.saving.save[i], animasi.saving.length) # Untuk menampilkan ascii
             time.sleep(1.5)
         time.sleep(2)
 
@@ -294,8 +296,8 @@ def printascii(typegambar: str,access: str):
         animasi.saving.save[1][23] = f"Membuat folder {path_folder}   "
         animasi.saving.save[2][23] = f"Menyimpan data pada folder {path_folder}   "
         animasi.saving.save[3][23] = f"Berhasil menyimpan data di folder {path_folder}!"
-        for i in range(animasi.saving.animasi):
-            render_screen(animasi.saving.save[i], animasi.saving.length)
+        for i in range(animasi.saving.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(animasi.saving.save[i], animasi.saving.length) # Untuk menampilkan ascii
             time.sleep(1.5)
         time.sleep(2)
 
@@ -305,25 +307,25 @@ def printascii(typegambar: str,access: str):
         animasi.saving.save[1][23] = f"Menyimpan data pada folder {path_folder}   "
         animasi.saving.save[2][23] = f"Menyimpan data pada folder {path_folder}   "
         animasi.saving.save[3][23] = f"Berhasil menyimpan data di folder {path_folder}!"
-        for i in range(animasi.saving.animasi):
-            render_screen(animasi.saving.save[i], animasi.saving.length)
+        for i in range(animasi.saving.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(animasi.saving.save[i], animasi.saving.length) # Untuk menampilkan ascii
             time.sleep(1.5)
         time.sleep(2)
         
     elif typegambar == "exit": # Menampilkan Animasi Keluar
-        for i in range(animasi.door.animasi):
-            render_screen(animasi.door.exit[i], animasi.door.length)
+        for i in range(animasi.door.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(animasi.door.exit[i], animasi.door.length) # Untuk menampilkan ascii
             time.sleep(0.5)
         time.sleep(2)
 
     elif typegambar == "undo": # Menampilkan Animasi Keluar
-        for i in range(animasi.undo.animasi):
-            render_screen(animasi.undo.undo[i], animasi.undo.length)
+        for i in range(animasi.undo.animasi): # Loop untuk menampilkan ascii secara berurutan sesuai jumlah animasi yang akan ditampilkan
+            render_screen(animasi.undo.undo[i], animasi.undo.length) # Untuk menampilkan ascii
             time.sleep(0.5)
         time.sleep(2)
 
     elif typegambar == "home": # Menampilkan Animasi Main Menu (Saat awal sebelum login)
-        render_screen(Manajerial, 35)
+        render_screen(Manajerial, 35) # Untuk menampilkan ascii
         time.sleep(0.5)
         time.sleep(1)
     '''-------------------- Tipe Animasi --------------------'''

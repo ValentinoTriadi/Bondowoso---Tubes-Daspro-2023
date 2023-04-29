@@ -153,5 +153,5 @@ bondo = [
 roromenang = [ayam1,ayam2,ayam3,roro]
 bondomenang = [ayam1,ayam2,ayam3,bondo]
 
-animasi = 4
-length = 28
+animasi = 4 # Jumlah animasi
+length = 28 # Tinggi animasi

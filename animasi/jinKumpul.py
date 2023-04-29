@@ -242,5 +242,5 @@ summon7 = [
 ""]
 
 summon = [summon1, summon2, summon3, summon4, summon5, summon6, summon7]
-animasi = 7
-length = 33
+animasi = 7 # Jumlah animasi
+length = 33 # Tinggi animasi

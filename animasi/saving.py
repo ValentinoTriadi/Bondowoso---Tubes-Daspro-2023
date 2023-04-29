@@ -103,5 +103,6 @@ save4 = [
 
 
 save = [save1, save2,save3,save4]
-animasi = 4
-length = 24
+
+animasi = 4 # Jumlah animasi
+length = 24 # Tinggi animasi

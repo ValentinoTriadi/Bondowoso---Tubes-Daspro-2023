@@ -169,5 +169,6 @@ kumpul5 = [
 "                    ***//////(((                                "]
 
 kumpul = [kumpul1,kumpul2,kumpul3,kumpul4,kumpul5]
-animasi = 5
-length = 32
+
+animasi = 5 # Jumlah animasi
+length = 32 # Tinggi animasi

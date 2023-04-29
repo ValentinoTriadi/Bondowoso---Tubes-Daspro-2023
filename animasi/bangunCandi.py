@@ -65,5 +65,5 @@ candi3 ='''
 
 
 banguncandi = [candi3arr,candi2arr,candi1arr]
-animasi = 3
-length = 20
+animasi = 3 # Jumlah animasi
+length = 20 # Tinggi animasi
