@@ -154,7 +154,7 @@ def read_csv(name_file: str, name_folder: str) -> tuple:
 
 '''-------------------- Menghitung Panjang String --------------------'''
 # Menggunakan metode sentinel
-def length(arr: list,EOP: str) -> int:
+def length(arr: str,EOP: str) -> int:
     count = 0 # Inisialisasi awal jumlah character
     i = 0 # index string
     cek = True # Kondisi pemberhenti perhitungan

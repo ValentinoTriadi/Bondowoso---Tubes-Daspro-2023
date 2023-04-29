@@ -1,5 +1,5 @@
 def lapor(type:str)->list:
-    import tempdata, function_jin, function_candi
+    import tempdata, function_jin, function_candi, util_function
     laporan2 = [
     "",
     "       ..,,,*                     ,.,.            ",
@@ -81,8 +81,36 @@ def lapor(type:str)->list:
         return [laporan3, laporan2,laporancandi] # Mengembalikan array berisi laporan candi
     
     elif type == "jin": # Ketika user ingin menampilkan laporan jin
+        '''-------------------- Cari Jin Terajin --------------------'''
         jin_terajin = function_jin.jinter(True) # Mencari jin terajin
+        '''-------------------- Cari Jin Terajin --------------------'''
+
+        '''-------------------- Validasi Panjang Nama Jin Terajin --------------------'''
+        if util_function.length(jin_terajin + ".", '.') > 20: # Jika panjang nama jin terajin lebih dari 20 huruf
+            jin_terajin1 = '' # Temporary variable untuk menyimpan nama jin yang sudah divalidasi
+            for i in range(20): # Loop untuk mengisi temporary variable
+                if i < 17: # Ketika index nama jin masih dibawah 17
+                    jin_terajin1 += jin_terajin[i]
+                else: # Ketika index nama jin sudah 17 keatas
+                    jin_terajin1 += '.' # Menambahkan ... ke akhir dari nama jin
+            jin_terajin = jin_terajin1 # Update nama jin terajin
+        '''-------------------- Validasi Panjang Nama Jin Terajin --------------------'''
+        
+
+        '''-------------------- Cari Jin Termalas --------------------'''
         jin_termalas = function_jin.jinter(False) # Mencari jin termalas
+        '''-------------------- Cari Jin Termalas --------------------'''
+
+        '''-------------------- Validasi Panjang Nama Jin Termalas --------------------'''
+        if util_function.length(jin_termalas + ".", '.') > 20:
+            jin_termalas1 = '' # Temporary variable untuk menyimpan nama jin yang sudah divalidasi
+            for i in range(20): # Loop untuk mengisi temporary variable
+                if i < 17: # Ketika index nama jin masih dibawah 17
+                    jin_termalas1 += jin_termalas[i] 
+                else: # Ketika index nama jin sudah 17 keatas
+                    jin_termalas1 += '.' # Menambahkan ... ke akhir dari nama jin
+            jin_termalas = jin_termalas1 # Update nama jin termalas
+        '''-------------------- Validasi Panjang Nama Jin Termalas --------------------'''
 
         laporanjin = [
         "       ..,,,*                                                     ,.,.           ",

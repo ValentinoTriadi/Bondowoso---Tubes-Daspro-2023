@@ -125,9 +125,10 @@ def summonJin():
             if jin == 1: # Ketika user menginput opsi 1
                 role = "Pengumpul"
                 Visual.render_screen(['Memilih jin "Pengumpul".'], 1)
-                username = input("Masukkan username jin: ") # Memasukkan username jin yang akan dipanggil
+                # Diasumsikan username jin semuanya berupa huruf alphabet tanpa tanda baca ataupun karakter lainnya
+                username = input("Masukkan username jin: ") # Memasukkan username jin yang akan dipanggil 
 
-                # # TODO: Validasi username
+                # TODO: Validasi username
                 if function_jin.Cek_User(username): # Jika username sudah terdaftar akan looping meminta input
                     Visual.render_screen([f'Username "{username}" sudah diambil!'],1) 
                     time.sleep(2)
