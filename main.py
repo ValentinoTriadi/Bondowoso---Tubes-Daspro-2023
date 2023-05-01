@@ -38,11 +38,11 @@ if __name__ == "__main__":
             Main_Function.ubahJin()
             Visual.printascii(Main_Function.access,Main_Function.access) # Tampilan Karakter sesuai dengan role
 
-        elif menu == "bangun" and Main_Function.access == "Pembangun": # Saat user memasukan command bangun dan memiliki akses Pembangun
+        elif menu == "bangun" and Main_Function.access == "jin_pembangun": # Saat user memasukan command bangun dan memiliki akses jin_pembangun
             Main_Function.bangun(Main_Function.user)
             Visual.printascii(Main_Function.access,Main_Function.access) # Tampilan Karakter sesuai dengan role
 
-        elif menu == "kumpul" and Main_Function.access == "Pengumpul": # Saat user memasukan command kumpul dan memiliki akses Pengumpul
+        elif menu == "kumpul" and Main_Function.access == "jin_pengumpul": # Saat user memasukan command kumpul dan memiliki akses jin_pengumpul
             Main_Function.kumpul(False)
             Visual.printascii(Main_Function.access,Main_Function.access) # Tampilan Karakter sesuai dengan role
 

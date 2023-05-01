@@ -27,7 +27,7 @@ def ubah_role(role: str) -> str:
     import Visual
 
     '''-------------------- Mengecek Role --------------------'''
-    if role == "Pengumpul": # Saat role jin awal adalah pengumpul
+    if role == "jin_pengumpul": # Saat role jin awal adalah pengumpul
 
         '''-------------------- Input Opsi dan Validasi --------------------'''
         opsi = input(f'Jin ini bertipe "Pengumpul". Yakin ingin mengubah ke tipe "Pembangun" (Y/N)? ') # Meminta opsi atau konfirmasi user
@@ -39,7 +39,7 @@ def ubah_role(role: str) -> str:
 
         '''-------------------- Mengembalikan Tipe Jin Setelah Dirubah --------------------'''
         if opsi == "Y": # Saat user ingin merubah tipe jin
-            return 'Pengumpul' # Mengembalikan tipe jin setelah dirubah
+            return 'jin_pembangun' # Mengembalikan tipe jin setelah dirubah
         else: # Saat user tidak jadi merubah tipe jin
             return 'Tidak Jadi'
         '''-------------------- Mengembalikan Tipe Jin Setelah Dirubah --------------------'''
@@ -51,13 +51,13 @@ def ubah_role(role: str) -> str:
         opsi = input(f'Jin ini bertipe "Pembangun". Yakin ingin mengubah ke tipe "Pengumpul" (Y/N)? ') # Meminta opsi atau konfirmasi user
         while opsi != "Y" and opsi != "N": # Validasi saat opsi yang diinputkan tidak sesuai dengan ketentuan
             Visual.render_screen(["Input salah! Masukan hanya (Y/N)"],1) # Pesan Kesalahan
-            opsi = input(f'Jin ini bertipe "Pengumpul". Yakin ingin mengubah ke tipe "Pembangun" (Y/N)? ') # Meminta opsi atau konfirmasi user ulang
+            opsi = input(f'Jin ini bertipe "Pembangun". Yakin ingin mengubah ke tipe "Pengumpul" (Y/N)? ') # Meminta opsi atau konfirmasi user ulang
         '''-------------------- Input Opsi dan Validasi --------------------'''
 
 
         '''-------------------- Mengembalikan Tipe Jin Setelah Dirubah --------------------'''
         if opsi == "Y": # Saat user ingin merubah tipe jin
-            return 'Pengumpul' # Mengembalikan tipe jin setelah dirubah
+            return 'jin_pengumpul' # Mengembalikan tipe jin setelah dirubah
         else: # Saat user tidak jadi merubah tipe jin
             return 'Tidak Jadi'
         '''-------------------- Mengembalikan Tipe Jin Setelah Dirubah --------------------'''

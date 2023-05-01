@@ -1,7 +1,7 @@
 import util_function, function_jin, time, function_candi, os.path
 logins = False
 access = ""
-user = "asdf"
+user = ""
 path_folder = ""
 username_jin_summon = ""
 
@@ -100,8 +100,8 @@ def summonJin():
         '''-------------------- Input Jenis Jin --------------------'''
         def minta_Jenis_Jin():   
             Visual.render_screen(["Jenis jin yang dapat dipanggil: ", # Animasi opsi jenis jin
-            "(1) Pengumpul - Bertugas mengumpulkan bahan bangunan",
-            "(2) Pembangun - Bertugas membangun candi"], 3)
+            "(1) Jin Pengumpul - Bertugas mengumpulkan bahan bangunan",
+            "(2) Jin Pembangun - Bertugas membangun candi"], 3)
 
             jin = input("Masukkan nomor jenis jin yang ingin dipanggil: ") # Menerima input jenis jin yang akan dipanggil
 
@@ -123,7 +123,7 @@ def summonJin():
         def minta_User_Jin(jin):   
             # TODO: Meminta input sesuai tipe jin yang diinput sebelumnya
             if jin == 1: # Ketika user menginput opsi 1
-                role = "Pengumpul"
+                role = "jin_pengumpul"
                 Visual.render_screen(['Memilih jin "Pengumpul".'], 1)
                 # Diasumsikan username jin semuanya berupa huruf alphabet tanpa tanda baca ataupun karakter lainnya
                 username = input("Masukkan username jin: ") # Memasukkan username jin yang akan dipanggil 
@@ -138,7 +138,7 @@ def summonJin():
                     return username, role
                 
             else: # Ketika user menginput opsi 2
-                role = "Pembangun"
+                role = "jin_pembangun"
                 Visual.render_screen(['Memilih jin "Pembangun".'], 1)
                 username = input("Masukkan username jin: ") # Memasukkan username jin yang akan dipanggil
 
@@ -164,10 +164,10 @@ def summonJin():
 
             # TODO: Validasi panjang password
             if 5 <= util_function.length(password + '.', '.') <= 25: # Jika password panjangnya tidak dari 5 sampai 25 huruf
-                if role == "Pengumpul": # Sesuai opsi jenis jin yang dipilih di atas
+                if role == "jin_pengumpul": # Sesuai opsi jenis jin yang dipilih di atas
                     Visual.render_screen(['Memilih jin "Pengumpul".'], 1) 
                     return password
-                elif role == "Pembangun": # Sesuai opsi jenis jin yang dipilih di atas
+                elif role == "jin_pembangun": # Sesuai opsi jenis jin yang dipilih di atas
                     Visual.render_screen(['Memilih jin "Pembangun".'], 1)
                     return password
             else:
@@ -194,8 +194,8 @@ def summonJin():
         '''-------------------- Update Data User --------------------'''
 
 
-        '''-------------------- Update Data Jin Yang Pernah Membangun Jika Role Jin Adalah Pembangun --------------------'''
-        if role == "Pembangun":
+        '''-------------------- Update Data Jin Yang Pernah Membangun Jika Role Jin Adalah jin_pembangun --------------------'''
+        if role == "jin_pembangun":
             tempdata.len_pembangun += 1 # Panjang data bertambah 1 (ditambahkan jin yang baru disummon)
 
             temp_jin_yang_pernah_membangun = ['' for i in range(tempdata.len_pembangun)] # List sebagai tempat untuk menyimpan data baru
@@ -205,15 +205,15 @@ def summonJin():
             temp_jin_yang_pernah_membangun[tempdata.len_pembangun-1] = username # Mengisi elemen terakhir list dengan jin pembangun yang baru di summon
 
             tempdata.data_jin_yang_pernah_membangun = temp_jin_yang_pernah_membangun # Mengupdate data global
-        '''-------------------- Update Data Jin Yang Pernah Membangun Jika Role Jin Adalah Pembangun --------------------'''
+        '''-------------------- Update Data Jin Yang Pernah Membangun Jika Role Jin Adalah jin_pembangun --------------------'''
 
 
         '''-------------------- Tampilan Animasi --------------------'''
         time.sleep(1)
         tempdata.data_user = tempdatas
-        if role == "Pengumpul":
+        if role == "jin_pengumpul":
             Visual.printascii("summon_pengumpul",access) # Menampilkan animasi summon jin pengumpul
-        elif role == "Pembangun":
+        elif role == "jin_pembangun":
             Visual.printascii("summon_pembangun",access) # Menampilkan animasi summon jin pembangun
         '''-------------------- Tampilan Animasi --------------------'''
         
@@ -358,11 +358,11 @@ def hapusJin():
 
 
             '''-------------------- Tampilan Animasi --------------------'''
-            if data_user[index][2] == "Pembangun": # Jika role jin yang dihapus adalah pembangun
+            if data_user[index][2] == "jin_pembangun": # Jika role jin yang dihapus adalah pembangun
                 Visual.printascii("hapus_jin_bangun",access) # Menampilkan animasi jin dihapus
                 Visual.render_screen(["Jin telah berhasil dihapus dari alam gaib."],1)
                 time.sleep(2)
-            elif data_user[index][2] == "Pengumpul": # Jika role jin yang dihapus adalah pembangun
+            elif data_user[index][2] == "jin_pengumpul": # Jika role jin yang dihapus adalah pembangun
                 Visual.printascii("hapus_jin_kumpul",access) # Menampilkan animasi jin dihapus
                 Visual.render_screen(["Jin telah berhasil dihapus dari alam gaib."],1)
                 time.sleep(2)
@@ -420,9 +420,9 @@ def ubahJin():
             tempdata.data_user[index][2] = temp_role 
 
             '''-------------------- Tampilan Animasi --------------------'''
-            if tempdata.data_user[index][2] == "Pembangun": # Jika jin diubah menjadi tipe pembangun
+            if tempdata.data_user[index][2] == "jin_pembangun": # Jika jin diubah menjadi tipe pembangun
                 Visual.printascii("ubah_kumpul_bangun",access)
-            elif tempdata.data_user[index][2] == "Pengumpul": # Jika jin diubah menjadi tipe pengumpul
+            elif tempdata.data_user[index][2] == "jin_pengumpul": # Jika jin diubah menjadi tipe pengumpul
                 Visual.printascii("ubah_bangun_kumpul",access)
             '''-------------------- Tampilan Animasi --------------------'''
 
@@ -577,7 +577,7 @@ def batchkumpul():
     import Visual
 
     '''-------------------- Menghitung Jumlah Jin Pengumpul --------------------'''
-    jumlah_jin_Pengumpul = function_jin.count_jin("Pengumpul")
+    jumlah_jin_Pengumpul = function_jin.count_jin("jin_pengumpul")
     '''-------------------- Menghitung Jumlah Jin Pengumpul --------------------'''
 
 
@@ -613,7 +613,7 @@ def batchbangun():
     import tempdata, Visual
 
     '''-------------------- Menghitung Jumlah Jin Pembangun --------------------'''
-    Jumlah_jin_Pembangun = function_jin.count_jin("Pembangun")
+    Jumlah_jin_Pembangun = function_jin.count_jin("jin_pembangun")
     '''-------------------- Menghitung Jumlah Jin Pembangun --------------------'''
 
 
@@ -663,7 +663,7 @@ def batchbangun():
 
         '''-------------------- Mencari Jin Pembangun --------------------'''
         for i in range(tempdata.len_user): # Loop untuk mencari semua jin pembangun
-            if data_user[i][2] == "Pembangun": # Ketika jin memiliki role Pembangun maka jin akan masuk ke list jin
+            if data_user[i][2] == "jin_pembangun": # Ketika jin memiliki role jin_pembangun maka jin akan masuk ke list jin
                 jin[j] = data_user[i][0] # Memasukan nama jin ke list jin
                 j += 1 # Index bertambah 1
         '''-------------------- Mencari Jin Pembangun --------------------'''
@@ -720,8 +720,8 @@ def batchbangun():
             '''-------------------- Cek apakah username ada di list jin_yang_pernah_membangun atau tidak --------------------'''
             # Kalau ada, maka list jin_yang_pernah_membangun tidak ditambahkan username
             # Kalau tidak ada, maka list jin_yang_pernah_membangun ditambahkan username
-            for i in range(tempdata.len_user): # Cek semua user yang memiliki role "Pembangun"
-                if data_user[i][2] == "Pembangun":
+            for i in range(tempdata.len_user): # Cek semua user yang memiliki role "jin_pembangun"
+                if data_user[i][2] == "jin_pembangun":
                     cek = True  # Kondisi awal apabila user tidak ditemukan dalam list jin_yang_pernah_membangun
                     for j in range(tempdata.len_pembangun): # Loop untuk mengecek apakah user ada didalam list jin_yang_pernah_membangun atau tidak
                         if tempdata.data_jin_yang_pernah_membangun[j] == data_user[i][0]:   # Kondisi saat user ditemukan ada didalam list jin_yang_pernah_membangun
@@ -801,8 +801,8 @@ def laporanjin ():
     data_bahan = tempdata.data_bahan_bangunan
 
     print("> Total Jin:", tempdata.len_user-2)
-    print("> Total Jin Pengumpul:", function_jin.count_jin("Pengumpul"))
-    print("> Total Jin Pembangun:", function_jin.count_jin("Pembangun"))
+    print("> Total Jin Pengumpul:", function_jin.count_jin("jin_pengumpul"))
+    print("> Total Jin Pembangun:", function_jin.count_jin("jin_pembangun"))
     print("> Jin Terajin:", function_jin.jinter(True))
     print("> Jin Termalas:", function_jin.jinter(False))
     print("> Jumlah Pasir:", data_bahan[0][0], "unit")
@@ -1074,7 +1074,7 @@ def help():
             "5. exit".ljust(80," "),"   Untuk keluar dari permainan".ljust(80," ")],12)
             '''-------------------- Tampilan Help Roro --------------------'''
 
-        elif access == "Pembangun": # Saat role user adalah Pembangun
+        elif access == "jin_pembangun": # Saat role user adalah jin_pembangun
 
             '''-------------------- Tampilan Help Jin Pembangun --------------------'''
             Visual.render_screen([" HELP ".center(28,"="),"","1. logout".ljust(80," "),"   Untuk keluar dari akun yang digunakan sekarang".ljust(80," "),
@@ -1083,7 +1083,7 @@ def help():
             "4. exit".ljust(80," "),"   Untuk keluar dari permainan".ljust(80," ")],10)
             '''-------------------- Tampilan Help Jin Pembangun --------------------'''
 
-        elif access == "Pengumpul": # Saat role user adalah Pengumpul
+        elif access == "jin_pengumpul": # Saat role user adalah jin_pengumpul
 
             '''-------------------- Tampilan Help Jin Pengumpul --------------------'''
             Visual.render_screen([" HELP ".center(28,"="),"","1. logout".ljust(80," "),"   Untuk keluar dari akun yang digunakan sekarang".ljust(80," "),

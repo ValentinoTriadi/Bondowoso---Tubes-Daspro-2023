@@ -100,8 +100,8 @@ for i in range(len_candi): # Loop untuk mengisi list id candi yang dihancurkan
 '''-------------------- Jumlah Pembangun Yang Terdaftar --------------------'''
 len_pembangun = 0 # Inisialisasi awal jumlah jin yang pernah membangun 
 for i in range(len_user): # Loop untuk mencari jin pembangun pada data user
-    if data_user[i][2] == "Pembangun": # Ketika jin memiliki role Pembangun
-        len_pembangun += 1 # Jumlah jin bertambah 1 ketika ditemukan jin dengan role Pembangun
+    if data_user[i][2] == "jin_pembangun": # Ketika jin memiliki role jin_pembangun
+        len_pembangun += 1 # Jumlah jin bertambah 1 ketika ditemukan jin dengan role jin_pembangun
 '''-------------------- Jumlah Pembangun Yang Terdaftar --------------------'''
 
 
@@ -109,8 +109,8 @@ for i in range(len_user): # Loop untuk mencari jin pembangun pada data user
 data_jin_yang_pernah_membangun = ["" for i in range(len_pembangun)] # List tempat data jin yang pernah membangun 
 j = 0 # Inisialisasi index pencacah list data jin yang pernah membangun
 
-for i in range(len_user): # Loop untuk mengisi data jin yang pernah membangun dengan data user yang memiliki role Pembangun
-    if data_user[i][2] == "Pembangun": # Ketika user memiliki role Pembangun
+for i in range(len_user): # Loop untuk mengisi data jin yang pernah membangun dengan data user yang memiliki role jin_pembangun
+    if data_user[i][2] == "jin_pembangun": # Ketika user memiliki role jin_pembangun
         data_jin_yang_pernah_membangun[j] = data_user[i][0] # Menginputkan nama jin pembangun ke data jin yang pernah membangun
         j += 1 # Index pencacah bertambah 1
 '''-------------------- Mengisi Data Jin Yang Pernah Membangun Dengan Data User --------------------'''

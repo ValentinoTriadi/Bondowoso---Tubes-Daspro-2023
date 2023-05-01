@@ -120,8 +120,8 @@ def lapor(type:str)->list:
         "        &&&%##%/(((##%                                     %#####(((&%((#        ",
         "         &&%#%%(/(#%                                          ######&%#(#        ",
         "         &&##%%((##    "+f"> Total Jin: {tempdata.len_user-2}".ljust(36," ")+"    %####&%###        ",  # Menampilkan total jin dari panjang data jin
-        "         &%####(##     "+f"> Total Jin Pengumpul: {function_jin.count_jin('Pengumpul')}".ljust(36," ")+"     ###%&%###        ", # Menghitung jumlah jin dengan role pengumpul
-        "         &%###(((#     "+f"> Total Jin Pembangun: {function_jin.count_jin('Pembangun')}".ljust(36," ")+"      ##&%####        ", # Menghitung jumlah jin dengan role pembangun
+        "         &%####(##     "+f"> Total Jin Pengumpul: {function_jin.count_jin('jin_pengumpul')}".ljust(36," ")+"     ###%&%###        ", # Menghitung jumlah jin dengan role pengumpul
+        "         &%###(((#     "+f"> Total Jin Pembangun: {function_jin.count_jin('jin_pembangun')}".ljust(36," ")+"      ##&%####        ", # Menghitung jumlah jin dengan role pembangun
         "         &%%##((#      "+f"> Jin Terajin: {jin_terajin}".ljust(36," ")+"       #%%#(##        ", # Mencari jin dengan jumlah candi yang dibuat terbanyak
         "         &%###((       "+f"> Jin Termalas: {jin_termalas}".ljust(36," ")+"       #&%#(##        ", # Mencari jin dengan jumlah candi yang dibuat tersedikit
         "         &%###((#      "+f"> Jumlah Pasir: {data_bahan[0][0]} unit".ljust(36," ")+"       #&%#((#        ", # Menghitung banyak pasir yang sudah digunakan 

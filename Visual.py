@@ -123,9 +123,9 @@ def printascii(typegambar: str,access: str):
         cmd = 'color 9' # Warna Biru
     elif access == "roro_jonggrang":
         cmd = 'color 5' # Warna pink
-    elif access == "Pembangun":
+    elif access == "jin_pembangun":
         cmd = 'color 3' # Warna Aqua
-    elif access == "Pengumpul":
+    elif access == "jin_pengumpul":
         cmd = 'color 2' # Warna Hijau
     else:
         cmd = "color 7"
@@ -173,7 +173,7 @@ def printascii(typegambar: str,access: str):
             render_screen(arr_print, animasi.karakterGame.length + 3) # Untuk menampilkan ascii
             time.sleep(0.5)            
 
-    elif typegambar == "Pembangun": # Menampilkan Animasi Karakter Jin Pembangun
+    elif typegambar == "jin_pembangun": # Menampilkan Animasi Karakter Jin Pembangun
         from Main_Function import user
         arr_print = ["" for i in range(animasi.karakterGame.length + 3)]
         for i in range(animasi.karakterGame.length):
@@ -185,7 +185,7 @@ def printascii(typegambar: str,access: str):
             render_screen(arr_print, animasi.karakterGame.length + 3) # Untuk menampilkan ascii
             time.sleep(0.5)        
 
-    elif typegambar == "Pengumpul": # Menampilkan Animasi Karakter Jin Pengumpul
+    elif typegambar == "jin_pengumpul": # Menampilkan Animasi Karakter Jin Pengumpul
         from Main_Function import user
         arr_print = ["" for i in range(animasi.karakterGame.length + 3)]
         for i in range(animasi.karakterGame.length):
