@@ -143,16 +143,18 @@ for i in range(len_candi): # Loop untuk mengecek dan menambahkan data jin yang p
 
 '''------------------------------------------------------------ DATA STACK ------------------------------------------------------------'''
 jumlah_stack = 1
-undo_stack = [[data_candi, len_candi, data_user, len_user, data_jin_yang_pernah_membangun, len_pembangun]] # Data awal stack
+undo_stack = [[data_candi, len_candi, data_user, len_user, data_jin_yang_pernah_membangun, len_pembangun, id_candi_yang_dihancurkan, jumlah_candi_yang_dihancurkan]] # Data awal stack
 
 # Struktur stack
 """
-undo_stack = [[data candi, panjang data candi, data user, panjang data user, data jin yang pernah membangun, panjang data jin yang pernah membangun],[...],...]
+undo_stack = [[data candi, panjang data candi, data user, panjang data user, data jin yang pernah membangun, panjang data jin yang pernah membangun, id candi yang hancur, jumlah id candi yang hancur],[...],...]
 undo_stack[...][0] = Data candi
 undo_stack[...][1] = Panjang data candi
 undo_stack[...][2] = Data user
 undo_stack[...][3] = Panjang data user
 undo_stack[...][4] = Data jin yang pernah membangun
 undo_stack[...][5] = Panjang data jin yang pernah membangun
+undo_stack[...][6] = Id candi yang hancur (tidak ada pada data)
+undo_stack[...][7] = Banyak id candi yang hancur
 """
 '''------------------------------------------------------------ DATA STACK ------------------------------------------------------------'''

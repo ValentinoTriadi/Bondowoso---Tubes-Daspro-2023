@@ -1174,6 +1174,8 @@ def undo():
             tempdata.len_user = tempdata.undo_stack[tempdata.jumlah_stack-1][3] # Update panjang user
             tempdata.data_jin_yang_pernah_membangun = tempdata.undo_stack[tempdata.jumlah_stack-1][4] # Update data jin yang pernah membangun
             tempdata.len_pembangun = tempdata.undo_stack[tempdata.jumlah_stack-1][5] # Update panjang data jin yang pernah membangun
+            tempdata.id_candi_yang_dihancurkan = tempdata.undo_stack[tempdata.jumlah_stack-1][6] # Update id candi yang dihancurkan
+            tempdata.jumlah_candi_yang_dihancurkan = tempdata.undo_stack[tempdata.jumlah_stack-1][7] # Update jumlah id candi yang dihancurkan
             '''-------------------- Update Data Setelah diUndo --------------------'''
 
 
@@ -1196,7 +1198,7 @@ def update_stack(command: str):
 
         '''-------------------- Update Isi Stack --------------------'''
         tempdata.jumlah_stack = 1
-        tempdata.undo_stack = [[tempdata.data_candi, tempdata.len_candi, tempdata.data_user, tempdata.len_user, tempdata.data_jin_yang_pernah_membangun, tempdata.len_pembangun]]
+        tempdata.undo_stack = [[tempdata.data_candi, tempdata.len_candi, tempdata.data_user, tempdata.len_user, tempdata.data_jin_yang_pernah_membangun, tempdata.len_pembangun, tempdata.id_candi_yang_dihancurkan, tempdata.jumlah_candi_yang_dihancurkan]]
         '''-------------------- Update Isi Stack --------------------'''
 
     elif command == "hapus": # Ketika ingin update stack setelah melakukan hapus jin
@@ -1210,7 +1212,7 @@ def update_stack(command: str):
         for i in range(tempdata.jumlah_stack - 1): # Mengisi list dengan data stack yang lama
             temp_undo_stack[i] = tempdata.undo_stack[i]
 
-        temp_undo_stack[tempdata.jumlah_stack-1] = [tempdata.data_candi, tempdata.len_candi, tempdata.data_user, tempdata.len_user, tempdata.data_jin_yang_pernah_membangun, tempdata.len_pembangun] # Menambahkan data stack terbaru setelah user menghapus jin
+        temp_undo_stack[tempdata.jumlah_stack-1] = [tempdata.data_candi, tempdata.len_candi, tempdata.data_user, tempdata.len_user, tempdata.data_jin_yang_pernah_membangun, tempdata.len_pembangun, tempdata.id_candi_yang_dihancurkan, tempdata.jumlah_candi_yang_dihancurkan] # Menambahkan data stack terbaru setelah user menghapus jin
 
         tempdata.undo_stack = temp_undo_stack # Update data stack
         '''-------------------- Update Isi Stack --------------------'''
