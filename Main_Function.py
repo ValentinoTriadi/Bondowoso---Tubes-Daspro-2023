@@ -43,10 +43,7 @@ def login():
     if not cekuser: # Saat user tidak ditemukan pada data
         Visual.render_screen(["Username tidak terdaftar!"],1) # Menampilkan pesan
         time.sleep(2.5)
-
-        '''~~~~~~~~~~~~~~~~~~~~ Rekursif ~~~~~~~~~~~~~~~~~~~~'''
-        login() # Mengulangi fungsi login 
-        '''~~~~~~~~~~~~~~~~~~~~ Rekursif ~~~~~~~~~~~~~~~~~~~~'''
+        Visual.printascii("home",None) # Tampilan Home Awal 
 
     else: # Saat user ditemukan pada data
         if password == cekpass: # ketika password yang diinput benar
@@ -58,11 +55,7 @@ def login():
         else: # ketika password yang diinput salah
             Visual.render_screen(["Password salah!"],1) # Menampilkan pesan
             time.sleep(2.5)
-
-            '''~~~~~~~~~~~~~~~~~~~~ Rekursif ~~~~~~~~~~~~~~~~~~~~'''
-            login() # Mengulang fungsi login
-            '''~~~~~~~~~~~~~~~~~~~~ Rekursif ~~~~~~~~~~~~~~~~~~~~'''
-                        
+            Visual.printascii("home",None) # Tampilan Home Awal 
     '''-------------------- Validasi Login --------------------'''
 
 '''-------------------------------------------------------------F01------------------------------------------------------------'''
@@ -342,6 +335,7 @@ def hapusJin():
 
 
             '''-------------------- Mengupdate Data Jin Yang Pernah Membangun --------------------'''
+            cek = False
             for i in range(tempdata.len_pembangun): # Loop untuk mencari username di data jin yang pernah membangun
                 if tempdata.data_jin_yang_pernah_membangun[i] == username: # Ketika username ditemukan pada data jin yang pernah membangun
                     cek = True # Mengembalikan True yang berarti jin yang ingin dihapus ditemukan di data jin yang pernah membangun 
@@ -550,7 +544,7 @@ def bangun(username: str):
 
     
 '''-------------------------------------------------------------F07------------------------------------------------------------'''
-def kumpul(batch: bool):
+def kumpul(batch: bool) -> (list[int] | None):
     import tempdata, Visual
 
     '''-------------------- Inisialisasi Awal --------------------'''
