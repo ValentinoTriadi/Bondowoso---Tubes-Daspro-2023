@@ -1183,6 +1183,7 @@ def undo():
             temp_undo_stack = [[] for i in range(tempdata.jumlah_stack)] # Tempat untuk data stack setelah melakukan undo 
             for i in range(tempdata.jumlah_stack): # Loop untuk mengisi stack data terbaru dengan data yang lama setelah dilakukan undo (panjang berkurang 1)
                 temp_undo_stack[i] = tempdata.undo_stack[i] 
+            tempdata.undo_stack = temp_undo_stack
             '''-------------------- Update Stack Setelah diUndo --------------------'''
 
 
