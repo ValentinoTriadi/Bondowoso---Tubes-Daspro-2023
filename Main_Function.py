@@ -922,7 +922,8 @@ def hancurkancandi():
 
         '''-------------------- Validasi Konfirmasi --------------------'''
         while confirm != 'Y' and confirm != 'N': # Saat input user bukan 'Y' atau 'N'
-            Visual.render_screen(["EXIT", "", "", "Silakan masukan input sesuai dengan ketentuan!"],4) # Pesan Kesalahan 
+            Visual.render_screen(["Silakan masukan input sesuai dengan ketentuan!"],1) # Pesan Kesalahan 
+            confirm = input(f"Apakah anda yakin ingin menghancurkan candi ID: {id} (Y/N)? ") # Konfirmasi untuk hancurkan candi
         '''-------------------- Validasi Konfirmasi --------------------'''
 
 
